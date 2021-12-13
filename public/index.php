@@ -72,5 +72,5 @@ $data = [
 ];
 
 $GS1order = GS1InsbouOrderConverter::make($data);
-dump($GS1order->toArray());
+dump($GS1order->toArray(true));
 dump($GS1order->toXML()->asXML()); //as string

@@ -93,6 +93,15 @@ class GS1InsbouOrderConverter extends DataTransferObject implements Validatable
         parent::__construct($data);
     }
 
+    function toArray(bool $stripEmptyElements = true): array
+    {
+        $data = parent::toArray();
+        if($stripEmptyElements) {
+            $data = ArrayStripEmptyElements::ArrayStripEmptyElements($data);
+        }
+        return $data;
+    }
+
     public function isValid(): bool
     {
         // TODO: Implement isValid() method.
@@ -105,7 +114,7 @@ class GS1InsbouOrderConverter extends DataTransferObject implements Validatable
     public function toXML(): SimpleXMLElement
     {
         $xmltest = new SimpleXMLElement('<Order xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Order_insbou003.xsd" />');
-        ArrayToXML::arrayToXML($xmltest, $this->toArray());
+        ArrayToXML::arrayToXML($xmltest, $this->toArray(true));
         return $xmltest;
     }
 
