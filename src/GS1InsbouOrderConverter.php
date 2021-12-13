@@ -119,9 +119,7 @@ class GS1InsbouOrderConverter extends DataTransferObject implements Validatable
 
     public function isValid(): bool
     {
-        if(empty($this->OrderType) || strlen($this->OrderType) > 3) {
-            return false;
-        } else if (! in_array($this->OrderType, ['220', '402'])) {
+        if(empty($this->OrderType) || strlen($this->OrderType) > 3 || ! in_array($this->OrderType, ['220', '402']) ) {
             return false;
         }
 
@@ -137,21 +135,15 @@ class GS1InsbouOrderConverter extends DataTransferObject implements Validatable
             return false;
         }
 
-        if(! empty($this->ScenarioTypeCode) && ! strlen($this->ScenarioTypeCode) > 3) {
-            return false;
-        } else if (! in_array($this->ScenarioTypeCode, ['X1', 'X2'])) {
+        if(! empty($this->ScenarioTypeCode) && ( strlen($this->ScenarioTypeCode) > 3 || ! in_array($this->ScenarioTypeCode, ['X1', 'X2']))){
             return false;
         }
 
-        if(! empty($this->DraftOrderIndicator) && ! strlen($this->DraftOrderIndicator) > 3) {
-            return false;
-        } else if (! in_array($this->DraftOrderIndicator, ['16'])) {
+        if(! empty($this->DraftOrderIndicator) && ( strlen($this->DraftOrderIndicator) > 3 || ! in_array($this->DraftOrderIndicator, ['16']) ) ) {
             return false;
         }
 
-        if(! empty($this->DeliveryOnDemandIndicator) && ! strlen($this->DeliveryOnDemandIndicator) > 3) {
-            return false;
-        } else if (! in_array($this->DeliveryOnDemandIndicator, ['73E'])) {
+        if(! empty($this->DeliveryOnDemandIndicator) && ( strlen($this->DeliveryOnDemandIndicator) > 3 || ! in_array($this->DeliveryOnDemandIndicator, ['73E']) ) ) {
             return false;
         }
 

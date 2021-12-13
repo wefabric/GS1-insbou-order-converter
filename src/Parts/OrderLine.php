@@ -60,13 +60,59 @@ class OrderLine extends DataTransferObject implements Validatable
         parent::__construct($data);
     }
 
+    const validOrderedQuantityMeasureUnitCodes = ['CMT', 'DAY' ,'GRM', 'HUR', 'KGM', 'LTR', 'MIN', 'MLT', 'MMT', 'MTK', 'MTQ', 'MTR', 'PCE', 'TNE'];
+
     /**
      * @return bool indicating whether the object is Valid (true) or invalid (false) based on the information inside the object.
      */
     public function isValid(): bool
     {
-        // TODO: Implement isValid() method.
-        return true; // valid by default.
+
+        if(empty($this->LineNumber) || ! strlen(number_format($this->LineNumber)) > 6) {
+            return false;
+        }
+
+        if(empty($this->OrderedQuantity) || ! strlen(number_format($this->OrderedQuantity,3)) > 15) {
+            return false;
+        }
+
+        if(! empty($this->OrderedQuantityMeasureUnitCode) && (strlen($this->OrderedQuantityMeasureUnitCode) > 3 || ! in_array($this->OrderedQuantityMeasureUnitCode, Orderline::validOrderedQuantityMeasureUnitCodes)) ) {
+            return false;
+        }
+
+        if(empty($this->LineIdentification) || ! strlen(number_format($this->LineIdentification)) > 6) {
+            return false;
+        }
+
+        if(empty($this->TradeItemIdentification) || ! $this->TradeItemIdentification->isValid()) {
+            return false;
+        }
+
+        if(! empty($this->TradeItemProcessing) && ! $this->TradeItemProcessing->isValid()) {
+            return false;
+        }
+
+        if(! empty($this->TransportInstruction) && ! $this->TransportInstruction->isValid()) {
+            return false;
+        }
+
+        if(! empty($this->AdditionalInformation) && ! $this->AdditionalInformation->isValid()) {
+            return false;
+        }
+
+        if(! empty($this->DeliveryDateTimeInformation) && ! $this->DeliveryDateTimeInformation->isValid()) {
+            return false;
+        }
+
+        if(! empty($this->DifferentPriceAgreement) && ! $this->DifferentPriceAgreement->isValid()) {
+            return false;
+        }
+
+        if(! empty($this->ContractReference) && ! $this->ContractReference->isValid()) {
+            return false;
+        }
+
+        return true;
     }
 
 }

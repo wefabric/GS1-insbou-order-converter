@@ -23,14 +23,14 @@ class TransportInstruction extends DataTransferObject implements Validatable
         parent::__construct($data);
     }
 
+    const validTransportInstructionTypeCodes = ['CRN', 'G05', 'G07', 'G10', 'G12', 'G15', 'G20', 'G25', 'G30', 'G40', 'IEU', 'IRM', 'MCH', 'MVA', 'PAF', 'PBE', 'PDV', 'PIN', 'PLA', 'PLL', 'PLR', 'PLV', 'POH', 'POT', 'VDA', 'VEA', 'VKO', 'VKR', 'VLA', 'VLK'];
+
     /**
      * @return bool indicating whether the object is Valid (true) or invalid (false) based on the information inside the object.
      */
     public function isValid(): bool
     {
-        if(! empty($this->TransportInstructionTypeCode) && strlen($this->TransportInstructionTypeCode) <> 3) {
-            return false;
-        } else if (! in_array($this->TransportInstructionTypeCode, ['CRN', 'G05', 'G07', 'G10', 'G12', 'G15', 'G20', 'G25', 'G30', 'G40', 'IEU', 'IRM', 'MCH', 'MVA', 'PAF', 'PBE', 'PDV', 'PIN', 'PLA', 'PLL', 'PLR', 'PLV', 'POH', 'POT', 'VDA', 'VEA', 'VKO', 'VKR', 'VLA', 'VLK'])) {
+        if(! empty($this->TransportInstructionTypeCode) && ( strlen($this->TransportInstructionTypeCode) <> 3 || ! in_array($this->TransportInstructionTypeCode, TransportInstruction::validTransportInstructionTypeCodes) ) ) {
             return false;
         }
 

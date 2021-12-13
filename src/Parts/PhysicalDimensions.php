@@ -42,9 +42,7 @@ class PhysicalDimensions extends DataTransferObject implements  Validatable
             return false;
         }
 
-        if(! empty($this->MeasurementUnitCode) && strlen($this->MeasurementUnitCode) <> 3) {
-            return false;
-        } else if (! in_array($this->MeasurementUnitCode, ['CMT', 'MMT', 'MTR'])) {
+        if(! empty($this->MeasurementUnitCode) && ( strlen($this->MeasurementUnitCode) <> 3) || ! in_array($this->MeasurementUnitCode, ['CMT', 'MMT', 'MTR'])) {
             return false;
         }
 

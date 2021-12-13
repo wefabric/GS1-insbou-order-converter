@@ -73,5 +73,5 @@ $data = [
 
 $GS1order = GS1InsbouOrderConverter::make($data);
 dump($GS1order->toArray(true));
-dump('$GS1order->isValid() returned ' . $GS1order->isValid());
 dump($GS1order->toXML()->asXML()); //as string
+dump('$GS1order->isValid() returned ' . ($GS1order->isValid() ? '1' : '0'));
