@@ -71,7 +71,42 @@ $data = [
     ]
 ];
 
-$GS1order = GS1InsbouOrderConverter::make($data);
-dump($GS1order->toArray(true));
-dump($GS1order->toXML()->asXML()); //as string
-dump('$GS1order->isValid() returned ' . ($GS1order->isValid() ? '1' : '0'));
+//$GS1order = GS1InsbouOrderConverter::make($data);
+//dump($GS1order->toArray(true));
+//dump('$GS1order->isValid() returned ' . ($GS1order->isValid() ? '1' : '0'));
+//dump($GS1order->toXML()->asXML()); //as string
+
+$data2 = [
+    'OrderType' => '220',
+    'OrderNumber' => 'ELB-100197041',
+    'OrderDate' => '2021-12-09',
+    'DeliveryDateTimeInformation' => [
+        'RequiredDeliveryDate' => '2021-12-10'
+    ],
+    'Buyer' => [
+        'GLN' => '8714231774051'
+    ],
+    'Supplier' => [
+        'GLN' => '8711389000001'
+    ],
+    'DeliveryParty' => [
+        'GLN' => 'empty',
+        'LocationDescription' => '001'
+    ],
+    'OrderLine' => [
+        'LineNumber' => '1',
+        'OrderedQuantity' => '0000050',
+        'LineIdentification' => '1',
+        'TradeItemIdentification' => [
+            'SuppliersTradeItemIdentification' => '0448993',
+            'AdditionalItemIdentification' => [
+                'TradeItemDescription' => 'Nvent Eriflex aardingslitze MBJ 6-1'
+            ]
+        ]
+    ]
+];
+
+$GS1order2 = GS1InsbouOrderConverter::make($data2);
+dump($GS1order2->toArray(true));
+dump('$GS1order2->isValid() returned ' . ($GS1order2->isValid() ? '1' : '0'));
+dump($GS1order2->toXML()->asXML()); //as string
