@@ -1,0 +1,32 @@
+{
+    "name": "wefabric/gs1-insbou-order-converter",
+    "description": "Package for converting data to and from GS1 Insbou Order XML files.",
+    "license" : "MIT",
+    "keywords": [
+        "wefabric",
+        "insbou003",
+        "insbou",
+        "order",
+        "GS1"
+    ],
+    "autoload": {
+        "psr-4": {
+            "Wefabric\\GS1InsbouOrderConverter\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Kevin Nauta",
+            "email": "kevin@wefabric.nl"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require-dev": {
+        "symfony/var-dumper": "6.1.x-dev"
+    },
+    "require": {
+        "spatie/data-transfer-object": "dev-main",
+        "ext-dom": "*",
+        "ext-simplexml": "*"
+    }
+}
