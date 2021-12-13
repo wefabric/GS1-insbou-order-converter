@@ -33,8 +33,19 @@ class TradeItemIdentification extends DataTransferObject implements Validatable
      */
     public function isValid(): bool
     {
-        // TODO: Implement isValid() method.
-        return true; // valid by default.
+        if(! empty($this->GTIN) && ( strlen($this->GTIN) <> 14 || ! is_numeric($this->GTIN) ) ) {
+            return false;
+        }
+
+        if(! empty($this->SupplierTradeItemIdentification) && strlen($this->SupplierTradeItemIdentification) > 35) {
+            return false;
+        }
+
+        if(! empty($this->AdditionalItemIdentification) && ! $this->AdditionalItemIdentification->isValid()) {
+            return false;
+        }
+
+        return true;
     }
 
 

@@ -6,6 +6,9 @@ use Wefabric\GS1InsbouOrderConverter\Validatable;
 
 class DeliveryParty extends Party implements Validatable
 {
+    public ?string $LocationDescription;
+    public ?ContactInformation $ContactInformation;
+
     /**
      * @return DeliveryParty Object
      */
@@ -25,8 +28,19 @@ class DeliveryParty extends Party implements Validatable
      */
     public function isValid(): bool
     {
-        // TODO: Implement isValid() method.
-        return true; // valid by default.
+        if(! empty($this->LocationDescription) && strlen($this->LocationDescription) > 70) {
+            return false;
+        }
+
+        if(! empty($this->ContactInformation) ) {
+            if (! $this->ContactInformation->isValid()) {
+                return false;
+            } else if(! empty($this->ContactInformation->EmailAddress)) {
+                return false; //DOES NOT have optional emailaddress
+            }
+        }
+
+        return parent::isValid();
     }
 
 }

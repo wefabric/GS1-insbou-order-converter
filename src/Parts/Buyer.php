@@ -7,6 +7,8 @@ use Wefabric\GS1InsbouOrderConverter\Validatable;
 
 class Buyer extends Party implements Validatable
 {
+    public ?ContactInformation $ContactInformation;
+
     /**
      * @return Buyer Object
      */
@@ -26,8 +28,11 @@ class Buyer extends Party implements Validatable
      */
     public function isValid(): bool
     {
-        // TODO: Implement isValid() method.
-        return true; // valid by default.
+        if(! empty($this->ContactInformation) && ! $this->ContactInformation->isValid()) {
+            return false;
+        } // DOES have optional emailaddress. Is already checked inside.
+
+        return parent::isValid();
     }
 
 }

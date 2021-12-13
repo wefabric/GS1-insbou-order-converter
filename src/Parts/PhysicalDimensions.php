@@ -7,9 +7,9 @@ use Wefabric\GS1InsbouOrderConverter\Validatable;
 
 class PhysicalDimensions extends DataTransferObject implements  Validatable
 {
-    public ?int $Width;
-    public ?int $Length;
-    public ?int $Height;
+    public ?float $Width;
+    public ?float $Length;
+    public ?float $Height;
     public ?string $MeasurementUnitCode;
 
     /**
@@ -30,8 +30,25 @@ class PhysicalDimensions extends DataTransferObject implements  Validatable
      */
     public function isValid(): bool
     {
-        // TODO: Implement isValid() method.
-        return true; // valid by default.
+        if(! empty($this->Width) && strlen(number_format($this->Width,3)) > 18) {
+            return false;
+        }
+
+        if(! empty($this->Length) && strlen(number_format($this->Length,3)) > 18) {
+            return false;
+        }
+
+        if(! empty($this->Height) && strlen(number_format($this->Height,3)) > 18) {
+            return false;
+        }
+
+        if(! empty($this->MeasurementUnitCode) && strlen($this->MeasurementUnitCode) <> 3) {
+            return false;
+        } else if (! in_array($this->MeasurementUnitCode, ['CMT', 'MMT', 'MTR'])) {
+            return false;
+        }
+
+        return true;
     }
 
 }

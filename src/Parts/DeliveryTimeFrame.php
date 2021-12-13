@@ -30,8 +30,23 @@ class DeliveryTimeFrame extends DataTransferObject implements Validatable
      */
     public function isValid(): bool
     {
-        // TODO: Implement isValid() method.
-        return true; // valid by default.
+        if(empty($this->DeliveryDateEarliest) || ! strtotime($this->DeliveryDateEarliest)) {
+            return false;
+        }
+
+        if(empty($this->DeliveryTimeEarliest) || ! strtotime($this->DeliveryTimeEarliest)) {
+            return false;
+        }
+
+        if(empty($this->DeliveryDateLatest) || ! strtotime($this->DeliveryDateLatest)) {
+            return false;
+        }
+
+        if(empty($this->DeliveryTimeLatest) || ! strtotime($this->DeliveryTimeLatest)) {
+            return false;
+        }
+
+        return true;
     }
 
 

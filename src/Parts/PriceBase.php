@@ -29,8 +29,21 @@ class PriceBase extends DataTransferObject implements Validatable
      */
     public function isValid(): bool
     {
-        // TODO: Implement isValid() method.
-        return true; // valid by default.
+        if(empty($this->NumberOfUnitsInPriceBasis) || strlen(number_format($this->NumberOfUnitsInPriceBasis,3)) > 9) {
+            return false;
+        }
+
+        if(! empty($this->MeasureUnitPriceBasis) && strlen($this->MeasureUnitPriceBasis) <> 3) {
+            return false;
+        } else if (! in_array($this->MeasureUnitPriceBasis, ['CMT', 'DAY', 'GRM', 'HUR', 'KGM', 'LTR', 'MIN', 'MLT', 'MMT', 'MTK', 'MTQ', 'MTR', 'PCE', 'TNE'])) {
+            return false;
+        }
+
+        if(! empty($this->PriceBaseDescription) && strlen($this->PriceBaseDescription) > 35) {
+            return false;
+        }
+
+        return true;
     }
 
 }

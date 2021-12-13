@@ -7,7 +7,7 @@ use Wefabric\GS1InsbouOrderConverter\Validatable;
 
 class TradeItemProcessing extends DataTransferObject implements Validatable
 {
-    public int $GTIN;
+    public string $GTIN;
     public ?int $ProcessingSequence;
     public ?string $ProcessingDescription;
 
@@ -29,8 +29,19 @@ class TradeItemProcessing extends DataTransferObject implements Validatable
      */
     public function isValid(): bool
     {
-        // TODO: Implement isValid() method.
-        return true; // valid by default.
+        if(empty($this->GTIN) || ( strlen($this->GTIN) <> 14 || ! is_numeric($this->GTIN) ) ) {
+            return false;
+        }
+
+        if(! empty($this->ProcessingSequence) && strlen(number_format($this->ProcessingSequence)) > 2) {
+            return false;
+        }
+
+        if(! empty($this->ProcessingDescription) && strlen($this->ProcessingDescription) > 70) {
+            return false;
+        }
+
+        return true;
     }
 
 

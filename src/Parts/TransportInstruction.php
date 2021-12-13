@@ -28,8 +28,17 @@ class TransportInstruction extends DataTransferObject implements Validatable
      */
     public function isValid(): bool
     {
-        // TODO: Implement isValid() method.
-        return true; // valid by default.
+        if(! empty($this->TransportInstructionTypeCode) && strlen($this->TransportInstructionTypeCode) <> 3) {
+            return false;
+        } else if (! in_array($this->TransportInstructionTypeCode, ['CRN', 'G05', 'G07', 'G10', 'G12', 'G15', 'G20', 'G25', 'G30', 'G40', 'IEU', 'IRM', 'MCH', 'MVA', 'PAF', 'PBE', 'PDV', 'PIN', 'PLA', 'PLL', 'PLR', 'PLV', 'POH', 'POT', 'VDA', 'VEA', 'VKO', 'VKR', 'VLA', 'VLK'])) {
+            return false;
+        }
+
+        if(! empty($this->DeliveryNoteText) && strlen($this->DeliveryNoteText) > 70) {
+            return false;
+        }
+
+        return true;
     }
 
 }

@@ -7,7 +7,6 @@ use Wefabric\GS1InsbouOrderConverter\Validatable;
 
 class ContactInformation extends DataTransferObject implements Validatable
 {
-    public ?string $ContactInformation;
     public ?string $ContactPersonName;
     public ?string $PhoneNumber;
     public ?string $EmailAddress;
@@ -30,8 +29,19 @@ class ContactInformation extends DataTransferObject implements Validatable
      */
     public function isValid(): bool
     {
-        // TODO: Implement isValid() method.
-        return true; // valid by default.
+        if(! empty($this->ContactPersonName) && strlen($this->ContactPersonName) > 35) {
+            return false;
+        }
+
+        if(! empty($this->PhoneNumber) && strlen($this->PhoneNumber) > 20) {
+            return false;
+        }
+
+        if(! empty($this->EmailAddress) && strlen($this->EmailAddress) > 254) {
+            return false;
+        }
+
+        return true;
     }
 
 }

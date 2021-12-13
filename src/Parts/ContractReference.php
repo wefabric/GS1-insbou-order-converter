@@ -28,8 +28,15 @@ class ContractReference extends DataTransferObject implements Validatable
      */
     public function isValid(): bool
     {
-        // TODO: Implement isValid() method.
-        return true; // valid by default.
+        if(empty($this->ContractNumber) || strlen($this->ContractNumber) > 17) {
+            return false;
+        }
+
+        if(! empty($this->ContractDate) && ! strtotime($this->ContractDate)) {
+            return false;
+        } // A value is supplied, but it doesn't parse to a valid date. Return false.
+
+        return true;
     }
 
 }

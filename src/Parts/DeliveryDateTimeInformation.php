@@ -33,8 +33,19 @@ class DeliveryDateTimeInformation extends DataTransferObject implements Validata
      */
     public function isValid(): bool
     {
-        // TODO: Implement isValid() method.
-        return true; // valid by default.
+        if(! empty($this->RequiredDeliveryDate) && ! strtotime($this->RequiredDeliveryDate)) {
+            return false;
+        }
+
+        if(! empty($this->RequiredDeliveryTime) && ! strtotime($this->RequiredDeliveryTime)) {
+            return false;
+        }
+
+        if(! empty($this->DeliveryTimeFrame) && ! $this->DeliveryTimeFrame->isValid()) {
+            return false;
+        }
+
+        return true;
     }
 
 }

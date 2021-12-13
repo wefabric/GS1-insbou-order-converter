@@ -35,8 +35,27 @@ class AdditionalItemIdentification extends DataTransferObject implements Validat
      */
     public function isValid(): bool
     {
-        // TODO: Implement isValid() method.
-        return true; // valid by default.
+        if(! empty($this->TradeItemDescription) && strlen($this->TradeItemDescription) > 70) {
+            return false;
+        }
+
+        if(! empty($this->Colour) && strlen($this->Colour) > 35) {
+            return false;
+        }
+
+        if(! empty($this->Size) && strlen($this->Size) > 35) {
+            return false;
+        }
+
+        if(! empty($this->SerialNumber) && strlen($this->SerialNumber) > 35) {
+            return false;
+        }
+
+        if(! empty($this->PhysicalDimensions) && ! $this->PhysicalDimensions->isValid()) {
+            return false;
+        }
+
+        return true;
     }
 
 }

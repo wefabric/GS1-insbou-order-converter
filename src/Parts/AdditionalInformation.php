@@ -27,8 +27,11 @@ class AdditionalInformation extends DataTransferObject implements Validatable
      */
     public function isValid(): bool
     {
-        // TODO: Implement isValid() method.
-        return true; // valid by default.
+        if(empty($this->FreeText) || strlen($this->FreeText) > 70) {
+            return false;
+        }
+
+        return true;
     }
 
 }

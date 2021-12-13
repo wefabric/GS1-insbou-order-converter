@@ -8,7 +8,7 @@ use Wefabric\GS1InsbouOrderConverter\Validatable;
 class DifferentPriceAgreement extends DataTransferObject implements Validatable
 {
     public ?string $DifferentPriceAgreementIndicator;
-    public ?int $DifferentPrice;
+    public ?float $DifferentPrice;
     public ?PriceBase $PriceBase;
 
     /**
@@ -33,8 +33,21 @@ class DifferentPriceAgreement extends DataTransferObject implements Validatable
      */
     public function isValid(): bool
     {
-        // TODO: Implement isValid() method.
-        return true; // valid by default.
+        if(! empty($this->DifferentPriceAgreementIndicator) && strlen($this->DifferentPriceAgreementIndicator) <> 3) {
+            return false;
+        } else if (! in_array($this->MeasurementUnitCode, ['PPR'])) {
+            return false;
+        }
+
+        if(! empty($this->DifferentPrice) && strlen(number_format($this->DifferentPrice,4)) > 15) {
+            return false;
+        }
+
+        if(! empty($this->PriceBase) && ! $this->PriceBase->isValid()) {
+            return false;
+        }
+
+        return true;
     }
 
 }

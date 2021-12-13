@@ -25,8 +25,7 @@ class Carrier extends Party implements Validatable
      */
     public function isValid(): bool
     {
-        // TODO: Implement isValid() method.
-        return true; // valid by default.
+        return parent::isValid();
     }
 
 }

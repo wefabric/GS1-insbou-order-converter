@@ -16,8 +16,6 @@ abstract class Party extends DataTransferObject implements Validatable
     public ?string $City;
     public ?string $PostalCode;
     public ?string $Country;
-    public ?string $LocationDescription;
-    public ?ContactInformation $ContactInformation;
 
     public function __construct(array $data = [])
     {
@@ -31,6 +29,41 @@ abstract class Party extends DataTransferObject implements Validatable
     /**
      * @return bool indicating whether the object is Valid (true) or invalid (false) based on the information inside the object.
      */
-    public abstract function isValid(): bool;
+    public function isValid(): bool
+    {
+        if(empty($this->PartyType)) {
+            return false; //This would mean the PartyType was not set, and is the default 0.
+        }
+
+        if(empty($this->GLN) || strlen($this->GLN) <> 13) {
+            return false;
+        }
+
+        if(! empty($this->Name) && strlen($this->Name) > 50) {
+            return false;
+        }
+
+        if(! empty($this->Name2) && strlen($this->Name2) > 50) {
+            return false;
+        }
+
+        if(! empty($this->StreetAndNumber) && strlen($this->StreetAndNumber) > 35) {
+            return false;
+        }
+
+        if(! empty($this->City) && strlen($this->City) > 35) {
+            return false;
+        }
+
+        if(! empty($this->PostalCode) && strlen($this->PostalCode) > 9) {
+            return false;
+        }
+
+        if(! empty($this->Country) && strlen($this->Country) <> 2) {
+            return false;
+        }
+
+        return true;
+    }
 
 }

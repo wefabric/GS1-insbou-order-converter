@@ -28,9 +28,9 @@ class GS1InsbouOrderConverter extends DataTransferObject implements Validatable
     public ?string $ScenarioTypeCode;
     public ?string $DraftOrderIndicator;
     public ?string $DeliveryOnDemandIndicator;
-    public ?string $EndCustomerOrderNumber;
+    public ?string $EndCustomerOrderNumber; // Documentation dictates this should be inside a class CustomerOrderReference ?
     public ?ContractReference $ContractReference;
-    public string $ProjectNumber;
+    public string $ProjectNumber; // Documentation dictates this should be inside a class ProjectReference ?
     public ?TransportInstruction $TransportInstruction;
     public ?DeliveryDateTimeInformation $DeliveryDateTimeInformation;
     public Buyer $Buyer;
@@ -104,8 +104,99 @@ class GS1InsbouOrderConverter extends DataTransferObject implements Validatable
 
     public function isValid(): bool
     {
-        // TODO: Implement isValid() method.
-        return true; // valid by default.
+        if(empty($this->OrderType) || strlen($this->OrderType) > 3) {
+            return false;
+        } else if (! in_array($this->OrderType, ['220', '402'])) {
+            return false;
+        }
+
+        if(empty($this->OrderNumber) || strlen($this->OrderNumber) > 17) {
+            return false;
+        }
+
+        if(empty($this->OrderDate) || ! strtotime($this->OrderDate)) {
+            return false;
+        } // A value is supplied, but it doesn't parse to a valid date. Return false.
+
+        if(! empty($this->OrderTime) && ! strtotime($this->OrderTime)) {
+            return false;
+        }
+
+        if(! empty($this->ScenarioTypeCode) && ! strlen($this->ScenarioTypeCode) > 3) {
+            return false;
+        } else if (! in_array($this->ScenarioTypeCode, ['X1', 'X2'])) {
+            return false;
+        }
+
+        if(! empty($this->DraftOrderIndicator) && ! strlen($this->DraftOrderIndicator) > 3) {
+            return false;
+        } else if (! in_array($this->DraftOrderIndicator, ['16'])) {
+            return false;
+        }
+
+        if(! empty($this->DeliveryOnDemandIndicator) && ! strlen($this->DeliveryOnDemandIndicator) > 3) {
+            return false;
+        } else if (! in_array($this->DeliveryOnDemandIndicator, ['73E'])) {
+            return false;
+        }
+
+        if(! empty($this->EndCustomerOrderNumber) && ! strlen($this->EndCustomerOrderNumber) > 3) {
+            return false;
+        }
+
+        if(! empty($this->ContractReference) && ! $this->ContractReference->isValid()) {
+            return false;
+        }
+
+        if(empty($this->ProjectNumber) || strlen($this->ProjectNumber) > 17) {
+            return false;
+        }
+
+        if(! empty($this->TransportInstruction) && ! $this->TransportInstruction->isValid()) {
+            return false;
+        }
+
+        if(! empty($this->DeliveryDateTimeInformation) && ! $this->DeliveryDateTimeInformation->isValid()) {
+            return false;
+        }
+
+        if(empty($this->Buyer) || ! $this->Buyer->isValid()) {
+            return false;
+        }
+
+        if(empty($this->Supplier) || ! $this->Supplier->isValid()) {
+            return false;
+        }
+
+        if(! empty($this->DeliveryParty) && ! $this->DeliveryParty->isValid()) {
+            return false;
+        }
+
+        if(! empty($this->Invoicee) && ! $this->Invoicee->isValid()) {
+            return false;
+        }
+
+        if(! empty($this->UltimateConsignee) && ! $this->UltimateConsignee->isValid()) {
+            return false;
+        }
+
+        if(! empty($this->ShipFrom) && ! $this->ShipFrom->isValid()) {
+            return false;
+        }
+
+        if(! empty($this->PurchasingOrganisation) && ! $this->PurchasingOrganisation->isValid()) {
+            return false;
+        }
+
+        if(! empty($this->Carrier) && ! $this->Carrier->isValid()) {
+            return false;
+        }
+
+        if(empty($this->OrderLine) || ! $this->OrderLine->isValid()) {
+            return false;
+        }
+
+        return true;
     }
 
     /**
