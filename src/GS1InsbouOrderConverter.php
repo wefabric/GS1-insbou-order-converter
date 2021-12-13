@@ -6,6 +6,8 @@ use SimpleXMLElement;
 use Spatie\DataTransferObject\DataTransferObject;
 
 use Wefabric\GS1InsbouOrderConverter\Parts\ContractReference;
+use Wefabric\GS1InsbouOrderConverter\Parts\CustomerOrderReference;
+use Wefabric\GS1InsbouOrderConverter\Parts\ProjectReference;
 use Wefabric\GS1InsbouOrderConverter\Parts\TransportInstruction;
 use Wefabric\GS1InsbouOrderConverter\Parts\DeliveryDateTimeInformation;
 use Wefabric\GS1InsbouOrderConverter\Parts\Buyer;
@@ -28,9 +30,9 @@ class GS1InsbouOrderConverter extends DataTransferObject implements Validatable
     public ?string $ScenarioTypeCode;
     public ?string $DraftOrderIndicator;
     public ?string $DeliveryOnDemandIndicator;
-    public ?string $EndCustomerOrderNumber; // Documentation dictates this should be inside a class CustomerOrderReference ?
+    public ?CustomerOrderReference $CustomerOrderReference;
     public ?ContractReference $ContractReference;
-    public string $ProjectNumber; // Documentation dictates this should be inside a class ProjectReference ?
+    public ?ProjectReference $ProjectReference;
     public ?TransportInstruction $TransportInstruction;
     public ?DeliveryDateTimeInformation $DeliveryDateTimeInformation;
     public Buyer $Buyer;
@@ -53,9 +55,22 @@ class GS1InsbouOrderConverter extends DataTransferObject implements Validatable
 
     public function __construct(array $data = [])
     {
+        if(isset($data['CustomerOrderReference']) && is_array($data['CustomerOrderReference'])){
+            $data['CustomerOrderReference'] = new ProjectReference($data['CustomerOrderReference']);
+        } else if (! isset($data['CustomerOrderReference']) && isset($data['$EndCustomerOrderNumber'])) {
+            $data['CustomerOrderReference'] = new ProjectReference(['$EndCustomerOrderNumber' => $data['$EndCustomerOrderNumber']]);
+        } //sometimes $EndCustomerOrderNumber is sent outside CustomerOrderReference.
+
         if(isset($data['ContractReference']) && is_array($data['ContractReference'])){
             $data['ContractReference'] = new ContractReference($data['ContractReference']);
         }
+
+        if(isset($data['ProjectReference']) && is_array($data['ProjectReference'])){
+            $data['ProjectReference'] = new ProjectReference($data['ProjectReference']);
+        } else if (! isset($data['ProjectReference']) && isset($data['ProjectNumber'])) {
+            $data['ProjectReference'] = new ProjectReference(['ProjectNumber' => $data['ProjectNumber']]);
+        } //sometimes ProjectNumber is sent outside ProjectReference.
+
         if(isset($data['TransportInstruction']) && is_array($data['TransportInstruction'])){
             $data['TransportInstruction'] = new TransportInstruction($data['TransportInstruction']);
         }
@@ -140,7 +155,7 @@ class GS1InsbouOrderConverter extends DataTransferObject implements Validatable
             return false;
         }
 
-        if(! empty($this->EndCustomerOrderNumber) && ! strlen($this->EndCustomerOrderNumber) > 3) {
+        if(! empty($this->CustomerOrderReference) && ! $this->CustomerOrderReference->isValid()) {
             return false;
         }
 
@@ -148,7 +163,7 @@ class GS1InsbouOrderConverter extends DataTransferObject implements Validatable
             return false;
         }
 
-        if(empty($this->ProjectNumber) || strlen($this->ProjectNumber) > 17) {
+        if(! empty($this->ProjectReference) && ! $this->ProjectReference->isValid()) {
             return false;
         }
 
