@@ -60,7 +60,7 @@ class DeliveryDateTimeInformation extends DataTransferObject implements Validata
             }
         }
 
-        return empty($errorMessage);
+        return $errorMessage;
     }
 
 }

@@ -208,7 +208,7 @@ class GS1InsbouOrderConverter extends DataTransferObject implements Validatable
         if(! empty($this->DeliveryDateTimeInformation)) {
             $innerErrorMessage = $this->DeliveryDateTimeInformation->getErrorMessages();
             if(! empty($innerErrorMessage)) {
-            $errorMessage .= 'DeliveryDateTimeInformation is invalid.' . '\n' . $innerErrorMessage . '\n';
+                $errorMessage .= 'DeliveryDateTimeInformation is invalid.' . '\n' . $innerErrorMessage . '\n';
             }
         }
 
