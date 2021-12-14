@@ -90,7 +90,7 @@ $data2 = [
         'GLN' => '8711389000001'
     ],
     'DeliveryParty' => [
-        'GLN' => '',
+        'GLN' => '1234567890123',
         'LocationDescription' => '001'
     ],
     'OrderLine' => [

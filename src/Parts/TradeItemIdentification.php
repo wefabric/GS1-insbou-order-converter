@@ -8,7 +8,7 @@ use Wefabric\GS1InsbouOrderConverter\Validatable;
 class TradeItemIdentification extends DataTransferObject implements Validatable
 {
     public ?string $GTIN;
-    public ?string $SupplierTradeItemIdentification;
+    public ?string $SuppliersTradeItemIdentification;
     public ?AdditionalItemIdentification $AdditionalItemIdentification;
 
     /**
@@ -49,8 +49,8 @@ class TradeItemIdentification extends DataTransferObject implements Validatable
             $errorMessage .= 'GTIN (' . $this->GTIN .') is invalid.' . '\n';
         }
 
-        if(! empty($this->SupplierTradeItemIdentification) && strlen($this->SupplierTradeItemIdentification) > 35) {
-            $errorMessage .= 'SupplierTradeItemIdentification (' . $this->SupplierTradeItemIdentification .') is invalid.' . '\n';
+        if(! empty($this->SuppliersTradeItemIdentification) && strlen($this->SuppliersTradeItemIdentification) > 35) {
+            $errorMessage .= 'SuppliersTradeItemIdentification (' . $this->SuppliersTradeItemIdentification .') is invalid.' . '\n';
         }
 
         if(! empty($this->AdditionalItemIdentification)) {
