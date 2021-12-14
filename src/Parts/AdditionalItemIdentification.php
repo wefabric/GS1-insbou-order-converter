@@ -32,9 +32,21 @@ class AdditionalItemIdentification extends DataTransferObject implements Validat
 
     /**
      * @return bool indicating whether the object is Valid (true) or invalid (false) based on the information inside the object.
+     * Calls getErrorMessages() and checks if the response is empty or not.
      */
-    public function isValid(string &$errorMessage): bool
+    public function isValid() : bool
     {
+        return !(bool) self::getErrorMessages();
+    }
+
+    /**
+     * @return string Human-readable errormessage(s) indicating the location of the invalid properties.
+     */
+    public function getErrorMessages() : string
+    {
+        $errorMessage = '';
+        $innerErrorMessage = '';
+
         if(! empty($this->TradeItemDescription) && strlen($this->TradeItemDescription) > 70) {
             $errorMessage .= 'TradeItemDescription (' . $this->TradeItemDescription .') is invalid.' . '\n';
         }
@@ -51,14 +63,14 @@ class AdditionalItemIdentification extends DataTransferObject implements Validat
             $errorMessage .= 'SerialNumber (' . $this->SerialNumber .') is invalid.' . '\n';
         }
 
-        $innerErrorMessage = '';
-
-        if(! empty($this->PhysicalDimensions) && ! $this->PhysicalDimensions->isValid($innerErrorMessage)) {
-            $errorMessage .= 'PhysicalDimensions is invalid.' . '\n' . $innerErrorMessage & '\n';
-            $innerErrorMessage = '';
+        if(! empty($this->PhysicalDimensions)) {
+            $innerErrorMessage = $this->PhysicalDimensions->getErrorMessages();
+            if (!empty($innerErrorMessage)) {
+                $errorMessage .= 'PhysicalDimensions is invalid.' . '\n' . $innerErrorMessage & '\n';
+            }
         }
 
-        return empty($errorMessage);
+        return $errorMessage;
     }
 
 }

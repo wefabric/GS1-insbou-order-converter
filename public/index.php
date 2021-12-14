@@ -109,10 +109,8 @@ $data2 = [
 $GS1order2 = GS1InsbouOrderConverter::make($data2);
 dump($GS1order2->toArray(true));
 
-$errorMessage = '';
-dump('$GS1order2->isValid() returned ' . ($GS1order2->isValid($errorMessage) ? '1' : '0'));
-if(! empty($errorMessage) ){
-    dump($errorMessage);
+if(! $GS1order2->isValid() ){
+    dump($GS1order2->getErrorMessages());
+} else {
+    dump($GS1order2->toXML()->asXML()); //as string
 }
-
-dump($GS1order2->toXML()->asXML()); //as string

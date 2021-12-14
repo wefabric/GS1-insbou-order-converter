@@ -30,9 +30,21 @@ class TradeItemIdentification extends DataTransferObject implements Validatable
 
     /**
      * @return bool indicating whether the object is Valid (true) or invalid (false) based on the information inside the object.
+     * Calls getErrorMessages() and checks if the response is empty or not.
      */
-    public function isValid(string &$errorMessage): bool
+    public function isValid() : bool
     {
+        return !(bool) self::getErrorMessages();
+    }
+
+    /**
+     * @return string Human-readable errormessage(s) indicating the location of the invalid properties.
+     */
+    public function getErrorMessages() : string
+    {
+        $errorMessage = '';
+        $innerErrorMessage = '';
+
         if(! empty($this->GTIN) && ( strlen($this->GTIN) <> 14 || ! is_numeric($this->GTIN) ) ) {
             $errorMessage .= 'GTIN (' . $this->GTIN .') is invalid.' . '\n';
         }
@@ -41,14 +53,15 @@ class TradeItemIdentification extends DataTransferObject implements Validatable
             $errorMessage .= 'SupplierTradeItemIdentification (' . $this->SupplierTradeItemIdentification .') is invalid.' . '\n';
         }
 
-        $innerErrorMessage = '';
-
-        if(! empty($this->AdditionalItemIdentification) && ! $this->AdditionalItemIdentification->isValid($innerErrorMessage)) {
-            $errorMessage .= 'AdditionalItemIdentification is invalid.' . '\n' . $innerErrorMessage & '\n';
-            $innerErrorMessage = '';
+        if(! empty($this->AdditionalItemIdentification)) {
+            $innerErrorMessage = $this->AdditionalItemIdentification->getErrorMessages();
+            if(! empty($innerErrorMessage)) {
+                $errorMessage .= 'AdditionalItemIdentification is invalid.' . '\n' . $innerErrorMessage & '\n';
+                $innerErrorMessage = '';
+            }
         }
 
-        return empty($errorMessage);
+        return $errorMessage;
     }
 
 

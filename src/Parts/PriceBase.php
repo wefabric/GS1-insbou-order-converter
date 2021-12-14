@@ -28,9 +28,20 @@ class PriceBase extends DataTransferObject implements Validatable
 
     /**
      * @return bool indicating whether the object is Valid (true) or invalid (false) based on the information inside the object.
+     * Calls getErrorMessages() and checks if the response is empty or not.
      */
-    public function isValid(string &$errorMessage): bool
+    public function isValid() : bool
     {
+        return !(bool) self::getErrorMessages();
+    }
+
+    /**
+     * @return string Human-readable errormessage(s) indicating the location of the invalid properties.
+     */
+    public function getErrorMessages() : string
+    {
+        $errorMessage = '';
+
         if(empty($this->NumberOfUnitsInPriceBasis) || strlen(number_format($this->NumberOfUnitsInPriceBasis,3)) > 9) {
             $errorMessage .= 'NumberOfUnitsInPriceBasis (' . $this->NumberOfUnitsInPriceBasis .') is invalid.' . '\n';
         }
@@ -43,7 +54,7 @@ class PriceBase extends DataTransferObject implements Validatable
             $errorMessage .= 'PriceBaseDescription (' . $this->PriceBaseDescription .') is invalid.' . '\n';
         }
 
-        return empty($errorMessage);
+        return $errorMessage;
     }
 
 }

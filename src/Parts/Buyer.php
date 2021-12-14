@@ -26,20 +26,34 @@ class Buyer extends Party implements Validatable
         parent::__construct($data);
         $this->PartyType = PartyType::Buyer;
     }
-    
+
     /**
      * @return bool indicating whether the object is Valid (true) or invalid (false) based on the information inside the object.
+     * Calls getErrorMessages() and checks if the response is empty or not.
      */
-    public function isValid(string &$errorMessage): bool
+    public function isValid() : bool
     {
+        return !(bool) self::getErrorMessages();
+    }
+
+    /**
+     * @return string Human-readable errormessage(s) indicating the location of the invalid properties.
+     */
+    public function getErrorMessages() : string
+    {
+        $errorMessage = '';
         $innerErrorMessage = '';
 
-        if(! empty($this->ContactInformation) && ! $this->ContactInformation->isValid($innerErrorMessage)) {
-            $errorMessage .= 'ContactInformation is invalid.' . '\n' . $innerErrorMessage & '\n';
-            $innerErrorMessage = '';
+        if(! empty($this->ContactInformation) ) {
+            $innerErrorMessage = $this->ContactInformation->getErrorMessages();
+            if(! empty($innerErrorMessage))  {
+                $errorMessage .= 'ContactInformation is invalid.' . '\n' . $innerErrorMessage & '\n';
+            }
         } // DOES have optional emailaddress. Is already checked inside.
 
-        return parent::isValid($errorMessage);
+        $errorMessage .= parent::getErrorMessages();
+
+        return $errorMessage;
     }
 
 }

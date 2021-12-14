@@ -30,9 +30,21 @@ class DifferentPriceAgreement extends DataTransferObject implements Validatable
 
     /**
      * @return bool indicating whether the object is Valid (true) or invalid (false) based on the information inside the object.
+     * Calls getErrorMessages() and checks if the response is empty or not.
      */
-    public function isValid(string &$errorMessage): bool
+    public function isValid() : bool
     {
+        return !(bool) self::getErrorMessages();
+    }
+
+    /**
+     * @return string Human-readable errormessage(s) indicating the location of the invalid properties.
+     */
+    public function getErrorMessages() : string
+    {
+        $errorMessage = '';
+        $innerErrorMessage = '';
+
         if(! empty($this->DifferentPriceAgreementIndicator) && ( strlen($this->DifferentPriceAgreementIndicator) <> 3) || ! in_array($this->DifferentPriceAgreementIndicator, ['PPR'])) {
             $errorMessage .= 'DifferentPriceAgreementIndicator (' . $this->DifferentPriceAgreementIndicator .') is invalid.' . '\n';
         }
@@ -41,14 +53,14 @@ class DifferentPriceAgreement extends DataTransferObject implements Validatable
             $errorMessage .= 'DifferentPrice (' . $this->DifferentPrice .') is invalid.' . '\n';
         }
 
-        $innerErrorMessage = '';
-
-        if(! empty($this->PriceBase) && ! $this->PriceBase->isValid($innerErrorMessage)) {
-            $errorMessage .= 'PriceBase is invalid.' . '\n' . $innerErrorMessage & '\n';
-            $innerErrorMessage = '';
+        if(! empty($this->PriceBase)) {
+            $innerErrorMessage = $this->PriceBase->getErrorMessages();
+            if(! empty($innerErrorMessage)) {
+                $errorMessage .= 'PriceBase is invalid.' . '\n' . $innerErrorMessage & '\n';
+            }
         }
 
-        return empty($errorMessage);
+        return $errorMessage;
     }
 
 }

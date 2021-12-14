@@ -128,8 +128,22 @@ class GS1InsbouOrderConverter extends DataTransferObject implements Validatable
         return $data;
     }
 
-    public function isValid(string &$errorMessage): bool
+    /**
+     * @return bool indicating whether the object is Valid (true) or invalid (false) based on the information inside the object.
+     * Calls getErrorMessages() and checks if the response is empty or not.
+     */
+    public function isValid() : bool
     {
+        return !(bool) self::getErrorMessages();
+    }
+
+    /**
+     * @return string Human-readable errormessage(s) indicating the location of the invalid properties.
+     */
+    public function getErrorMessages() : string
+    {
+        $errorMessage = '';
+        $innerErrorMessage = '';
 
         if(empty($this->OrderType) || strlen($this->OrderType) > 3 || ! in_array($this->OrderType, ['220', '402']) ) {
             $errorMessage .= 'OrderType (' . $this->OrderType .') is invalid.' . '\n';
@@ -159,79 +173,109 @@ class GS1InsbouOrderConverter extends DataTransferObject implements Validatable
             $errorMessage .= 'DeliveryOnDemandIndicator (' . $this->DeliveryOnDemandIndicator .') is invalid.' . '\n';
         }
 
-        $innerErrorMessage = '';
-
-        if(! empty($this->CustomerOrderReference) && ! $this->CustomerOrderReference->isValid($innerErrorMessage)) {
-            $errorMessage .= 'CustomerOrderReference is invalid:' . '\n' . $innerErrorMessage . '\n';
-            $innerErrorMessage = '';
+        if(! empty($this->CustomerOrderReference)) {
+            $innerErrorMessage = $this->CustomerOrderReference->getErrorMessages();
+            if(! empty($innerErrorMessage)) {
+                $errorMessage .= 'CustomerOrderReference is invalid:' . '\n' . $innerErrorMessage . '\n';
+            }
         }
 
-        if(! empty($this->ContractReference) && ! $this->ContractReference->isValid($innerErrorMessage)) {
-            $errorMessage .= 'ContractReference is invalid.' . '\n' . $innerErrorMessage . '\n';
-            $innerErrorMessage = '';
+        if(! empty($this->ContractReference)) {
+            $innerErrorMessage = $this->ContractReference->getErrorMessages();
+            if(! empty($innerErrorMessage)) {
+                $errorMessage .= 'ContractReference is invalid.' . '\n' . $innerErrorMessage . '\n';
+            }
         }
 
-        if(! empty($this->ProjectReference) && ! $this->ProjectReference->isValid($innerErrorMessage)) {
-            $errorMessage .= 'ProjectReference is invalid.' . '\n' . $innerErrorMessage . '\n';
-            $innerErrorMessage = '';
+        if(! empty($this->ProjectReference)) {
+            $innerErrorMessage = $this->ProjectReference->getErrorMessages();
+            if(! empty($innerErrorMessage)) {
+                $errorMessage .= 'ProjectReference is invalid.' . '\n' . $innerErrorMessage . '\n';
+            }
         }
 
-        if(! empty($this->TransportInstruction) && ! $this->TransportInstruction->isValid($innerErrorMessage)) {
-            $errorMessage .= 'TransportInstruction is invalid.' . '\n' . $innerErrorMessage . '\n';
-            $innerErrorMessage = '';
+        if(! empty($this->TransportInstruction)) {
+            $innerErrorMessage = $this->TransportInstruction->getErrorMessages();
+            if(! empty($innerErrorMessage)) {
+                $errorMessage .= 'TransportInstruction is invalid.' . '\n' . $innerErrorMessage . '\n';
+            }
         }
 
-        if(! empty($this->DeliveryDateTimeInformation) && ! $this->DeliveryDateTimeInformation->isValid($innerErrorMessage)) {
+        if(! empty($this->DeliveryDateTimeInformation)) {
+            $innerErrorMessage = $this->DeliveryDateTimeInformation->getErrorMessages();
+            if(! empty($innerErrorMessage)) {
             $errorMessage .= 'DeliveryDateTimeInformation is invalid.' . '\n' . $innerErrorMessage . '\n';
-            $innerErrorMessage = '';
+            }
         }
 
-        if(empty($this->Buyer) || ! $this->Buyer->isValid($innerErrorMessage)) {
-            $errorMessage .= 'Buyer is invalid.' . '\n' . $innerErrorMessage . '\n';
-            $innerErrorMessage = '';
+        if(empty($this->Buyer)) {
+            $errorMessage .= 'Buyer is invalid (empty).' . '\n';
+        } else {
+            $innerErrorMessage = $this->Buyer->getErrorMessages();
+            if(! empty($innerErrorMessage)) {
+                $errorMessage .= 'Buyer is invalid.' . '\n' . $innerErrorMessage . '\n';
+            }
         }
 
-        if(empty($this->Supplier) || ! $this->Supplier->isValid($innerErrorMessage)) {
-            $errorMessage .= 'Supplier is invalid.' . '\n' . $innerErrorMessage . '\n';
-            $innerErrorMessage = '';
+        if(empty($this->Supplier)) {
+            $errorMessage .= 'Supplier is invalid (empty).' . '\n';
+        } else {
+            $innerErrorMessage = $this->Supplier->getErrorMessages();
+            if(! empty($innerErrorMessage)) {
+                $errorMessage .= 'Supplier is invalid.' . '\n' . $innerErrorMessage . '\n';
+            }
         }
 
-        if(! empty($this->DeliveryParty) && ! $this->DeliveryParty->isValid($innerErrorMessage)) {
-            $errorMessage .= 'DeliveryParty is invalid.' . '\n' . $innerErrorMessage . '\n';
-            $innerErrorMessage = '';
+        if(! empty($this->DeliveryParty)) {
+            $innerErrorMessage = $this->DeliveryParty->getErrorMessages();
+            if(! empty($innerErrorMessage)) {
+                $errorMessage .= 'DeliveryParty is invalid.' . '\n' . $innerErrorMessage . '\n';
+            }
         }
 
-        if(! empty($this->Invoicee) && ! $this->Invoicee->isValid($innerErrorMessage)) {
-            $errorMessage .= 'Invoicee is invalid.' . '\n' . $innerErrorMessage . '\n';
-            $innerErrorMessage = '';
+        if(! empty($this->Invoicee)) {
+            $innerErrorMessage = $this->Invoicee->getErrorMessages();
+            if (!empty($innerErrorMessage)) {
+                $errorMessage .= 'Invoicee is invalid.' . '\n' . $innerErrorMessage . '\n';
+            }
         }
 
-        if(! empty($this->UltimateConsignee) && ! $this->UltimateConsignee->isValid($innerErrorMessage)) {
-            $errorMessage .= 'UltimateConsignee is invalid.' . '\n' . $innerErrorMessage . '\n';
-            $innerErrorMessage = '';
+        if(! empty($this->UltimateConsignee)) {
+            $innerErrorMessage = $this->UltimateConsignee->getErrorMessages();
+            if(! empty($innerErrorMessage)) {
+                $errorMessage .= 'UltimateConsignee is invalid.' . '\n' . $innerErrorMessage . '\n';
+            }
         }
 
-        if(! empty($this->ShipFrom) && ! $this->ShipFrom->isValid($innerErrorMessage)) {
+        if(! empty($this->ShipFrom)) {
+            $innerErrorMessage = $this->ShipFrom->getErrorMessages();
+            if(! empty($innerErrorMessage)) {
             $errorMessage .= 'ShipFrom is invalid.' . '\n' . $innerErrorMessage . '\n';
-            $innerErrorMessage = '';
+            }
         }
 
-        if(! empty($this->PurchasingOrganisation) && ! $this->PurchasingOrganisation->isValid($innerErrorMessage)) {
-            $errorMessage .= 'PurchasingOrganisation is invalid.' . '\n' . $innerErrorMessage . '\n';
-            $innerErrorMessage = '';
+        if(! empty($this->PurchasingOrganisation)) {
+            $innerErrorMessage = $this->PurchasingOrganisation->getErrorMessages();
+            if(! empty($innerErrorMessage)) {
+                $errorMessage .= 'PurchasingOrganisation is invalid.' . '\n' . $innerErrorMessage . '\n';
+            }
         }
 
-        if(! empty($this->Carrier) && ! $this->Carrier->isValid($innerErrorMessage)) {
-            $errorMessage .= 'Carrier is invalid.' . '\n' . $innerErrorMessage . '\n';
-            $innerErrorMessage = '';
+        if(! empty($this->Carrier)) {
+            $innerErrorMessage = $this->Carrier->getErrorMessages();
+            if(! empty($innerErrorMessage)) {
+                $errorMessage .= 'Carrier is invalid.' . '\n' . $innerErrorMessage . '\n';
+            }
         }
 
-        if(empty($this->OrderLine) || ! $this->OrderLine->isValid($innerErrorMessage)) {
-            $errorMessage .= 'OrderLine is invalid.' . '\n' . $innerErrorMessage . '\n';
-            $innerErrorMessage = '';
+        if(empty($this->OrderLine)) {
+            $innerErrorMessage = $this->OrderLine->getErrorMessages();
+            if(! empty($innerErrorMessage)) {
+                $errorMessage .= 'OrderLine is invalid.' . '\n' . $innerErrorMessage . '\n';
+            }
         }
 
-        return empty($errorMessage);
+        return $errorMessage;
     }
 
     /**

@@ -25,9 +25,20 @@ abstract class Party extends DataTransferObject implements Validatable
 
     /**
      * @return bool indicating whether the object is Valid (true) or invalid (false) based on the information inside the object.
+     * Calls getErrorMessages() and checks if the response is empty or not.
      */
-    public function isValid(string &$errorMessage): bool
+    public function isValid() : bool
     {
+        return !(bool) self::getErrorMessages();
+    }
+
+    /**
+     * @return string Human-readable errormessage(s) indicating the location of the invalid properties.
+     */
+    public function getErrorMessages() : string
+    {
+        $errorMessage = '';
+
         if(empty($this->PartyType)) {
             $errorMessage .= 'PartyType (' . $this->PartyType .') is invalid.' . '\n';
         } //This would mean the PartyType was not set, and is the default 0.
@@ -60,7 +71,7 @@ abstract class Party extends DataTransferObject implements Validatable
             $errorMessage .= 'Country (' . $this->Country .') is invalid.' . '\n';
         }
 
-        return empty($errorMessage);
+        return $errorMessage;
     }
 
 }

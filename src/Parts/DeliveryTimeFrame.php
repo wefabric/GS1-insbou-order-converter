@@ -27,9 +27,20 @@ class DeliveryTimeFrame extends DataTransferObject implements Validatable
 
     /**
      * @return bool indicating whether the object is Valid (true) or invalid (false) based on the information inside the object.
+     * Calls getErrorMessages() and checks if the response is empty or not.
      */
-    public function isValid(string &$errorMessage): bool
+    public function isValid() : bool
     {
+        return !(bool) self::getErrorMessages();
+    }
+
+    /**
+     * @return string Human-readable errormessage(s) indicating the location of the invalid properties.
+     */
+    public function getErrorMessages() : string
+    {
+        $errorMessage = '';
+
         if(empty($this->DeliveryDateEarliest) || ! strtotime($this->DeliveryDateEarliest)) {
             $errorMessage .= 'DeliveryDateEarliest (' . $this->DeliveryDateEarliest .') is invalid.' . '\n';
         }
@@ -46,7 +57,7 @@ class DeliveryTimeFrame extends DataTransferObject implements Validatable
             $errorMessage .= 'DeliveryTimeLatest (' . $this->DeliveryTimeLatest .') is invalid.' . '\n';
         }
 
-        return empty($errorMessage);
+        return $errorMessage;
     }
 
 

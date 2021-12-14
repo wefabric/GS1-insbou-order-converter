@@ -25,25 +25,37 @@ class DeliveryParty extends Party implements Validatable
 
     /**
      * @return bool indicating whether the object is Valid (true) or invalid (false) based on the information inside the object.
+     * Calls getErrorMessages() and checks if the response is empty or not.
      */
-    public function isValid(string &$errorMessage): bool
+    public function isValid() : bool
     {
+        return !(bool) self::getErrorMessages();
+    }
+
+    /**
+     * @return string Human-readable errormessage(s) indicating the location of the invalid properties.
+     */
+    public function getErrorMessages() : string
+    {
+        $errorMessage = '';
+        $innerErrorMessage = '';
+
         if(! empty($this->LocationDescription) && strlen($this->LocationDescription) > 70) {
             $errorMessage .= 'LocationDescription (' . $this->LocationDescription .') is invalid.' . '\n';
         }
 
-        $innerErrorMessage = '';
-
         if(! empty($this->ContactInformation) ) {
-            if (! $this->ContactInformation->isValid($innerErrorMessage)) {
+            $innerErrorMessage = $this->ContactInformation->getErrorMessages();
+            if (! empty($innerErrorMessage)) {
                 $errorMessage .= 'ContactInformation is invalid.' . '\n' . $innerErrorMessage & '\n';
-                $innerErrorMessage = '';
             } else if(! empty($this->ContactInformation->EmailAddress)) {
                 $errorMessage .= 'ContactInformation ->  EmailAddress (' . $this->ContactInformation->EmailAddress .') is invalid: DeliveryParty -> ContactInformation cannot have EmailAddress.' . '\n';
             }
         }
 
-        return parent::isValid($errorMessage);
+        $errorMessage .= parent::getErrorMessages();
+
+        return $errorMessage;
     }
 
 }

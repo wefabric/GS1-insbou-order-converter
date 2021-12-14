@@ -30,9 +30,21 @@ class DeliveryDateTimeInformation extends DataTransferObject implements Validata
 
     /**
      * @return bool indicating whether the object is Valid (true) or invalid (false) based on the information inside the object.
+     * Calls getErrorMessages() and checks if the response is empty or not.
      */
-    public function isValid(string &$errorMessage): bool
+    public function isValid() : bool
     {
+        return !(bool) self::getErrorMessages();
+    }
+
+    /**
+     * @return string Human-readable errormessage(s) indicating the location of the invalid properties.
+     */
+    public function getErrorMessages() : string
+    {
+        $errorMessage = '';
+        $innerErrorMessage = '';
+
         if(! empty($this->RequiredDeliveryDate) && ! strtotime($this->RequiredDeliveryDate)) {
             $errorMessage .= 'RequiredDeliveryDate (' . $this->RequiredDeliveryDate .') is invalid.' . '\n';
         }
@@ -41,11 +53,11 @@ class DeliveryDateTimeInformation extends DataTransferObject implements Validata
             $errorMessage .= 'RequiredDeliveryTime (' . $this->RequiredDeliveryTime .') is invalid.' . '\n';
         }
 
-        $innerErrorMessage = '';
-
-        if(! empty($this->DeliveryTimeFrame) && ! $this->DeliveryTimeFrame->isValid($innerErrorMessage)) {
-            $errorMessage .= 'DeliveryTimeFrame is invalid.' . '\n' . $innerErrorMessage & '\n';
-            $innerErrorMessage = '';
+        if(! empty($this->DeliveryTimeFrame)) {
+            $innerErrorMessage = $this->DeliveryTimeFrame->getErrorMessages();
+            if(! empty(($innerErrorMessage)))  {
+                $errorMessage .= 'DeliveryTimeFrame is invalid.' . '\n' . $innerErrorMessage & '\n';
+            }
         }
 
         return empty($errorMessage);

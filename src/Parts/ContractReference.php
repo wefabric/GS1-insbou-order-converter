@@ -25,9 +25,20 @@ class ContractReference extends DataTransferObject implements Validatable
 
     /**
      * @return bool indicating whether the object is Valid (true) or invalid (false) based on the information inside the object.
+     * Calls getErrorMessages() and checks if the response is empty or not.
      */
-    public function isValid(string &$errorMessage): bool
+    public function isValid() : bool
     {
+        return !(bool) self::getErrorMessages();
+    }
+
+    /**
+     * @return string Human-readable errormessage(s) indicating the location of the invalid properties.
+     */
+    public function getErrorMessages() : string
+    {
+        $errorMessage = '';
+
         if(empty($this->ContractNumber) || strlen($this->ContractNumber) > 17) {
             $errorMessage .= 'ContractNumber (' . $this->ContractNumber .') is invalid.' . '\n';
         }
@@ -36,7 +47,7 @@ class ContractReference extends DataTransferObject implements Validatable
             $errorMessage .= 'ContractDate (' . $this->ContractDate .') is invalid.' . '\n';
         } // A value is supplied, but it doesn't parse to a valid date. Return false.
 
-        return empty($errorMessage);
+        return $errorMessage;
     }
 
 }
