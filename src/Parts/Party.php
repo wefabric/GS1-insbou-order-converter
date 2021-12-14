@@ -19,9 +19,6 @@ abstract class Party extends DataTransferObject implements Validatable
 
     public function __construct(array $data = [])
     {
-        if(isset($data['ContactInformation']) && is_array($data['ContactInformation'])){
-            $data['ContactInformation'] = new ContactInformation($data['ContactInformation']);
-        }
 
         parent::__construct($data);
     }

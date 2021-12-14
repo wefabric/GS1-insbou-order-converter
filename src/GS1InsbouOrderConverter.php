@@ -55,6 +55,7 @@ class GS1InsbouOrderConverter extends DataTransferObject implements Validatable
 
     public function __construct(array $data = [])
     {
+
         if(isset($data['CustomerOrderReference']) && is_array($data['CustomerOrderReference'])){
             $data['CustomerOrderReference'] = new ProjectReference($data['CustomerOrderReference']);
         } else if (! isset($data['CustomerOrderReference']) && isset($data['$EndCustomerOrderNumber'])) {
@@ -74,33 +75,43 @@ class GS1InsbouOrderConverter extends DataTransferObject implements Validatable
         if(isset($data['TransportInstruction']) && is_array($data['TransportInstruction'])){
             $data['TransportInstruction'] = new TransportInstruction($data['TransportInstruction']);
         }
+
         if(isset($data['DeliveryDateTimeInformation']) && is_array($data['DeliveryDateTimeInformation'])){
             $data['DeliveryDateTimeInformation'] = new DeliveryDateTimeInformation($data['DeliveryDateTimeInformation']);
         }
+
         if(isset($data['Buyer']) && is_array($data['Buyer'])){
             $data['Buyer'] = new Buyer($data['Buyer']);
         }
+
         if(isset($data['Supplier']) && is_array($data['Supplier'])){
             $data['Supplier'] = new Supplier($data['Supplier']);
         }
+
         if(isset($data['DeliveryParty']) && is_array($data['DeliveryParty'])){
             $data['DeliveryParty'] = new DeliveryParty($data['DeliveryParty']);
         }
+
         if(isset($data['Invoicee']) && is_array($data['Invoicee'])){
             $data['Invoicee'] = new Invoicee($data['Invoicee']);
         }
+
         if(isset($data['UltimateConsignee']) && is_array($data['UltimateConsignee'])){
             $data['UltimateConsignee'] = new UltimateConsignee($data['UltimateConsignee']);
         }
+
         if(isset($data['ShipFrom']) && is_array($data['ShipFrom'])){
             $data['ShipFrom'] = new ShipFrom($data['ShipFrom']);
         }
+
         if(isset($data['PurchasingOrganisation']) && is_array($data['PurchasingOrganisation'])){
             $data['PurchasingOrganisation'] = new PurchasingOrganisation($data['PurchasingOrganisation']);
         }
+
         if(isset($data['Carrier']) && is_array($data['Carrier'])){
             $data['Carrier'] = new Carrier($data['Carrier']);
         }
+
         if(isset($data['OrderLine']) && is_array($data['OrderLine'])){
             $data['OrderLine'] = new OrderLine($data['OrderLine']);
         }
@@ -119,6 +130,7 @@ class GS1InsbouOrderConverter extends DataTransferObject implements Validatable
 
     public function isValid(string &$errorMessage): bool
     {
+
         if(empty($this->OrderType) || strlen($this->OrderType) > 3 || ! in_array($this->OrderType, ['220', '402']) ) {
             $errorMessage .= 'OrderType (' . $this->OrderType .') is invalid.' . '\n';
         }
