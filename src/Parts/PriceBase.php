@@ -24,26 +24,26 @@ class PriceBase extends DataTransferObject implements Validatable
         parent::__construct($data);
     }
 
+    const validMeasureUnitPriceBasisCodes = ['CMT', 'DAY', 'GRM', 'HUR', 'KGM', 'LTR', 'MIN', 'MLT', 'MMT', 'MTK', 'MTQ', 'MTR', 'PCE', 'TNE'];
+
     /**
      * @return bool indicating whether the object is Valid (true) or invalid (false) based on the information inside the object.
      */
-    public function isValid(): bool
+    public function isValid(string &$errorMessage): bool
     {
         if(empty($this->NumberOfUnitsInPriceBasis) || strlen(number_format($this->NumberOfUnitsInPriceBasis,3)) > 9) {
-            return false;
+            $errorMessage .= 'NumberOfUnitsInPriceBasis (' . $this->NumberOfUnitsInPriceBasis .') is invalid.' . '\n';
         }
 
-        if(! empty($this->MeasureUnitPriceBasis) && strlen($this->MeasureUnitPriceBasis) <> 3) {
-            return false;
-        } else if (! in_array($this->MeasureUnitPriceBasis, ['CMT', 'DAY', 'GRM', 'HUR', 'KGM', 'LTR', 'MIN', 'MLT', 'MMT', 'MTK', 'MTQ', 'MTR', 'PCE', 'TNE'])) {
-            return false;
+        if(! empty($this->MeasureUnitPriceBasis) && (strlen($this->MeasureUnitPriceBasis) <> 3 || ! in_array($this->MeasureUnitPriceBasis, PriceBase::validMeasureUnitPriceBasisCodes))) {
+            $errorMessage .= 'MeasureUnitPriceBasis (' . $this->MeasureUnitPriceBasis .') is invalid.' . '\n';
         }
 
         if(! empty($this->PriceBaseDescription) && strlen($this->PriceBaseDescription) > 35) {
-            return false;
+            $errorMessage .= 'PriceBaseDescription (' . $this->PriceBaseDescription .') is invalid.' . '\n';
         }
 
-        return true;
+        return empty($errorMessage);
     }
 
 }

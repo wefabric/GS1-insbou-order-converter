@@ -31,21 +31,24 @@ class TradeItemIdentification extends DataTransferObject implements Validatable
     /**
      * @return bool indicating whether the object is Valid (true) or invalid (false) based on the information inside the object.
      */
-    public function isValid(): bool
+    public function isValid(string &$errorMessage): bool
     {
         if(! empty($this->GTIN) && ( strlen($this->GTIN) <> 14 || ! is_numeric($this->GTIN) ) ) {
-            return false;
+            $errorMessage .= 'GTIN (' . $this->GTIN .') is invalid.' . '\n';
         }
 
         if(! empty($this->SupplierTradeItemIdentification) && strlen($this->SupplierTradeItemIdentification) > 35) {
-            return false;
+            $errorMessage .= 'SupplierTradeItemIdentification (' . $this->SupplierTradeItemIdentification .') is invalid.' . '\n';
         }
 
-        if(! empty($this->AdditionalItemIdentification) && ! $this->AdditionalItemIdentification->isValid()) {
-            return false;
+        $innerErrorMessage = '';
+
+        if(! empty($this->AdditionalItemIdentification) && ! $this->AdditionalItemIdentification->isValid($innerErrorMessage)) {
+            $errorMessage .= 'AdditionalItemIdentification is invalid.' . '\n' . $innerErrorMessage & '\n';
+            $innerErrorMessage = '';
         }
 
-        return true;
+        return empty($errorMessage);
     }
 
 

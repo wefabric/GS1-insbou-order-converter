@@ -90,7 +90,7 @@ $data2 = [
         'GLN' => '8711389000001'
     ],
     'DeliveryParty' => [
-        'GLN' => 'empty',
+        'GLN' => '',
         'LocationDescription' => '001'
     ],
     'OrderLine' => [
@@ -108,5 +108,11 @@ $data2 = [
 
 $GS1order2 = GS1InsbouOrderConverter::make($data2);
 dump($GS1order2->toArray(true));
-dump('$GS1order2->isValid() returned ' . ($GS1order2->isValid() ? '1' : '0'));
+
+$errorMessage = '';
+dump('$GS1order2->isValid() returned ' . ($GS1order2->isValid($errorMessage) ? '1' : '0'));
+if(! empty($errorMessage) ){
+    dump($errorMessage);
+}
+
 dump($GS1order2->toXML()->asXML()); //as string

@@ -31,21 +31,24 @@ class DeliveryDateTimeInformation extends DataTransferObject implements Validata
     /**
      * @return bool indicating whether the object is Valid (true) or invalid (false) based on the information inside the object.
      */
-    public function isValid(): bool
+    public function isValid(string &$errorMessage): bool
     {
         if(! empty($this->RequiredDeliveryDate) && ! strtotime($this->RequiredDeliveryDate)) {
-            return false;
+            $errorMessage .= 'RequiredDeliveryDate (' . $this->RequiredDeliveryDate .') is invalid.' . '\n';
         }
 
         if(! empty($this->RequiredDeliveryTime) && ! strtotime($this->RequiredDeliveryTime)) {
-            return false;
+            $errorMessage .= 'RequiredDeliveryTime (' . $this->RequiredDeliveryTime .') is invalid.' . '\n';
         }
 
-        if(! empty($this->DeliveryTimeFrame) && ! $this->DeliveryTimeFrame->isValid()) {
-            return false;
+        $innerErrorMessage = '';
+
+        if(! empty($this->DeliveryTimeFrame) && ! $this->DeliveryTimeFrame->isValid($innerErrorMessage)) {
+            $errorMessage .= 'DeliveryTimeFrame is invalid.' . '\n' . $innerErrorMessage & '\n';
+            $innerErrorMessage = '';
         }
 
-        return true;
+        return empty($errorMessage);
     }
 
 }

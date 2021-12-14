@@ -65,54 +65,63 @@ class OrderLine extends DataTransferObject implements Validatable
     /**
      * @return bool indicating whether the object is Valid (true) or invalid (false) based on the information inside the object.
      */
-    public function isValid(): bool
+    public function isValid(string &$errorMessage): bool
     {
 
         if(empty($this->LineNumber) || ! strlen(number_format($this->LineNumber)) > 6) {
-            return false;
+            $errorMessage .= 'LineNumber (' . $this->LineNumber .') is invalid.' . '\n';
         }
 
         if(empty($this->OrderedQuantity) || ! strlen(number_format($this->OrderedQuantity,3)) > 15) {
-            return false;
+            $errorMessage .= 'OrderedQuantity (' . $this->OrderedQuantity .') is invalid.' . '\n';
         }
 
         if(! empty($this->OrderedQuantityMeasureUnitCode) && (strlen($this->OrderedQuantityMeasureUnitCode) > 3 || ! in_array($this->OrderedQuantityMeasureUnitCode, Orderline::validOrderedQuantityMeasureUnitCodes)) ) {
-            return false;
+            $errorMessage .= 'OrderedQuantityMeasureUnitCode (' . $this->OrderedQuantityMeasureUnitCode .') is invalid.' . '\n';
         }
 
         if(empty($this->LineIdentification) || ! strlen(number_format($this->LineIdentification)) > 6) {
-            return false;
+            $errorMessage .= 'LineIdentification (' . $this->LineIdentification .') is invalid.' . '\n';
         }
 
-        if(empty($this->TradeItemIdentification) || ! $this->TradeItemIdentification->isValid()) {
-            return false;
+        $innerErrorMessage = '';
+
+        if(empty($this->TradeItemIdentification) || ! $this->TradeItemIdentification->isValid($innerErrorMessage)) {
+            $errorMessage .= 'TradeItemIdentification is invalid.' . '\n' . $innerErrorMessage & '\n';
+            $innerErrorMessage = '';
         }
 
-        if(! empty($this->TradeItemProcessing) && ! $this->TradeItemProcessing->isValid()) {
-            return false;
+        if(! empty($this->TradeItemProcessing) && ! $this->TradeItemProcessing->isValid($innerErrorMessage)) {
+            $errorMessage .= 'TradeItemProcessing is invalid.' . '\n' . $innerErrorMessage & '\n';
+            $innerErrorMessage = '';
         }
 
-        if(! empty($this->TransportInstruction) && ! $this->TransportInstruction->isValid()) {
-            return false;
+        if(! empty($this->TransportInstruction) && ! $this->TransportInstruction->isValid($innerErrorMessage)) {
+            $errorMessage .= 'TransportInstruction is invalid.' . '\n' . $innerErrorMessage & '\n';
+            $innerErrorMessage = '';
         }
 
-        if(! empty($this->AdditionalInformation) && ! $this->AdditionalInformation->isValid()) {
-            return false;
+        if(! empty($this->AdditionalInformation) && ! $this->AdditionalInformation->isValid($innerErrorMessage)) {
+            $errorMessage .= 'AdditionalInformation is invalid.' . '\n' . $innerErrorMessage & '\n';
+            $innerErrorMessage = '';
         }
 
-        if(! empty($this->DeliveryDateTimeInformation) && ! $this->DeliveryDateTimeInformation->isValid()) {
-            return false;
+        if(! empty($this->DeliveryDateTimeInformation) && ! $this->DeliveryDateTimeInformation->isValid($innerErrorMessage)) {
+            $errorMessage .= 'DeliveryDateTimeInformation is invalid.' . '\n' . $innerErrorMessage & '\n';
+            $innerErrorMessage = '';
         }
 
-        if(! empty($this->DifferentPriceAgreement) && ! $this->DifferentPriceAgreement->isValid()) {
-            return false;
+        if(! empty($this->DifferentPriceAgreement) && ! $this->DifferentPriceAgreement->isValid($innerErrorMessage)) {
+            $errorMessage .= 'DifferentPriceAgreement is invalid.' . '\n' . $innerErrorMessage & '\n';
+            $innerErrorMessage = '';
         }
 
-        if(! empty($this->ContractReference) && ! $this->ContractReference->isValid()) {
-            return false;
+        if(! empty($this->ContractReference) && ! $this->ContractReference->isValid($innerErrorMessage)) {
+            $errorMessage .= 'ContractReference is invalid.' . '\n' . $innerErrorMessage & '\n';
+            $innerErrorMessage = '';
         }
 
-        return true;
+        return empty($errorMessage);
     }
 
 }

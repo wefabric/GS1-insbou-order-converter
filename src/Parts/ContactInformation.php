@@ -27,21 +27,21 @@ class ContactInformation extends DataTransferObject implements Validatable
     /**
      * @return bool indicating whether the object is Valid (true) or invalid (false) based on the information inside the object.
      */
-    public function isValid(): bool
+    public function isValid(string &$errorMessage): bool
     {
         if(! empty($this->ContactPersonName) && strlen($this->ContactPersonName) > 35) {
-            return false;
+            $errorMessage .= 'ContactPersonName (' . $this->ContactPersonName .') is invalid.' . '\n';
         }
 
         if(! empty($this->PhoneNumber) && strlen($this->PhoneNumber) > 20) {
-            return false;
+            $errorMessage .= 'PhoneNumber (' . $this->PhoneNumber .') is invalid.' . '\n';
         }
 
         if(! empty($this->EmailAddress) && strlen($this->EmailAddress) > 254) {
-            return false;
+            $errorMessage .= 'EmailAddress (' . $this->EmailAddress .') is invalid.' . '\n';
         }
 
-        return true;
+        return empty($errorMessage);
     }
 
 }

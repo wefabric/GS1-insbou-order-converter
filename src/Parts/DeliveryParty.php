@@ -26,21 +26,24 @@ class DeliveryParty extends Party implements Validatable
     /**
      * @return bool indicating whether the object is Valid (true) or invalid (false) based on the information inside the object.
      */
-    public function isValid(): bool
+    public function isValid(string &$errorMessage): bool
     {
         if(! empty($this->LocationDescription) && strlen($this->LocationDescription) > 70) {
-            return false;
+            $errorMessage .= 'LocationDescription (' . $this->LocationDescription .') is invalid.' . '\n';
         }
 
+        $innerErrorMessage = '';
+
         if(! empty($this->ContactInformation) ) {
-            if (! $this->ContactInformation->isValid()) {
-                return false;
+            if (! $this->ContactInformation->isValid($innerErrorMessage)) {
+                $errorMessage .= 'ContactInformation is invalid.' . '\n' . $innerErrorMessage & '\n';
+                $innerErrorMessage = '';
             } else if(! empty($this->ContactInformation->EmailAddress)) {
-                return false; //DOES NOT have optional emailaddress
+                $errorMessage .= 'ContactInformation ->  EmailAddress (' . $this->ContactInformation->EmailAddress .') is invalid: DeliveryParty -> ContactInformation cannot have EmailAddress.' . '\n';
             }
         }
 
-        return parent::isValid();
+        return parent::isValid($errorMessage);
     }
 
 }

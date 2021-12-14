@@ -25,13 +25,13 @@ class AdditionalInformation extends DataTransferObject implements Validatable
     /**
      * @return bool indicating whether the object is Valid (true) or invalid (false) based on the information inside the object.
      */
-    public function isValid(): bool
+    public function isValid(string &$errorMessage): bool
     {
         if(empty($this->FreeText) || strlen($this->FreeText) > 70) {
-            return false;
+            $errorMessage .= 'FreeText (' . $this->FreeText .') is invalid.' . '\n';
         }
 
-        return true;
+        return empty($errorMessage);
     }
 
 }

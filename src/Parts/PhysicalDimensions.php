@@ -28,25 +28,25 @@ class PhysicalDimensions extends DataTransferObject implements  Validatable
     /**
      * @return bool indicating whether the object is Valid (true) or invalid (false) based on the information inside the object.
      */
-    public function isValid(): bool
+    public function isValid(string &$errorMessage): bool
     {
         if(! empty($this->Width) && strlen(number_format($this->Width,3)) > 18) {
-            return false;
+            $errorMessage .= 'Width (' . $this->Width .') is invalid.' . '\n';
         }
 
         if(! empty($this->Length) && strlen(number_format($this->Length,3)) > 18) {
-            return false;
+            $errorMessage .= 'Length (' . $this->Length .') is invalid.' . '\n';
         }
 
         if(! empty($this->Height) && strlen(number_format($this->Height,3)) > 18) {
-            return false;
+            $errorMessage .= 'Height (' . $this->Height .') is invalid.' . '\n';
         }
 
         if(! empty($this->MeasurementUnitCode) && ( strlen($this->MeasurementUnitCode) <> 3) || ! in_array($this->MeasurementUnitCode, ['CMT', 'MMT', 'MTR'])) {
-            return false;
+            $errorMessage .= 'MeasurementUnitCode (' . $this->MeasurementUnitCode .') is invalid.' . '\n';
         }
 
-        return true;
+        return empty($errorMessage);
     }
 
 }

@@ -26,13 +26,16 @@ class Buyer extends Party implements Validatable
     /**
      * @return bool indicating whether the object is Valid (true) or invalid (false) based on the information inside the object.
      */
-    public function isValid(): bool
+    public function isValid(string &$errorMessage): bool
     {
-        if(! empty($this->ContactInformation) && ! $this->ContactInformation->isValid()) {
-            return false;
+        $innerErrorMessage = '';
+
+        if(! empty($this->ContactInformation) && ! $this->ContactInformation->isValid($innerErrorMessage)) {
+            $errorMessage .= 'ContactInformation is invalid.' . '\n' . $innerErrorMessage & '\n';
+            $innerErrorMessage = '';
         } // DOES have optional emailaddress. Is already checked inside.
 
-        return parent::isValid();
+        return parent::isValid($errorMessage);
     }
 
 }

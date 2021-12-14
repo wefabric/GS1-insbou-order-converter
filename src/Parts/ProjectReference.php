@@ -25,13 +25,13 @@ class ProjectReference extends DataTransferObject implements Validatable
     /**
      * @return bool indicating whether the object is Valid (true) or invalid (false) based on the information inside the object.
      */
-    public function isValid(): bool
+    public function isValid(string &$errorMessage): bool
     {
         if(empty($this->ProjectNumber) || strlen($this->ProjectNumber) > 17) {
-            return false;
+            $errorMessage .= 'ProjectNumber (' . $this->ProjectNumber .') is invalid.' . '\n';
         }
 
-        return true;
+        return empty($errorMessage);
     }
 
 }

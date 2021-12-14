@@ -28,17 +28,17 @@ class TransportInstruction extends DataTransferObject implements Validatable
     /**
      * @return bool indicating whether the object is Valid (true) or invalid (false) based on the information inside the object.
      */
-    public function isValid(): bool
+    public function isValid(string &$errorMessage): bool
     {
         if(! empty($this->TransportInstructionTypeCode) && ( strlen($this->TransportInstructionTypeCode) <> 3 || ! in_array($this->TransportInstructionTypeCode, TransportInstruction::validTransportInstructionTypeCodes) ) ) {
-            return false;
+            $errorMessage .= 'TransportInstructionTypeCode (' . $this->TransportInstructionTypeCode .') is invalid.' . '\n';
         }
 
         if(! empty($this->DeliveryNoteText) && strlen($this->DeliveryNoteText) > 70) {
-            return false;
+            $errorMessage .= 'DeliveryNoteText (' . $this->DeliveryNoteText .') is invalid.' . '\n';
         }
 
-        return true;
+        return empty($errorMessage);
     }
 
 }

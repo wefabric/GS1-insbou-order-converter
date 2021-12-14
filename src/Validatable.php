@@ -7,6 +7,6 @@ interface Validatable
     /**
      * @return bool indicating whether the object is Valid (true) or invalid (false) based on the information inside the object.
      */
-    public function isValid() : bool;
+    public function isValid(string &$errorMessage) : bool;
 
 }

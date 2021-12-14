@@ -33,29 +33,32 @@ class AdditionalItemIdentification extends DataTransferObject implements Validat
     /**
      * @return bool indicating whether the object is Valid (true) or invalid (false) based on the information inside the object.
      */
-    public function isValid(): bool
+    public function isValid(string &$errorMessage): bool
     {
         if(! empty($this->TradeItemDescription) && strlen($this->TradeItemDescription) > 70) {
-            return false;
+            $errorMessage .= 'TradeItemDescription (' . $this->TradeItemDescription .') is invalid.' . '\n';
         }
 
         if(! empty($this->Colour) && strlen($this->Colour) > 35) {
-            return false;
+            $errorMessage .= 'Colour (' . $this->Colour .') is invalid.' . '\n';
         }
 
         if(! empty($this->Size) && strlen($this->Size) > 35) {
-            return false;
+            $errorMessage .= 'Size (' . $this->Size .') is invalid.' . '\n';
         }
 
         if(! empty($this->SerialNumber) && strlen($this->SerialNumber) > 35) {
-            return false;
+            $errorMessage .= 'SerialNumber (' . $this->SerialNumber .') is invalid.' . '\n';
         }
 
-        if(! empty($this->PhysicalDimensions) && ! $this->PhysicalDimensions->isValid()) {
-            return false;
+        $innerErrorMessage = '';
+
+        if(! empty($this->PhysicalDimensions) && ! $this->PhysicalDimensions->isValid($innerErrorMessage)) {
+            $errorMessage .= 'PhysicalDimensions is invalid.' . '\n' . $innerErrorMessage & '\n';
+            $innerErrorMessage = '';
         }
 
-        return true;
+        return empty($errorMessage);
     }
 
 }

@@ -28,25 +28,25 @@ class DeliveryTimeFrame extends DataTransferObject implements Validatable
     /**
      * @return bool indicating whether the object is Valid (true) or invalid (false) based on the information inside the object.
      */
-    public function isValid(): bool
+    public function isValid(string &$errorMessage): bool
     {
         if(empty($this->DeliveryDateEarliest) || ! strtotime($this->DeliveryDateEarliest)) {
-            return false;
+            $errorMessage .= 'DeliveryDateEarliest (' . $this->DeliveryDateEarliest .') is invalid.' . '\n';
         }
 
         if(empty($this->DeliveryTimeEarliest) || ! strtotime($this->DeliveryTimeEarliest)) {
-            return false;
+            $errorMessage .= 'DeliveryTimeEarliest (' . $this->DeliveryTimeEarliest .') is invalid.' . '\n';
         }
 
         if(empty($this->DeliveryDateLatest) || ! strtotime($this->DeliveryDateLatest)) {
-            return false;
+            $errorMessage .= 'DeliveryDateLatest (' . $this->DeliveryDateLatest .') is invalid.' . '\n';
         }
 
         if(empty($this->DeliveryTimeLatest) || ! strtotime($this->DeliveryTimeLatest)) {
-            return false;
+            $errorMessage .= 'DeliveryTimeLatest (' . $this->DeliveryTimeLatest .') is invalid.' . '\n';
         }
 
-        return true;
+        return empty($errorMessage);
     }
 
 

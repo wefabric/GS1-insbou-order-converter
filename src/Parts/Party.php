@@ -29,41 +29,41 @@ abstract class Party extends DataTransferObject implements Validatable
     /**
      * @return bool indicating whether the object is Valid (true) or invalid (false) based on the information inside the object.
      */
-    public function isValid(): bool
+    public function isValid(string &$errorMessage): bool
     {
         if(empty($this->PartyType)) {
-            return false; //This would mean the PartyType was not set, and is the default 0.
-        }
+            $errorMessage .= 'PartyType (' . $this->PartyType .') is invalid.' . '\n';
+        } //This would mean the PartyType was not set, and is the default 0.
 
         if(empty($this->GLN) || strlen($this->GLN) <> 13) {
-            return false;
+            $errorMessage .= 'GLN (' . $this->GLN .') is invalid.' . '\n';
         }
 
         if(! empty($this->Name) && strlen($this->Name) > 50) {
-            return false;
+            $errorMessage .= 'Name (' . $this->Name .') is invalid.' . '\n';
         }
 
         if(! empty($this->Name2) && strlen($this->Name2) > 50) {
-            return false;
+            $errorMessage .= 'Name2 (' . $this->Name2 .') is invalid.' . '\n';
         }
 
         if(! empty($this->StreetAndNumber) && strlen($this->StreetAndNumber) > 35) {
-            return false;
+            $errorMessage .= 'StreetAndNumber (' . $this->StreetAndNumber .') is invalid.' . '\n';
         }
 
         if(! empty($this->City) && strlen($this->City) > 35) {
-            return false;
+            $errorMessage .= 'City (' . $this->City .') is invalid.' . '\n';
         }
 
         if(! empty($this->PostalCode) && strlen($this->PostalCode) > 9) {
-            return false;
+            $errorMessage .= 'PostalCode (' . $this->PostalCode .') is invalid.' . '\n';
         }
 
         if(! empty($this->Country) && strlen($this->Country) <> 2) {
-            return false;
+            $errorMessage .= 'Country (' . $this->Country .') is invalid.' . '\n';
         }
 
-        return true;
+        return empty($errorMessage);
     }
 
 }
