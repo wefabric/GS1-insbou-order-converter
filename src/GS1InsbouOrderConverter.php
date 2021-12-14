@@ -128,6 +128,10 @@ class GS1InsbouOrderConverter extends DataTransferObject implements Validatable
         return $data;
     }
 
+    const validScenarioTypeCodes = ['X1', 'X2'];
+    const validDraftOrderIndicators = ['16'];
+    const validDeliveryOnDemandIndicators = ['73E'];
+
     /**
      * @return bool indicating whether the object is Valid (true) or invalid (false) based on the information inside the object.
      * Calls getErrorMessages() and checks if the response is empty or not.
@@ -161,15 +165,15 @@ class GS1InsbouOrderConverter extends DataTransferObject implements Validatable
             $errorMessage .= 'OrderTime (' . $this->OrderTime .') is invalid.' . '\n';
         }
 
-        if(! empty($this->ScenarioTypeCode) && ( strlen($this->ScenarioTypeCode) > 3 || ! in_array($this->ScenarioTypeCode, ['X1', 'X2']))){
+        if(! empty($this->ScenarioTypeCode) && ( strlen($this->ScenarioTypeCode) > 3 || ! in_array($this->ScenarioTypeCode, GS1InsbouOrderConverter::validScenarioTypeCodes))){
             $errorMessage .= 'ScenarioTypeCode (' . $this->ScenarioTypeCode .') is invalid.' . '\n';
         }
 
-        if(! empty($this->DraftOrderIndicator) && ( strlen($this->DraftOrderIndicator) > 3 || ! in_array($this->DraftOrderIndicator, ['16']) ) ) {
+        if(! empty($this->DraftOrderIndicator) && ( strlen($this->DraftOrderIndicator) > 3 || ! in_array($this->DraftOrderIndicator, GS1InsbouOrderConverter::validDraftOrderIndicators) ) ) {
             $errorMessage .= 'DraftOrderIndicator (' . $this->DraftOrderIndicator .') is invalid.' . '\n';
         }
 
-        if(! empty($this->DeliveryOnDemandIndicator) && ( strlen($this->DeliveryOnDemandIndicator) > 3 || ! in_array($this->DeliveryOnDemandIndicator, ['73E']) ) ) {
+        if(! empty($this->DeliveryOnDemandIndicator) && ( strlen($this->DeliveryOnDemandIndicator) > 3 || ! in_array($this->DeliveryOnDemandIndicator, GS1InsbouOrderConverter::validDeliveryOnDemandIndicators) ) ) {
             $errorMessage .= 'DeliveryOnDemandIndicator (' . $this->DeliveryOnDemandIndicator .') is invalid.' . '\n';
         }
 
