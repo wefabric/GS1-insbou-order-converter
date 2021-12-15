@@ -10,7 +10,7 @@ class OrderLine extends DataTransferObject implements Validatable
     public int $LineNumber;
     public int $OrderedQuantity;
     public ?string $OrderedQuantityMeasureUnitCode;
-    public int $LineIdentification;
+    public int $LineIdentitfication;
     public TradeItemIdentification $TradeItemIdentification;
     public ?TradeItemProcessing $TradeItemProcessing;
     public ?TransportInstruction $TransportInstruction;
@@ -91,8 +91,8 @@ class OrderLine extends DataTransferObject implements Validatable
             $errorMessage .= 'OrderedQuantityMeasureUnitCode (' . $this->OrderedQuantityMeasureUnitCode .') is invalid.' . '\n';
         }
 
-        if(empty($this->LineIdentification) || ! strlen(number_format($this->LineIdentification)) > 6) {
-            $errorMessage .= 'LineIdentification (' . $this->LineIdentification .') is invalid.' . '\n';
+        if(empty($this->LineIdentitfication) || ! strlen(number_format($this->LineIdentitfication)) > 6) {
+            $errorMessage .= 'LineIdentitfication (' . $this->LineIdentitfication .') is invalid.' . '\n';
         }
 
         if(empty($this->TradeItemIdentification)) {
