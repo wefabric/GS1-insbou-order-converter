@@ -5,16 +5,16 @@ namespace Wefabric\GS1InsbouOrderConverter\Parts;
 use Spatie\DataTransferObject\DataTransferObject;
 use Wefabric\GS1InsbouOrderConverter\Validatable;
 
-class ContactInformation extends DataTransferObject implements Validatable
+class Contactgegevens extends DataTransferObject implements Validatable
 {
     public ?string $ContactPersonName;
     public ?string $PhoneNumber;
     public ?string $EmailAddress;
 
     /**
-     * @return ContactInformation Object
+     * @return Contactgegevens Object
      */
-    public static function make($data = []): ContactInformation
+    public static function make($data = []): Contactgegevens
     {
         return new self($data);
     }

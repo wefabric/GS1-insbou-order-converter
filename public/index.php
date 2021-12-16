@@ -28,7 +28,7 @@ $data = [
     ],
     'Buyer' => [
         'GLN' => '8712345000011',
-        'ContactInformation' => [
+        'Contactgegevens' => [
             'ContactPersonName' => 'Afd. inkoop verlichting',
             'EmailAddress' => 'inkoop@verlichting.gs1'
         ]
@@ -90,9 +90,8 @@ $data2 = [
         'GLN' => '8711389000001'
     ],
     'DeliveryParty' => [
-        'GLN' => '8714231774051',
         'LocationDescription' => '001',
-        'ContactInformation' => [
+        'Contactgegevens' => [
             'ContactPersonName' => 'Pietje Puk',
             'PhoneNumber' => '0600000000'
         ]

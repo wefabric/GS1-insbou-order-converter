@@ -7,7 +7,7 @@ use Wefabric\GS1InsbouOrderConverter\Validatable;
 
 class Buyer extends Party implements Validatable
 {
-    public ?ContactInformation $ContactInformation;
+    public ?Contactgegevens $Contactgegevens;
 
     /**
      * @return Buyer Object
@@ -19,8 +19,8 @@ class Buyer extends Party implements Validatable
 
     public function __construct(array $data = [])
     {
-        if(isset($data['ContactInformation']) && is_array($data['ContactInformation'])){
-            $data['ContactInformation'] = new ContactInformation($data['ContactInformation']);
+        if(isset($data['Contactgegevens']) && is_array($data['Contactgegevens'])){
+            $data['Contactgegevens'] = new Contactgegevens($data['Contactgegevens']);
         }
 
         parent::__construct($data);
@@ -44,10 +44,10 @@ class Buyer extends Party implements Validatable
         $errorMessage = '';
         $innerErrorMessage = '';
 
-        if(! empty($this->ContactInformation) ) {
-            $innerErrorMessage = $this->ContactInformation->getErrorMessages();
+        if(! empty($this->Contactgegevens) ) {
+            $innerErrorMessage = $this->Contactgegevens->getErrorMessages();
             if(! empty($innerErrorMessage))  {
-                $errorMessage .= 'ContactInformation is invalid.' . '\n' . $innerErrorMessage & '\n';
+                $errorMessage .= 'Contactgegevens is invalid.' . '\n' . $innerErrorMessage & '\n';
             }
         } // DOES have optional emailaddress. Is already checked inside.
 
