@@ -90,7 +90,6 @@ $data2 = [
         'GLN' => '8711389000001'
     ],
     'DeliveryParty' => [
-        'LocationDescription' => '001',
         'Contactgegevens' => [
             'ContactPersonName' => 'Pietje Puk',
             'PhoneNumber' => '0600000000'

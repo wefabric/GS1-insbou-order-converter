@@ -29,6 +29,11 @@ class OrderLine extends DataTransferObject implements Validatable
 
     public function __construct(array $data = [])
     {
+        if(! isset($data['LineIdentitfication']) && isset($data['LineIdentification'])){
+            $data['LineIdentitfication'] = $data['LineIdentification'];
+            unset($data['LineIdentification']);
+        } // Catch value in 'fixed' name, and store in spelling-mistake-name.
+
         if(isset($data['TradeItemIdentification']) && is_array($data['TradeItemIdentification'])){
             $data['TradeItemIdentification'] = new TradeItemIdentification($data['TradeItemIdentification']);
         }
