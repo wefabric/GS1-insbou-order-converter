@@ -4,7 +4,7 @@ namespace Wefabric\GS1InsbouOrderConverter\Parts;
 
 use Wefabric\GS1InsbouOrderConverter\Validatable;
 
-class Buyer extends Party implements Validatable
+class Buyer extends GLNParty implements Validatable
 {
     public ?ContactInformation $ContactInformation;
 

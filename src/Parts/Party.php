@@ -9,7 +9,6 @@ abstract class Party extends DataTransferObject implements Validatable
 {
     protected int $PartyType;
 
-    public string $GLN;
     public ?string $Name;
     public ?string $Name2;
     public ?string $StreetAndNumber;
@@ -19,10 +18,6 @@ abstract class Party extends DataTransferObject implements Validatable
 
     public function __construct(array $data = [])
     {
-//        if(isset($data['GLN']) && empty($data['GLN'])) {
-//            unset($data['GLN']);
-//        }
-
         parent::__construct($data);
     }
 
@@ -45,10 +40,6 @@ abstract class Party extends DataTransferObject implements Validatable
         if(empty($this->PartyType)) {
             $errorMessage .= 'PartyType (' . $this->PartyType .') is invalid.' . '\n';
         } //This would mean the PartyType was not set, and is the default 0.
-
-        if(empty($this->GLN) || strlen($this->GLN) <> 13) {
-            $errorMessage .= 'GLN (' . $this->GLN .') is invalid.' . '\n';
-        }
 
         if(! empty($this->Name) && strlen($this->Name) > 50) {
             $errorMessage .= 'Name (' . $this->Name .') is invalid.' . '\n';

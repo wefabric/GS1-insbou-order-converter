@@ -4,7 +4,7 @@ namespace Wefabric\GS1InsbouOrderConverter\Parts;
 
 use Wefabric\GS1InsbouOrderConverter\Validatable;
 
-class Carrier extends Party implements Validatable
+class Carrier extends GLNParty implements Validatable
 {
     /**
      * @return Carrier Object

@@ -6,7 +6,7 @@ use Wefabric\GS1InsbouOrderConverter\Validatable;
 
 class DeliveryParty extends Party implements Validatable
 {
-    public ?string $LocationDescription;
+//    public ?string $LocationDescription;
     public ?Contactgegevens $Contactgegevens;
 
     /**
@@ -21,6 +21,8 @@ class DeliveryParty extends Party implements Validatable
     {
         if(isset($data['Contactgegevens']) && is_array($data['Contactgegevens'])){
             $data['Contactgegevens'] = new Contactgegevens($data['Contactgegevens']);
+        } elseif(! isset($data['Contactgegevens']) && isset($data['ContactInformation']) && is_array($data['ContactInformation'])){
+            $data['Contactgegevens'] = new Contactgegevens($data['ContactInformation']);
         }
 
         parent::__construct($data);
@@ -44,16 +46,16 @@ class DeliveryParty extends Party implements Validatable
         $errorMessage = '';
         $innerErrorMessage = '';
 
-        if(! empty($this->LocationDescription) && strlen($this->LocationDescription) > 70) {
-            $errorMessage .= 'LocationDescription (' . $this->LocationDescription .') is invalid.' . '\n';
-        }
+//        if(! empty($this->LocationDescription) && strlen($this->LocationDescription) > 70) {
+//            $errorMessage .= 'LocationDescription (' . $this->LocationDescription .') is invalid.' . '\n';
+//        }
 
         if(! empty($this->Contactgegevens) ) {
             $innerErrorMessage = $this->Contactgegevens->getErrorMessages();
             if (! empty($innerErrorMessage)) {
                 $errorMessage .= 'Contactgegevens is invalid.' . '\n' . $innerErrorMessage & '\n';
-            } else if(! empty($this->Contactgegevens->EmailAddress)) {
-                $errorMessage .= 'Contactgegevens ->  EmailAddress (' . $this->Contactgegevens->EmailAddress .') is invalid: DeliveryParty -> Contactgegevens cannot have EmailAddress.' . '\n';
+//            } else if(! empty($this->Contactgegevens->EmailAddress)) {
+//                $errorMessage .= 'Contactgegevens ->  EmailAddress (' . $this->Contactgegevens->EmailAddress .') is invalid: DeliveryParty -> Contactgegevens cannot have EmailAddress.' . '\n';
             }
         }
 

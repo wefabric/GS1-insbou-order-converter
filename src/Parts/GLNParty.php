@@ -2,22 +2,17 @@
 
 namespace Wefabric\GS1InsbouOrderConverter\Parts;
 
-use Wefabric\GS1InsbouOrderConverter\Validatable;
-
-class Supplier extends GLNParty implements Validatable
+/**
+ * Literally the same thing as Party, but some parties may not use a GLN.
+ * So all other parties that do use GLN, must extend this class instead.
+ */
+abstract class GLNParty extends Party
 {
-    /**
-     * @return Supplier Object
-     */
-    public static function make($data = []): Supplier
-    {
-        return new self($data);
-    }
+    public string $GLN;
 
     public function __construct(array $data = [])
     {
         parent::__construct($data);
-        $this->PartyType = PartyType::Supplier;
     }
 
     /**
@@ -36,9 +31,12 @@ class Supplier extends GLNParty implements Validatable
     {
         $errorMessage = '';
 
+        if(empty($this->GLN) || strlen($this->GLN) <> 13) {
+            $errorMessage .= 'GLN (' . $this->GLN .') is invalid.' . '\n';
+        }
+
         $errorMessage .= parent::getErrorMessages();
 
         return $errorMessage;
     }
-
 }
