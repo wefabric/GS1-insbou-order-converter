@@ -28,7 +28,7 @@ $data = [
     ],
     'Buyer' => [
         'GLN' => '8712345000011',
-        'Contactgegevens' => [
+        'ContactInformation' => [
             'ContactPersonName' => 'Afd. inkoop verlichting',
             'EmailAddress' => 'inkoop@verlichting.gs1'
         ]
