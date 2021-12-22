@@ -25,7 +25,7 @@
         "symfony/var-dumper": "6.1.x-dev"
     },
     "require": {
-        "spatie/data-transfer-object": "dev-main",
+        "spatie/data-transfer-object": "^2.8",
         "ext-dom": "*",
         "ext-simplexml": "*"
     }
