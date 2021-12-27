@@ -4,7 +4,7 @@ namespace Wefabric\GS1InsbouOrderConverter\Parts;
 
 use Wefabric\GS1InsbouOrderConverter\Validatable;
 
-class PurchasingOrganisation extends GLNParty implements Validatable
+class PurchasingOrganisation extends Party implements Validatable
 {
     /**
      * @return PurchasingOrganisation Object
