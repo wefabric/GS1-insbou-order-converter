@@ -7,7 +7,7 @@ use Wefabric\GS1InsbouOrderConverter\Validatable;
 class DeliveryParty extends Party implements Validatable
 {
 //    public ?string $LocationDescription;
-    public ?Contactgegevens $Contactgegevens;
+    public ?ContactInformation $ContactInformation;
 
     /**
      * @return DeliveryParty Object
@@ -19,10 +19,10 @@ class DeliveryParty extends Party implements Validatable
 
     public function __construct(array $data = [])
     {
-        if(isset($data['Contactgegevens']) && is_array($data['Contactgegevens'])){
-            $data['Contactgegevens'] = new Contactgegevens($data['Contactgegevens']);
-        } elseif(! isset($data['Contactgegevens']) && isset($data['ContactInformation']) && is_array($data['ContactInformation'])){
-            $data['Contactgegevens'] = new Contactgegevens($data['ContactInformation']);
+        if(isset($data['ContactInformation']) && is_array($data['ContactInformation'])){
+            $data['ContactInformation'] = new ContactInformation($data['ContactInformation']);
+//        } elseif(! isset($data['ContactInformation']) && isset($data['Contactgegevens']) && is_array($data['Contactgegevens'])){
+//            $data['ContactInformation'] = new ContactInformation($data['Contactgegevens']);
         }
 
         parent::__construct($data);
@@ -50,12 +50,12 @@ class DeliveryParty extends Party implements Validatable
 //            $errorMessage .= 'LocationDescription (' . $this->LocationDescription .') is invalid.' . '\n';
 //        }
 
-        if(! empty($this->Contactgegevens) ) {
-            $innerErrorMessage = $this->Contactgegevens->getErrorMessages();
+        if(! empty($this->ContactInformation) ) {
+            $innerErrorMessage = $this->ContactInformation->getErrorMessages();
             if (! empty($innerErrorMessage)) {
-                $errorMessage .= 'Contactgegevens is invalid.' . '\n' . $innerErrorMessage & '\n';
-//            } else if(! empty($this->Contactgegevens->EmailAddress)) {
-//                $errorMessage .= 'Contactgegevens ->  EmailAddress (' . $this->Contactgegevens->EmailAddress .') is invalid: DeliveryParty -> Contactgegevens cannot have EmailAddress.' . '\n';
+                $errorMessage .= 'ContactInformation is invalid.' . '\n' . $innerErrorMessage & '\n';
+//            } else if(! empty($this->ContactInformation->EmailAddress)) {
+//                $errorMessage .= 'ContactInformation ->  EmailAddress (' . $this->ContactInformation->EmailAddress .') is invalid: DeliveryParty -> ContactInformation cannot have EmailAddress.' . '\n';
             }
         }
 
