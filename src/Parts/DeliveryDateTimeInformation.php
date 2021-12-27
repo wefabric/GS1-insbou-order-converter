@@ -2,6 +2,7 @@
 
 namespace Wefabric\GS1InsbouOrderConverter\Parts;
 
+use DateTime;
 use Spatie\DataTransferObject\DataTransferObject;
 use Wefabric\GS1InsbouOrderConverter\Validatable;
 
@@ -21,6 +22,10 @@ class DeliveryDateTimeInformation extends DataTransferObject implements Validata
 
     public function __construct(array $data = [])
     {
+        if(isset($data['RequiredDeliveryDate']) && gettype($data['RequiredDeliveryDate']) === 'string' && strtotime($data['RequiredDeliveryDate'])) {
+            $this->RequiredDeliveryTime = (new DateTime($data['RequiredDeliveryDate']))->format('H:i:s');
+        } //If there's a time inside the RequiredDeliveryDate, use that to set the OrderTime.
+
         if(isset($data['DeliveryTimeFrame']) && is_array($data['DeliveryTimeFrame'])){
             $data['DeliveryTimeFrame'] = new DeliveryTimeFrame($data['DeliveryTimeFrame']);
         }

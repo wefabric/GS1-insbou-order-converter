@@ -2,6 +2,7 @@
 
 namespace Wefabric\GS1InsbouOrderConverter;
 
+use DateTime;
 use SimpleXMLElement;
 use Spatie\DataTransferObject\DataTransferObject;
 
@@ -55,6 +56,9 @@ class GS1InsbouOrderConverter extends DataTransferObject implements Validatable
 
     public function __construct(array $data = [])
     {
+        if(isset($data['OrderDate']) && gettype($data['OrderDate']) === 'string' && strtotime($data['OrderDate'])) {
+            $this->OrderTime = (new DateTime($data['OrderDate']))->format('H:i:s');
+        } //If there's a time inside the OrderDate, use that to set the OrderTime.
 
         if(isset($data['CustomerOrderReference']) && is_array($data['CustomerOrderReference'])){
             $data['CustomerOrderReference'] = new ProjectReference($data['CustomerOrderReference']);

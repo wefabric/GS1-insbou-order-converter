@@ -7,8 +7,7 @@ require __DIR__.'/../vendor/autoload.php';
 $data = [
     'OrderType' => '220',
     'OrderNumber' => 'ORD001',
-    'OrderDate' => '2012-03-01',
-    'OrderTime' => '05:10:10',
+    'OrderDate' => '2012-03-01 05:10:10',
     'ScenarioTypeCode' => 'X1',
     'DraftOrderIndicator' => '16',
     'DeliveryOnDemandIndicator' => '73E',
@@ -23,8 +22,7 @@ $data = [
         'DeliveryNoteText' => 'Neem pallet en palletverpakking retour'
     ],
     'DeliveryDateTimeInformation' => [
-        'RequiredDeliveryDate' => '2012-03-03',
-        'RequiredDeliveryTime' => '06:00:00'
+        'RequiredDeliveryDate' => '2012-03-03 06:00:00'
     ],
     'Buyer' => [
         'GLN' => '8712345000011',
