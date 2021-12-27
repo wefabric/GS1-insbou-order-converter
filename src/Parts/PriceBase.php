@@ -46,7 +46,7 @@ class PriceBase extends DataTransferObject implements Validatable
             $errorMessage .= 'NumberOfUnitsInPriceBasis (' . $this->NumberOfUnitsInPriceBasis .') is invalid.' . '\n';
         }
 
-        if(! empty($this->MeasureUnitPriceBasis) && (strlen($this->MeasureUnitPriceBasis) <> 3 || ! in_array($this->MeasureUnitPriceBasis, PriceBase::validMeasureUnitPriceBasisCodes))) {
+        if(! empty($this->MeasureUnitPriceBasis) && (strlen($this->MeasureUnitPriceBasis) <> 3 || ! in_array($this->MeasureUnitPriceBasis, self::validMeasureUnitPriceBasisCodes))) {
             $errorMessage .= 'MeasureUnitPriceBasis (' . $this->MeasureUnitPriceBasis .') is invalid.' . '\n';
         }
 

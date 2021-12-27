@@ -41,7 +41,7 @@ class TransportInstruction extends DataTransferObject implements Validatable
     {
         $errorMessage = '';
 
-        if(! empty($this->TransportInstructionTypeCode) && ( strlen($this->TransportInstructionTypeCode) <> 3 || ! in_array($this->TransportInstructionTypeCode, TransportInstruction::validTransportInstructionTypeCodes) ) ) {
+        if(! empty($this->TransportInstructionTypeCode) && ( strlen($this->TransportInstructionTypeCode) <> 3 || ! in_array($this->TransportInstructionTypeCode, self::validTransportInstructionTypeCodes) ) ) {
             $errorMessage .= 'TransportInstructionTypeCode (' . $this->TransportInstructionTypeCode .') is invalid.' . '\n';
         }
 

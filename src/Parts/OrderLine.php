@@ -92,7 +92,7 @@ class OrderLine extends DataTransferObject implements Validatable
             $errorMessage .= 'OrderedQuantity (' . $this->OrderedQuantity .') is invalid.' . '\n';
         }
 
-        if(! empty($this->OrderedQuantityMeasureUnitCode) && (strlen($this->OrderedQuantityMeasureUnitCode) > 3 || ! in_array($this->OrderedQuantityMeasureUnitCode, Orderline::validOrderedQuantityMeasureUnitCodes)) ) {
+        if(! empty($this->OrderedQuantityMeasureUnitCode) && (strlen($this->OrderedQuantityMeasureUnitCode) > 3 || ! in_array($this->OrderedQuantityMeasureUnitCode, self::validOrderedQuantityMeasureUnitCodes)) ) {
             $errorMessage .= 'OrderedQuantityMeasureUnitCode (' . $this->OrderedQuantityMeasureUnitCode .') is invalid.' . '\n';
         }
 

@@ -34,6 +34,8 @@ class PhysicalDimensions extends DataTransferObject implements  Validatable
         return !(bool) self::getErrorMessages();
     }
 
+    const validMeasurementUnitCodes = ['CMT', 'MMT', 'MTR'];
+
     /**
      * @return string Human-readable errormessage(s) indicating the location of the invalid properties.
      */
@@ -53,7 +55,7 @@ class PhysicalDimensions extends DataTransferObject implements  Validatable
             $errorMessage .= 'Height (' . $this->Height .') is invalid.' . '\n';
         }
 
-        if(! empty($this->MeasurementUnitCode) && ( strlen($this->MeasurementUnitCode) <> 3) || ! in_array($this->MeasurementUnitCode, ['CMT', 'MMT', 'MTR'])) {
+        if(! empty($this->MeasurementUnitCode) && ( strlen($this->MeasurementUnitCode) <> 3) || ! in_array($this->MeasurementUnitCode, self::validMeasurementUnitCodes)) {
             $errorMessage .= 'MeasurementUnitCode (' . $this->MeasurementUnitCode .') is invalid.' . '\n';
         }
 

@@ -128,6 +128,7 @@ class GS1InsbouOrderConverter extends DataTransferObject implements Validatable
         return $data;
     }
 
+    const validOrderTypeCodes = ['220', '402'];
     const validScenarioTypeCodes = ['X1', 'X2'];
     const validDraftOrderIndicators = ['16'];
     const validDeliveryOnDemandIndicators = ['73E'];
@@ -149,7 +150,7 @@ class GS1InsbouOrderConverter extends DataTransferObject implements Validatable
         $errorMessage = '';
         $innerErrorMessage = '';
 
-        if(empty($this->OrderType) || strlen($this->OrderType) > 3 || ! in_array($this->OrderType, ['220', '402']) ) {
+        if(empty($this->OrderType) || strlen($this->OrderType) > 3 || ! in_array($this->OrderType, self::validOrderTypeCodes) ) {
             $errorMessage .= 'OrderType (' . $this->OrderType .') is invalid.' . '\n';
         }
 
@@ -165,15 +166,15 @@ class GS1InsbouOrderConverter extends DataTransferObject implements Validatable
             $errorMessage .= 'OrderTime (' . $this->OrderTime .') is invalid.' . '\n';
         }
 
-        if(! empty($this->ScenarioTypeCode) && ( strlen($this->ScenarioTypeCode) > 3 || ! in_array($this->ScenarioTypeCode, GS1InsbouOrderConverter::validScenarioTypeCodes))){
+        if(! empty($this->ScenarioTypeCode) && ( strlen($this->ScenarioTypeCode) > 3 || ! in_array($this->ScenarioTypeCode, self::validScenarioTypeCodes))){
             $errorMessage .= 'ScenarioTypeCode (' . $this->ScenarioTypeCode .') is invalid.' . '\n';
         }
 
-        if(! empty($this->DraftOrderIndicator) && ( strlen($this->DraftOrderIndicator) > 3 || ! in_array($this->DraftOrderIndicator, GS1InsbouOrderConverter::validDraftOrderIndicators) ) ) {
+        if(! empty($this->DraftOrderIndicator) && ( strlen($this->DraftOrderIndicator) > 3 || ! in_array($this->DraftOrderIndicator, self::validDraftOrderIndicators) ) ) {
             $errorMessage .= 'DraftOrderIndicator (' . $this->DraftOrderIndicator .') is invalid.' . '\n';
         }
 
-        if(! empty($this->DeliveryOnDemandIndicator) && ( strlen($this->DeliveryOnDemandIndicator) > 3 || ! in_array($this->DeliveryOnDemandIndicator, GS1InsbouOrderConverter::validDeliveryOnDemandIndicators) ) ) {
+        if(! empty($this->DeliveryOnDemandIndicator) && ( strlen($this->DeliveryOnDemandIndicator) > 3 || ! in_array($this->DeliveryOnDemandIndicator, self::validDeliveryOnDemandIndicators) ) ) {
             $errorMessage .= 'DeliveryOnDemandIndicator (' . $this->DeliveryOnDemandIndicator .') is invalid.' . '\n';
         }
 

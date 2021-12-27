@@ -37,6 +37,8 @@ class DifferentPriceAgreement extends DataTransferObject implements Validatable
         return !(bool) self::getErrorMessages();
     }
 
+    const validDifferentPriceAgreementIndicatorCodes = ['PPR'];
+
     /**
      * @return string Human-readable errormessage(s) indicating the location of the invalid properties.
      */
@@ -45,7 +47,7 @@ class DifferentPriceAgreement extends DataTransferObject implements Validatable
         $errorMessage = '';
         $innerErrorMessage = '';
 
-        if(! empty($this->DifferentPriceAgreementIndicator) && ( strlen($this->DifferentPriceAgreementIndicator) <> 3) || ! in_array($this->DifferentPriceAgreementIndicator, ['PPR'])) {
+        if(! empty($this->DifferentPriceAgreementIndicator) && ( strlen($this->DifferentPriceAgreementIndicator) <> 3) || ! in_array($this->DifferentPriceAgreementIndicator, self::validDifferentPriceAgreementIndicatorCodes)) {
             $errorMessage .= 'DifferentPriceAgreementIndicator (' . $this->DifferentPriceAgreementIndicator .') is invalid.' . '\n';
         }
 
