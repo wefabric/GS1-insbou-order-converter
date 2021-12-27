@@ -1,6 +1,6 @@
 <?php
 
-use Wefabric\GS1InsbouOrderConverter\GS1InsbouOrderConverter;
+use Wefabric\GS1InsbouOrderConverter\Order;
 
 require __DIR__.'/../vendor/autoload.php';
 
@@ -69,7 +69,7 @@ $data = [
     ]
 ];
 
-//$GS1order = GS1InsbouOrderConverter::make($data);
+//$GS1order = Order::make($data);
 //dump($GS1order->toArray(true));
 
 //if(! $GS1order->isValid() ){
@@ -110,7 +110,7 @@ $data2 = [
     ]
 ];
 
-$GS1order2 = GS1InsbouOrderConverter::make($data2);
+$GS1order2 = Order::make($data2);
 dump($GS1order2->toArray(true));
 
 if(! $GS1order2->isValid(true) ){

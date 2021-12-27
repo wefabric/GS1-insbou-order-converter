@@ -21,7 +21,7 @@ use Wefabric\GS1InsbouOrderConverter\Parts\PurchasingOrganisation;
 use Wefabric\GS1InsbouOrderConverter\Parts\Carrier;
 use Wefabric\GS1InsbouOrderConverter\Parts\OrderLine;
 
-class GS1InsbouOrderConverter extends DataTransferObject implements Validatable
+class Order extends DataTransferObject implements Validatable
 {
 
     public string $OrderType;
@@ -47,9 +47,9 @@ class GS1InsbouOrderConverter extends DataTransferObject implements Validatable
     public OrderLine $OrderLine;
 
     /**
-     * @return GS1InsbouOrderConverter Object
+     * @return Order Object
      */
-    public static function make(array $data = []): GS1InsbouOrderConverter
+    public static function make(array $data = []): Order
     {
         return new self($data);
     }
