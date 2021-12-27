@@ -71,8 +71,12 @@ $data = [
 
 //$GS1order = GS1InsbouOrderConverter::make($data);
 //dump($GS1order->toArray(true));
-//dump('$GS1order->isValid() returned ' . ($GS1order->isValid() ? '1' : '0'));
-//dump($GS1order->toXML()->asXML()); //as string
+
+//if(! $GS1order->isValid() ){
+//    dump($GS1order->getErrorMessages());
+//} else {
+//    dump($GS1order->toXML()->asXML()); //as string
+//}
 
 $data2 = [
     'OrderType' => '220',

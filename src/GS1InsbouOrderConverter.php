@@ -145,11 +145,13 @@ class GS1InsbouOrderConverter extends DataTransferObject implements Validatable
     {
         $msg = self::getErrorMessages();
 
-        if($validateWithDeviations) {
+        if(empty($msg)) {
+            return true; //No matter the deviations, an empty errormessage is always valid.
+        } else if($validateWithDeviations) {
             return ($msg === 'DeliveryParty is invalid.' . '\n' . 'GLN is empty.' . '\n' . '\n');
-        } // DeliveryParty -> GLN will throw a specific message if empty.
+        } // DeliveryParty -> GLN will throw a specific message if empty. If not empty, will get stripped out anyway.
 
-        return empty($msg);
+        return false; //if we get here, we don't validate deviations and the result is not empty. Therefore: invalid.
     }
 
     /**
