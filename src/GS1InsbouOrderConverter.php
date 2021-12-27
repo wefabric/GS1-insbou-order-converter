@@ -137,9 +137,15 @@ class GS1InsbouOrderConverter extends DataTransferObject implements Validatable
      * @return bool indicating whether the object is Valid (true) or invalid (false) based on the information inside the object.
      * Calls getErrorMessages() and checks if the response is empty or not.
      */
-    public function isValid() : bool
+    public function isValid(bool $validateWithDeviations = false) : bool
     {
-        return !(bool) self::getErrorMessages();
+        $msg = self::getErrorMessages();
+
+        if($validateWithDeviations) {
+            return ($msg === 'DeliveryParty is invalid.' . '\n' . 'GLN is empty.' . '\n' . '\n');
+        } // DeliveryParty -> GLN will throw a specific message if empty.
+
+        return empty($msg);
     }
 
     /**
@@ -286,10 +292,42 @@ class GS1InsbouOrderConverter extends DataTransferObject implements Validatable
     /**
      * @return SimpleXMLElement formatted as minified String.
      */
-    public function toXML(): SimpleXMLElement
+    public function toXML(bool $formatWithDeviations = false): SimpleXMLElement
     {
         $xmltest = new SimpleXMLElement('<Order xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Order_insbou003.xsd" />');
-        ArrayToXML::arrayToXML($xmltest, $this->toArray(true));
+        $array = $this->toArray(true);
+
+        if($formatWithDeviations) {
+
+            if(isset($array['DeliveryParty']['GLN'])) {
+                unset($array['DeliveryParty']['GLN']);
+            } // Remove GLN from DeliveryParty
+
+            if(isset($array['DeliveryParty']['LocationDescription'])) {
+                unset($array['DeliveryParty']['LocationDescription']);
+            } // Remove LocationDescription from DeliveryParty
+
+            if(isset($array['DeliveryParty']['ContactInformation'])) {
+                $array['DeliveryParty']['Contactgegevens'] = $array['DeliveryParty']['ContactInformation'];
+                unset($array['DeliveryParty']['ContactInformation']);
+            } // Rename DeliveryParty->ContactInformation to ContactInformation
+
+            foreach($array['OrderLine'] as $orderLine )  {
+                if(isset($orderLine['LineIdentification'])) {
+                    $orderLine['LineIdentitfication'] = $orderLine['LineIdentification'];
+                    unset($orderLine['LineIdentification']);
+                } // Rename Orderline->LineIdentification to LineIdentitfication
+            }
+
+        } else {
+
+            if(isset($array['DeliveryParty']['ContactInformation']['EmailAddress'])) {
+                unset($array['DeliveryParty']['ContactInformation']['EmailAddress']);
+            } // Remove DeliveryParty->ContactInformation->Emailaddress
+
+        }
+
+        ArrayToXML::arrayToXML($xmltest, $array);
         return $xmltest;
     }
 

@@ -5,8 +5,9 @@ This package can convert order data to GS1 INSBOU003-structured XML files.
 ## Spelling mistakes and irregularities
 
 Beware, there are a few spelling mistakes and irregularities of the production-implementation when compared to the standards documentation. 
-They are, unfortunately, now part of the standard. 
-These may be fixed in the implementation of the INSBOU003's successor: SALES005.
+They are, unfortunately, part of the implementation of some vendors - but not all.
+For this reason, the ```isValid``` and ```toXML``` functions can now cope with these deviations. 
+They may be fixed in the implementation of the INSBOU003's successor: SALES005.
 
 ### Orderline
 
