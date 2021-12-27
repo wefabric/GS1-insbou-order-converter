@@ -6,7 +6,7 @@ use Wefabric\GS1InsbouOrderConverter\Validatable;
 
 class DeliveryParty extends Party implements Validatable
 {
-//    public ?string $LocationDescription;
+    public ?string $LocationDescription;
     public ?ContactInformation $ContactInformation;
 
     /**
@@ -46,9 +46,9 @@ class DeliveryParty extends Party implements Validatable
         $errorMessage = '';
         $innerErrorMessage = '';
 
-//        if(! empty($this->LocationDescription) && strlen($this->LocationDescription) > 70) {
-//            $errorMessage .= 'LocationDescription (' . $this->LocationDescription .') is invalid.' . '\n';
-//        }
+        if(! empty($this->LocationDescription) && strlen($this->LocationDescription) > 70) {
+            $errorMessage .= 'LocationDescription (' . $this->LocationDescription .') is invalid.' . '\n';
+        }
 
         if(! empty($this->ContactInformation) ) {
             $innerErrorMessage = $this->ContactInformation->getErrorMessages();
