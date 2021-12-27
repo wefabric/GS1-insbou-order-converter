@@ -10,7 +10,7 @@ class OrderLine extends DataTransferObject implements Validatable
     public int $LineNumber;
     public int $OrderedQuantity;
     public ?string $OrderedQuantityMeasureUnitCode;
-    public int $LineIdentitfication;
+    public int $LineIdentification;
     public TradeItemIdentification $TradeItemIdentification;
     public ?TradeItemProcessing $TradeItemProcessing;
     public ?TransportInstruction $TransportInstruction;
@@ -29,11 +29,6 @@ class OrderLine extends DataTransferObject implements Validatable
 
     public function __construct(array $data = [])
     {
-        if(! isset($data['LineIdentitfication']) && isset($data['LineIdentification'])){
-            $data['LineIdentitfication'] = $data['LineIdentification'];
-            unset($data['LineIdentification']);
-        } // Catch value in 'fixed' name, and store in spelling-mistake-name.
-
         if(isset($data['TradeItemIdentification']) && is_array($data['TradeItemIdentification'])){
             $data['TradeItemIdentification'] = new TradeItemIdentification($data['TradeItemIdentification']);
         }
@@ -96,8 +91,8 @@ class OrderLine extends DataTransferObject implements Validatable
             $errorMessage .= 'OrderedQuantityMeasureUnitCode (' . $this->OrderedQuantityMeasureUnitCode .') is invalid.' . '\n';
         }
 
-        if(empty($this->LineIdentitfication) || ! strlen(number_format($this->LineIdentitfication)) > 6) {
-            $errorMessage .= 'LineIdentitfication (' . $this->LineIdentitfication .') is invalid.' . '\n';
+        if(empty($this->LineIdentification) || ! strlen(number_format($this->LineIdentification)) > 6) {
+            $errorMessage .= 'LineIdentification (' . $this->LineIdentification .') is invalid.' . '\n';
         }
 
         if(empty($this->TradeItemIdentification)) {
