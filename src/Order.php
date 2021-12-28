@@ -57,8 +57,10 @@ class Order extends DataTransferObject implements Validatable
     public function __construct(array $data = [])
     {
         if(isset($data['OrderDate']) && gettype($data['OrderDate']) === 'string' && strtotime($data['OrderDate'])) {
-            $this->OrderTime = (new DateTime($data['OrderDate']))->format('H:i:s');
-        } //If there's a time inside the OrderDate, use that to set the OrderTime.
+            $dateTime = new DateTime($data['OrderDate']);
+            $this->OrderTime = $dateTime->format('H:i:s');
+            $data['OrderDate'] = $dateTime->format('Y-m-d');
+        } //If there's a time inside the OrderDate, use that to set the OrderTime and strip it from the OrderDate.
 
         if(isset($data['CustomerOrderReference']) && is_array($data['CustomerOrderReference'])){
             $data['CustomerOrderReference'] = new ProjectReference($data['CustomerOrderReference']);

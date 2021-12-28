@@ -23,8 +23,10 @@ class DeliveryDateTimeInformation extends DataTransferObject implements Validata
     public function __construct(array $data = [])
     {
         if(isset($data['RequiredDeliveryDate']) && gettype($data['RequiredDeliveryDate']) === 'string' && strtotime($data['RequiredDeliveryDate'])) {
-            $this->RequiredDeliveryTime = (new DateTime($data['RequiredDeliveryDate']))->format('H:i:s');
-        } //If there's a time inside the RequiredDeliveryDate, use that to set the OrderTime.
+            $dateTime = new DateTime($data['RequiredDeliveryDate']);
+            $this->RequiredDeliveryTime = $dateTime->format('H:i:s');
+            $data['RequiredDeliveryDate'] = $dateTime->format('Y-m-d');
+        } //If there's a time inside the RequiredDeliveryDate, use that to set the OrderTime and strip it from the OrderDate.
 
         if(isset($data['DeliveryTimeFrame']) && is_array($data['DeliveryTimeFrame'])){
             $data['DeliveryTimeFrame'] = new DeliveryTimeFrame($data['DeliveryTimeFrame']);
