@@ -43,10 +43,14 @@ class DeliveryParty extends BaseAddressParty implements Validatable
 
         if(isset($this->ContactInformation)) {
             $innerErrorMessage = $this->ContactInformation->getErrorMessages();
-//            } else if(! empty($this->ContactInformation->EmailAddress)) {
-//                $errorMessage .= 'ContactInformation ->  EmailAddress (' . $this->ContactInformation->EmailAddress .') is invalid: DeliveryParty -> ContactInformation cannot have EmailAddress.' . '\n';
             if(! empty($innerErrorMessage)) {
                 $errorMessage .= 'ContactInformationList is invalid.' . '\n' . $innerErrorMessage . '\n';
+            }
+
+            foreach($this->ContactInformation as $contactInformation) {
+                if(! empty($contactInformation->EmailAddress)) {
+                    $errorMessage .= 'ContactInformation['. $this->ContactInformation->key() .']->EmailAddress (' . $contactInformation->EmailAddress .') is invalid: DeliveryParty->ContactInformation cannot have EmailAddress.' . '\n';
+                }
             }
         }
 

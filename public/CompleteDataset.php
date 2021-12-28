@@ -62,6 +62,7 @@ return [
                     [
                         'ContactPersonName' => 'Pietje Puk',
                         'PhoneNumber' => '0600000000',
+                        //'EmailAddress' => 'notallowed@structure.com'
                     ]
                 ]
             ]
