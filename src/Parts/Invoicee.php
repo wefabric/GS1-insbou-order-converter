@@ -4,7 +4,7 @@ namespace Wefabric\GS1InsbouOrderConverter\Parts;
 
 use Wefabric\GS1InsbouOrderConverter\Validatable;
 
-class Invoicee extends Party implements Validatable
+class Invoicee extends BaseParty implements Validatable
 {
     /**
      * @return Invoicee Object
