@@ -4,7 +4,7 @@ namespace Wefabric\GS1InsbouOrderConverter\Parts;
 
 use Wefabric\GS1InsbouOrderConverter\Validatable;
 
-class DeliveryParty extends BaseParty implements Validatable
+class DeliveryParty extends BaseAddressParty implements Validatable
 {
     public ?string $LocationDescription;
     public ?ContactInformationList $ContactInformation;
@@ -27,15 +27,6 @@ class DeliveryParty extends BaseParty implements Validatable
 
         parent::__construct($data);
         $this->PartyType = PartyType::DeliveryParty;
-    }
-
-    /**
-     * @return bool indicating whether the object is Valid (true) or invalid (false) based on the information inside the object.
-     * Calls getErrorMessages() and checks if the response is empty or not.
-     */
-    public function isValid() : bool
-    {
-        return !(bool) self::getErrorMessages();
     }
 
     /**
