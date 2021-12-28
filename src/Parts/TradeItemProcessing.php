@@ -9,7 +9,7 @@ class TradeItemProcessing extends DataTransferObject implements Validatable
 {
     public ?string $ProcessingGTIN;
     public ?int $ProcessingSequence;
-    public ?string $ProcessingDescription;
+    public ?ProcessingDescriptionList $ProcessingDescription;
 
     /**
      * @return TradeItemProcessing Object
@@ -21,6 +21,10 @@ class TradeItemProcessing extends DataTransferObject implements Validatable
 
     public function __construct(array $data = [])
     {
+        if(isset($data['ProcessingDescription']) && is_array($data['ProcessingDescription'])){
+            $data['ProcessingDescription'] = new ProcessingDescriptionList($data['ProcessingDescription']);
+        }
+
         parent::__construct($data);
     }
 
@@ -48,8 +52,11 @@ class TradeItemProcessing extends DataTransferObject implements Validatable
             $errorMessage .= 'ProcessingSequence (' . $this->ProcessingSequence .') is invalid.' . '\n';
         }
 
-        if(! empty($this->ProcessingDescription) && strlen($this->ProcessingDescription) > 70) {
-            $errorMessage .= 'ProcessingDescription (' . $this->ProcessingDescription .') is invalid.' . '\n';
+        if(isset($this->ProcessingDescription)) {
+            $innerErrorMessage = $this->ProcessingDescription->getErrorMessages();
+            if(! empty($innerErrorMessage)){
+                $errorMessage .= 'ProcessingDescriptionList is invalid.' . '\n' . $innerErrorMessage .'\n';
+            }
         }
 
         return $errorMessage;

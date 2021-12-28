@@ -7,7 +7,7 @@ use Wefabric\GS1InsbouOrderConverter\Validatable;
 
 class AdditionalInformation extends DataTransferObject implements Validatable
 {
-    public string $FreeText;
+    public FreeTextList $FreeText;
 
     /**
      * @return AdditionalInformation Object
@@ -19,6 +19,10 @@ class AdditionalInformation extends DataTransferObject implements Validatable
 
     public function __construct(array $data = [])
     {
+        if(isset($data['FreeText']) && is_array($data['FreeText'])){
+            $data['FreeText'] = new FreeTextList($data['FreeText']);
+        }
+
         parent::__construct($data);
     }
 
@@ -38,8 +42,13 @@ class AdditionalInformation extends DataTransferObject implements Validatable
     {
         $errorMessage = '';
 
-        if(empty($this->FreeText) || strlen($this->FreeText) > 70) {
-            $errorMessage .= 'FreeText (' . $this->FreeText .') is invalid.' . '\n';
+        if(! isset($this->FreeText)) {
+            $errorMessage .= 'FreeTextList is null.' . '\n';
+        } else {
+            $innerErrorMessage = $this->FreeText->getErrorMessages();
+            if(! empty($innerErrorMessage)){
+                $errorMessage .= 'FreeTextList is invalid.' . '\n' . $innerErrorMessage .'\n';
+            }
         }
 
         return $errorMessage;
