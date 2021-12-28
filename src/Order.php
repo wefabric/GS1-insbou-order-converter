@@ -6,8 +6,10 @@ use DateTime;
 use SimpleXMLElement;
 use Spatie\DataTransferObject\DataTransferObject;
 
+use Wefabric\GS1InsbouOrderConverter\Parts\AdditionalInformation;
 use Wefabric\GS1InsbouOrderConverter\Parts\ContractReference;
 use Wefabric\GS1InsbouOrderConverter\Parts\CustomerOrderReference;
+use Wefabric\GS1InsbouOrderConverter\Parts\DeliveryConditions;
 use Wefabric\GS1InsbouOrderConverter\Parts\ProjectReference;
 use Wefabric\GS1InsbouOrderConverter\Parts\TransportInstruction;
 use Wefabric\GS1InsbouOrderConverter\Parts\DeliveryDateTimeInformation;
@@ -35,6 +37,8 @@ class Order extends DataTransferObject implements Validatable
     public ?ContractReference $ContractReference;
     public ?ProjectReference $ProjectReference;
     public ?TransportInstruction $TransportInstruction;
+    public ?DeliveryConditions $DeliveryConditions;
+    public ?AdditionalInformation $AdditionalInformation;
     public ?DeliveryDateTimeInformation $DeliveryDateTimeInformation;
     public Buyer $Buyer;
     public Supplier $Supplier;
@@ -45,6 +49,11 @@ class Order extends DataTransferObject implements Validatable
     public ?PurchasingOrganisation $PurchasingOrganisation;
     public ?Carrier $Carrier;
     public OrderLine $OrderLine;
+
+    const validOrderTypeCodes = ['220', '402'];
+    const validScenarioTypeCodes = ['X1', 'X2'];
+    const validDraftOrderIndicators = ['16'];
+    const validDeliveryOnDemandIndicators = ['73E'];
 
     /**
      * @return Order Object
@@ -63,9 +72,9 @@ class Order extends DataTransferObject implements Validatable
         } //If there's a time inside the OrderDate, use that to set the OrderTime and strip it from the OrderDate.
 
         if(isset($data['CustomerOrderReference']) && is_array($data['CustomerOrderReference'])){
-            $data['CustomerOrderReference'] = new ProjectReference($data['CustomerOrderReference']);
+            $data['CustomerOrderReference'] = new CustomerOrderReference($data['CustomerOrderReference']);
         } else if (! isset($data['CustomerOrderReference']) && isset($data['$EndCustomerOrderNumber'])) {
-            $data['CustomerOrderReference'] = new ProjectReference(['$EndCustomerOrderNumber' => $data['$EndCustomerOrderNumber']]);
+            $data['CustomerOrderReference'] = new CustomerOrderReference(['$EndCustomerOrderNumber' => $data['$EndCustomerOrderNumber']]);
         } //sometimes $EndCustomerOrderNumber is sent outside CustomerOrderReference.
 
         if(isset($data['ContractReference']) && is_array($data['ContractReference'])){
@@ -78,8 +87,16 @@ class Order extends DataTransferObject implements Validatable
             $data['ProjectReference'] = new ProjectReference(['ProjectNumber' => $data['ProjectNumber']]);
         } //sometimes ProjectNumber is sent outside ProjectReference.
 
+        if(isset($data['DeliveryConditions']) && is_array($data['DeliveryConditions'])){
+            $data['DeliveryConditions'] = new DeliveryConditions($data['DeliveryConditions']);
+        }
+
         if(isset($data['TransportInstruction']) && is_array($data['TransportInstruction'])){
             $data['TransportInstruction'] = new TransportInstruction($data['TransportInstruction']);
+        }
+
+        if(isset($data['AdditionalInformation']) && is_array($data['AdditionalInformation'])){
+            $data['AdditionalInformation'] = new AdditionalInformation($data['AdditionalInformation']);
         }
 
         if(isset($data['DeliveryDateTimeInformation']) && is_array($data['DeliveryDateTimeInformation'])){
@@ -133,11 +150,6 @@ class Order extends DataTransferObject implements Validatable
         }
         return $data;
     }
-
-    const validOrderTypeCodes = ['220', '402'];
-    const validScenarioTypeCodes = ['X1', 'X2'];
-    const validDraftOrderIndicators = ['16'];
-    const validDeliveryOnDemandIndicators = ['73E'];
 
     /**
      * @return bool indicating whether the object is Valid (true) or invalid (false) based on the information inside the object.
@@ -213,10 +225,24 @@ class Order extends DataTransferObject implements Validatable
             }
         }
 
+        if(! empty($this->DeliveryConditions)) {
+            $innerErrorMessage = $this->DeliveryConditions->getErrorMessages();
+            if(! empty($innerErrorMessage)) {
+                $errorMessage .= 'DeliveryConditions is invalid.' . '\n' . $innerErrorMessage . '\n';
+            }
+        }
+
         if(! empty($this->TransportInstruction)) {
             $innerErrorMessage = $this->TransportInstruction->getErrorMessages();
             if(! empty($innerErrorMessage)) {
                 $errorMessage .= 'TransportInstruction is invalid.' . '\n' . $innerErrorMessage . '\n';
+            }
+        }
+
+        if(! empty($this->AdditionalInformation)) {
+            $innerErrorMessage = $this->AdditionalInformation->getErrorMessages();
+            if(! empty($innerErrorMessage)) {
+                $errorMessage .= 'AdditionalInformation is invalid.' . '\n' . $innerErrorMessage . '\n';
             }
         }
 
