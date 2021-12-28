@@ -13,14 +13,22 @@ class ArrayToXML
     {
         foreach ($data as $key => $value) {
             if (is_array($value)) {
-                $new_object = $object->addChild($key);
-                self::arrayToXML($new_object, $value);
-            } else {
-                // if the key is an integer, it needs text with it to actually work.
-                if ($key != 0 && $key == (int) $key) {
-                    $key = "key_$key";
+                if(is_numeric(array_key_first($value))) {
+                    //THIS array contains numeric childs. So we won't add THIS array, but the values inside it as direct children with THIS class' name.
+                    foreach($value as $childKey => $childValue) {
+                        if(gettype($childValue) == 'string') {
+                            $object->addChild($key, htmlspecialchars($childValue)); // PARENT key and CHILD (string) value
+                        } else {
+                            $new_object = $object->addChild($key); // PARENT key
+                            self::arrayToXML($new_object, $childValue); // and CHILD (array) value
+                        }
+                    }
+                } else {
+                    $new_object = $object->addChild($key);
+                    self::arrayToXML($new_object, $value);
                 }
-                $object->addChild($key, $value);
+            } else {
+                $object->addChild($key, htmlspecialchars($value));
             }
         }
     }

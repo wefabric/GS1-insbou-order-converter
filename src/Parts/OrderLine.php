@@ -12,8 +12,8 @@ class OrderLine extends DataTransferObject implements Validatable
     public ?string $OrderedQuantityMeasureUnitCode;
     public int $LineIdentification;
     public TradeItemIdentification $TradeItemIdentification;
-    public ?TradeItemProcessing $TradeItemProcessing;
-    public ?TransportInstruction $TransportInstruction;
+    public ?TradeItemProcessingList $TradeItemProcessing;
+    public ?TransportInstructionList $TransportInstruction;
     public ?AdditionalInformation $AdditionalInformation;
     public ?DeliveryDateTimeInformation $DeliveryDateTimeInformation;
     public ?DifferentPriceAgreement $DifferentPriceAgreement;
@@ -34,11 +34,11 @@ class OrderLine extends DataTransferObject implements Validatable
         }
 
         if(isset($data['TradeItemProcessing']) && is_array($data['TradeItemProcessing'])){
-            $data['TradeItemProcessing'] = new TradeItemProcessing($data['TradeItemProcessing']);
+            $data['TradeItemProcessing'] = new TradeItemProcessingList($data['TradeItemProcessing']);
         }
 
         if(isset($data['TransportInstruction']) && is_array($data['TransportInstruction'])){
-            $data['TransportInstruction'] = new TransportInstruction($data['TransportInstruction']);
+            $data['TransportInstruction'] = new TransportInstructionList($data['TransportInstruction']);
         }
 
         if(isset($data['AdditionalInformation']) && is_array($data['AdditionalInformation'])){
@@ -96,7 +96,7 @@ class OrderLine extends DataTransferObject implements Validatable
         }
 
         if(empty($this->TradeItemIdentification)) {
-            $errorMessage .= 'TradeItemIdentification is invalid (empty).' . '\n';
+            $errorMessage .= 'TradeItemIdentification is null.' . '\n';
         } else {
             $innerErrorMessage = $this->TradeItemIdentification->getErrorMessages();
             if(! empty($innerErrorMessage)) {
@@ -104,17 +104,17 @@ class OrderLine extends DataTransferObject implements Validatable
             }
         }
 
-        if(! empty($this->TradeItemProcessing)) {
+        if(isset($this->TradeItemProcessing)) {
             $innerErrorMessage = $this->TradeItemProcessing->getErrorMessages();
             if(! empty($innerErrorMessage))  {
-                $errorMessage .= 'TradeItemProcessing is invalid.' . '\n' . $innerErrorMessage . '\n';
+                $errorMessage .= 'TradeItemProcessingList is invalid.' . '\n' . $innerErrorMessage .'\n';
             }
         }
 
-        if(! empty($this->TransportInstruction)) {
+        if(isset($this->TransportInstruction)) {
             $innerErrorMessage = $this->TransportInstruction->getErrorMessages();
             if(! empty($innerErrorMessage)) {
-                $errorMessage .= 'TransportInstruction is invalid.' . '\n' . $innerErrorMessage . '\n';
+                $errorMessage .= 'TransportInstructionList is invalid.' . '\n' . $innerErrorMessage .'\n';
             }
         }
 

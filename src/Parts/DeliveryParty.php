@@ -7,7 +7,7 @@ use Wefabric\GS1InsbouOrderConverter\Validatable;
 class DeliveryParty extends BaseParty implements Validatable
 {
     public ?string $LocationDescription;
-    public ?ContactInformation $ContactInformation;
+    public ?ContactInformationList $ContactInformation;
 
     /**
      * @return DeliveryParty Object
@@ -20,9 +20,9 @@ class DeliveryParty extends BaseParty implements Validatable
     public function __construct(array $data = [])
     {
         if(isset($data['ContactInformation']) && is_array($data['ContactInformation'])){
-            $data['ContactInformation'] = new ContactInformation($data['ContactInformation']);
+            $data['ContactInformation'] = new ContactInformationList($data['ContactInformation']);
 //        } elseif(! isset($data['ContactInformation']) && isset($data['Contactgegevens']) && is_array($data['Contactgegevens'])){
-//            $data['ContactInformation'] = new ContactInformation($data['Contactgegevens']);
+//            $data['ContactInformation'] = new ContactInformationList($data['Contactgegevens']);
         }
 
         parent::__construct($data);
@@ -50,12 +50,12 @@ class DeliveryParty extends BaseParty implements Validatable
             $errorMessage .= 'LocationDescription (' . $this->LocationDescription .') is invalid.' . '\n';
         }
 
-        if(! empty($this->ContactInformation) ) {
+        if(isset($this->ContactInformation)) {
             $innerErrorMessage = $this->ContactInformation->getErrorMessages();
-            if (! empty($innerErrorMessage)) {
-                $errorMessage .= 'ContactInformation is invalid.' . '\n' . $innerErrorMessage & '\n';
 //            } else if(! empty($this->ContactInformation->EmailAddress)) {
 //                $errorMessage .= 'ContactInformation ->  EmailAddress (' . $this->ContactInformation->EmailAddress .') is invalid: DeliveryParty -> ContactInformation cannot have EmailAddress.' . '\n';
+            if(! empty($innerErrorMessage)) {
+                $errorMessage .= 'ContactInformationList is invalid.' . '\n' . $innerErrorMessage . '\n';
             }
         }
 

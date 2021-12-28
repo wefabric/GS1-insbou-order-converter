@@ -11,7 +11,7 @@ use Wefabric\GS1InsbouOrderConverter\Parts\ContractReference;
 use Wefabric\GS1InsbouOrderConverter\Parts\CustomerOrderReference;
 use Wefabric\GS1InsbouOrderConverter\Parts\DeliveryConditions;
 use Wefabric\GS1InsbouOrderConverter\Parts\ProjectReference;
-use Wefabric\GS1InsbouOrderConverter\Parts\TransportInstruction;
+use Wefabric\GS1InsbouOrderConverter\Parts\TransportInstructionList;
 use Wefabric\GS1InsbouOrderConverter\Parts\DeliveryDateTimeInformation;
 use Wefabric\GS1InsbouOrderConverter\Parts\Buyer;
 use Wefabric\GS1InsbouOrderConverter\Parts\Supplier;
@@ -21,7 +21,7 @@ use Wefabric\GS1InsbouOrderConverter\Parts\UltimateConsignee;
 use Wefabric\GS1InsbouOrderConverter\Parts\ShipFrom;
 use Wefabric\GS1InsbouOrderConverter\Parts\PurchasingOrganisation;
 use Wefabric\GS1InsbouOrderConverter\Parts\Carrier;
-use Wefabric\GS1InsbouOrderConverter\Parts\OrderLine;
+use Wefabric\GS1InsbouOrderConverter\Parts\OrderLineList;
 
 class Order extends DataTransferObject implements Validatable
 {
@@ -36,8 +36,8 @@ class Order extends DataTransferObject implements Validatable
     public ?CustomerOrderReference $CustomerOrderReference;
     public ?ContractReference $ContractReference;
     public ?ProjectReference $ProjectReference;
-    public ?TransportInstruction $TransportInstruction;
     public ?DeliveryConditions $DeliveryConditions;
+    public ?TransportInstructionList $TransportInstruction;
     public ?AdditionalInformation $AdditionalInformation;
     public ?DeliveryDateTimeInformation $DeliveryDateTimeInformation;
     public Buyer $Buyer;
@@ -48,7 +48,7 @@ class Order extends DataTransferObject implements Validatable
     public ?ShipFrom $ShipFrom;
     public ?PurchasingOrganisation $PurchasingOrganisation;
     public ?Carrier $Carrier;
-    public OrderLine $OrderLine;
+    public OrderLineList $OrderLine;
 
     const validOrderTypeCodes = ['220', '402'];
     const validScenarioTypeCodes = ['X1', 'X2'];
@@ -92,7 +92,7 @@ class Order extends DataTransferObject implements Validatable
         }
 
         if(isset($data['TransportInstruction']) && is_array($data['TransportInstruction'])){
-            $data['TransportInstruction'] = new TransportInstruction($data['TransportInstruction']);
+            $data['TransportInstruction'] = new TransportInstructionList($data['TransportInstruction']);
         }
 
         if(isset($data['AdditionalInformation']) && is_array($data['AdditionalInformation'])){
@@ -136,7 +136,7 @@ class Order extends DataTransferObject implements Validatable
         }
 
         if(isset($data['OrderLine']) && is_array($data['OrderLine'])){
-            $data['OrderLine'] = new OrderLine($data['OrderLine']);
+            $data['OrderLine'] = new OrderLineList($data['OrderLine']);
         }
 
         parent::__construct($data);
@@ -312,11 +312,13 @@ class Order extends DataTransferObject implements Validatable
                 $errorMessage .= 'Carrier is invalid.' . '\n' . $innerErrorMessage . '\n';
             }
         }
-
-        if(empty($this->OrderLine)) {
+        
+        if(! isset($this->OrderLine)) {
+            $errorMessage .= 'OrderLineList is null.' . '\n';
+        } else {
             $innerErrorMessage = $this->OrderLine->getErrorMessages();
-            if(! empty($innerErrorMessage)) {
-                $errorMessage .= 'OrderLine is invalid.' . '\n' . $innerErrorMessage . '\n';
+            if(! empty($innerErrorMessage)){
+                $errorMessage .= 'OrderLineList is invalid.' . '\n' . $innerErrorMessage .'\n';
             }
         }
 
