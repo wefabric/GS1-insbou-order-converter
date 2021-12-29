@@ -26,6 +26,7 @@ use Wefabric\GS1InsbouOrderConverter\Parts\OrderLineList;
 class Order extends DataTransferObject implements Validatable
 {
     //use IsValid; //Is the only class that DOESN'T use IsValid because it has a different implementation.
+    use ToArray_StripEmptyElements;
 
     public string $OrderType;
     public string $OrderNumber;
@@ -141,15 +142,6 @@ class Order extends DataTransferObject implements Validatable
         }
 
         parent::__construct($data);
-    }
-
-    function toArray(bool $stripEmptyElements = true): array
-    {
-        $data = parent::toArray();
-        if($stripEmptyElements) {
-            $data = ArrayStripEmptyElements::ArrayStripEmptyElements($data);
-        }
-        return $data;
     }
 
     /**

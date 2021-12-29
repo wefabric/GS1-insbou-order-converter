@@ -17,6 +17,8 @@ use Wefabric\GS1InsbouOrderConverter\Parts\UltimateConsignee;
 
 class OrderResponse
 {
+    use ToArray_StripEmptyElements;
+
     public string $OrderResponseNumber;
     public string $OrderResponseDate;
     public string $OrderResponseTime;
