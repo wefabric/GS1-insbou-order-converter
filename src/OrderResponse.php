@@ -49,16 +49,22 @@ class OrderResponse extends DataTransferObject
 
     public function __construct(array $data = [])
     {
+        if (isset($data['TotalAmount']) && ! is_double($data['TotalAmount'])) {
+            $data['TotalAmount'] = (double) $data['TotalAmount'];
+        }
+
         if(isset($data['OrderReference']) && is_array($data['OrderReference'])){
             $data['OrderReference'] = new OrderReference($data['OrderReference']);
         } else if (! isset($data['OrderReference']) && isset($data['BuyersOrderNumber'])) {
             $data['OrderReference'] = new OrderReference(['BuyersOrderNumber' => $data['BuyersOrderNumber']]);
+            unset($data['BuyersOrderNumber']);
         } //sometimes BuyersOrderNumber is sent outside OrderReference.
 
         if(isset($data['ProjectReference']) && is_array($data['ProjectReference'])){
             $data['ProjectReference'] = new ProjectReference($data['ProjectReference']);
         } else if (! isset($data['ProjectReference']) && isset($data['ProjectNumber'])) {
             $data['ProjectReference'] = new ProjectReference(['ProjectNumber' => $data['ProjectNumber']]);
+            unset($data['ProjectNumber']);
         } //sometimes ProjectNumber is sent outside ProjectReference.
 
 

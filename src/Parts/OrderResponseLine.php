@@ -6,11 +6,11 @@ use Spatie\DataTransferObject\DataTransferObject;
 
 class OrderResponseLine extends DataTransferObject
 {
-    public int $OrderResponseLineNumber;
-    public string $OrderResponseStatus;
+    public int $LineNumber;
+    public string $StatusCode;
     public ?float $PlannedDeliveryQuantity;
     public ?float $DifferenceWithOrderedQuantity;
-    public ?string $MeasurementUnitCode;
+    public ?string $QuantityMeasureUnitCode;
     public ?float $NetLineAmount;
     public ?AdditionalInformation $AdditionalInformation;
     public ?LineChargeList $LineCharge;
@@ -21,11 +21,27 @@ class OrderResponseLine extends DataTransferObject
     public ?PriceInformation $PriceInformation;
     public ?PartialDeliveryList $PartialDelivery;
 
-    const validOrderResponseStatusses = ['4', '5', '6', '7'];
-    const validMeasureUnitCodes = OrderLine::validOrderedQuantityMeasureUnitCodes;
+    const validStatusCodes = ['4', '5', '6', '7'];
+    const validQuantityMeasureUnitCodes = OrderLine::validOrderedQuantityMeasureUnitCodes;
 
     public function  __construct(array $data = [])
     {
+        if (isset($data['LineNumber']) && ! is_int($data['LineNumber'])) {
+            $data['LineNumber'] = (int) $data['LineNumber'];
+        }
+
+        if (isset($data['PlannedDeliveryQuantity']) && ! is_double($data['PlannedDeliveryQuantity'])) {
+            $data['PlannedDeliveryQuantity'] = (double) $data['PlannedDeliveryQuantity'];
+        }
+
+        if (isset($data['DifferenceWithOrderedQuantity']) && ! is_double($data['DifferenceWithOrderedQuantity'])) {
+            $data['DifferenceWithOrderedQuantity'] = (double) $data['DifferenceWithOrderedQuantity'];
+        }
+
+        if (isset($data['NetLineAmount']) && ! is_double($data['NetLineAmount'])) {
+            $data['NetLineAmount'] = (double) $data['NetLineAmount'];
+        }
+
         if(isset($data['AdditionalInformation']) && is_array($data['AdditionalInformation'])){
             $data['AdditionalInformation'] = new AdditionalInformation($data['AdditionalInformation']);
         }
@@ -44,7 +60,10 @@ class OrderResponseLine extends DataTransferObject
 
         if(isset($data['OrderLineReference']) && is_array($data['OrderLineReference'])){
             $data['OrderLineReference'] = new OrderLineReference($data['OrderLineReference']);
-        }
+        } else if (! isset($data['OrderLineReference']) && isset($data['OrderLineIdentification'])) {
+            $data['OrderLineReference'] = new OrderLineReference(['OrderLineIdentification' => $data['OrderLineIdentification']]);
+            unset($data['OrderLineIdentification']);
+        } //sometimes OrderLineIdentification is sent outside OrderLineReference.
 
         if(isset($data['DifferentPriceAgreement']) && is_array($data['DifferentPriceAgreement'])){
             $data['DifferentPriceAgreement'] = new DifferentPriceAgreement($data['DifferentPriceAgreement']);
