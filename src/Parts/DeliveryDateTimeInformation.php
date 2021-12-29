@@ -15,14 +15,6 @@ class DeliveryDateTimeInformation extends DataTransferObject implements Validata
     public ?string $RequiredDeliveryTime;
     public ?DeliveryTimeFrame $DeliveryTimeFrame;
 
-    /**
-     * @return DeliveryDateTimeInformation Object
-     */
-    public static function make($data = []): DeliveryDateTimeInformation
-    {
-        return new self($data);
-    }
-
     public function __construct(array $data = [])
     {
         if(isset($data['RequiredDeliveryDate']) && gettype($data['RequiredDeliveryDate']) === 'string' && strtotime($data['RequiredDeliveryDate'])) {

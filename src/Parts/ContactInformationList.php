@@ -15,14 +15,6 @@ class ContactInformationList extends BaseList
         return 5;
     }
 
-    /**
-     * @return ContactInformationList Object
-     */
-    public static function make(array $data = []): ContactInformationList
-    {
-        return new self($data);
-    }
-
     public function __construct(array $data = [])
     {
         parent::__construct($data); // Doen we EERST.

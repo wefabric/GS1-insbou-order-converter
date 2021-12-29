@@ -13,14 +13,6 @@ class CustomerOrderReference extends DataTransferObject implements Validatable
     public ?string $EndCustomerOrderNumber;
 
     /**
-     * @return CustomerOrderReference Object
-     */
-    public static function make($data = []): CustomerOrderReference
-    {
-        return new self($data);
-    }
-
-    /**
      * @return string Human-readable errormessage(s) indicating the location of the invalid properties.
      */
     public function getErrorMessages() : string

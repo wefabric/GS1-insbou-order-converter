@@ -6,13 +6,6 @@ use Wefabric\GS1InsbouOrderConverter\Validatable;
 
 class UltimateConsignee extends BaseAddressParty implements Validatable
 {
-    /**
-     * @return UltimateConsignee Object
-     */
-    public static function make($data = []): UltimateConsignee
-    {
-        return new self($data);
-    }
 
     public function __construct(array $data = [])
     {

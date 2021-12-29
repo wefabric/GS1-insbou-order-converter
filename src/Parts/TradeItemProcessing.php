@@ -14,14 +14,6 @@ class TradeItemProcessing extends DataTransferObject implements Validatable
     public ?int $ProcessingSequence;
     public ?ProcessingDescriptionList $ProcessingDescription;
 
-    /**
-     * @return TradeItemProcessing Object
-     */
-    public static function make($data = []): TradeItemProcessing
-    {
-        return new self($data);
-    }
-
     public function __construct(array $data = [])
     {
         if(isset($data['ProcessingDescription']) && is_array($data['ProcessingDescription'])){

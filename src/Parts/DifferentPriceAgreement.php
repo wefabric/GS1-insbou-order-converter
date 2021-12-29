@@ -14,14 +14,6 @@ class DifferentPriceAgreement extends DataTransferObject implements Validatable
     public ?float $DifferentPrice;
     public ?PriceBase $PriceBase;
 
-    /**
-     * @return DifferentPriceAgreement Object
-     */
-    public static function make($data = []): DifferentPriceAgreement
-    {
-        return new self($data);
-    }
-
     public function __construct(array $data = [])
     {
         if(isset($data['PriceBase']) && is_array($data['PriceBase'])){

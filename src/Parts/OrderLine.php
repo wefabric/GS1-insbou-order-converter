@@ -22,14 +22,6 @@ class OrderLine extends DataTransferObject implements Validatable
     public ?DifferentPriceAgreement $DifferentPriceAgreement;
     public ?ContractReference $ContractReference;
 
-    /**
-     * @return OrderLine Object
-     */
-    public static function make($data = []): OrderLine
-    {
-        return new self($data);
-    }
-
     public function __construct(array $data = [])
     {
         if(isset($data['TradeItemIdentification']) && is_array($data['TradeItemIdentification'])){

@@ -17,14 +17,6 @@ class PriceBase extends DataTransferObject implements Validatable
     const validMeasureUnitPriceBasisCodes = ['CMT', 'DAY', 'GRM', 'HUR', 'KGM', 'LTR', 'MIN', 'MLT', 'MMT', 'MTK', 'MTQ', 'MTR', 'PCE', 'TNE'];
 
     /**
-     * @return PriceBase Object
-     */
-    public static function make($data = []): PriceBase
-    {
-        return new self($data);
-    }
-
-    /**
      * @return string Human-readable errormessage(s) indicating the location of the invalid properties.
      */
     public function getErrorMessages() : string

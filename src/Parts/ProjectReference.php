@@ -13,14 +13,6 @@ class ProjectReference extends DataTransferObject implements Validatable
     public string $ProjectNumber;
 
     /**
-     * @return ProjectReference Object
-     */
-    public static function make($data = []): ProjectReference
-    {
-        return new self($data);
-    }
-
-    /**
      * @return string Human-readable errormessage(s) indicating the location of the invalid properties.
      */
     public function getErrorMessages() : string

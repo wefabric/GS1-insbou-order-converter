@@ -15,14 +15,6 @@ class ContactInformation extends DataTransferObject implements Validatable
     public ?string $EmailAddress;
 
     /**
-     * @return ContactInformation Object
-     */
-    public static function make($data = []): ContactInformation
-    {
-        return new self($data);
-    }
-
-    /**
      * @return string Human-readable errormessage(s) indicating the location of the invalid properties.
      */
     public function getErrorMessages() : string

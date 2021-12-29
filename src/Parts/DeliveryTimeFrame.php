@@ -16,14 +16,6 @@ class DeliveryTimeFrame extends DataTransferObject implements Validatable
     public string $DeliveryDateLatest;
     public string $DeliveryTimeLatest;
 
-    /**
-     * @return DeliveryTimeFrame Object
-     */
-    public static function make($data = []): DeliveryTimeFrame
-    {
-        return new self($data);
-    }
-
     public function __construct(array $data = [])
     {
         if(isset($data['DeliveryDateEarliest']) && gettype($data['DeliveryDateEarliest']) === 'string' && strtotime($data['DeliveryDateEarliest'])) {

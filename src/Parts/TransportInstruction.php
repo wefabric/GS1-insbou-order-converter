@@ -16,14 +16,6 @@ class TransportInstruction extends DataTransferObject implements Validatable
     const validTransportInstructionTypeCodes = ['CRN', 'G05', 'G07', 'G10', 'G12', 'G15', 'G20', 'G25', 'G30', 'G40', 'IEU', 'IRM', 'MCH', 'MVA', 'PAF', 'PBE', 'PDV', 'PIN', 'PLA', 'PLL', 'PLR', 'PLV', 'POH', 'POT', 'VDA', 'VEA', 'VKO', 'VKR', 'VLA', 'VLK'];
 
     /**
-     * @return TransportInstruction Object
-     */
-    public static function make($data = []): TransportInstruction
-    {
-        return new self($data);
-    }
-
-    /**
      * @return string Human-readable errormessage(s) indicating the location of the invalid properties.
      */
     public function getErrorMessages() : string

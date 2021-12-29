@@ -15,14 +15,6 @@ class DeliveryConditions extends DataTransferObject implements Validatable
     const validBackhaulingIndicatorCodes = ['4'];
 
     /**
-     * @return DeliveryConditions Object
-     */
-    public static function make($data = []): DeliveryConditions
-    {
-        return new self($data);
-    }
-
-    /**
      * @return string Human-readable errormessage(s) indicating the location of the invalid properties.
      */
     public function getErrorMessages() : string

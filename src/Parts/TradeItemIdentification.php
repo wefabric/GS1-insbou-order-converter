@@ -14,14 +14,6 @@ class TradeItemIdentification extends DataTransferObject implements Validatable
     public ?string $SuppliersTradeItemIdentification;
     public ?AdditionalItemIdentification $AdditionalItemIdentification;
 
-    /**
-     * @return TradeItemIdentification Object
-     */
-    public static function make($data = []): TradeItemIdentification
-    {
-        return new self($data);
-    }
-
     public function __construct(array $data = [])
     {
         if(isset($data['AdditionalItemIdentification']) && is_array($data['AdditionalItemIdentification'])){

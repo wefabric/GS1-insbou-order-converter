@@ -15,14 +15,6 @@ class TradeItemProcessingList extends BaseList
         return 5;
     }
 
-    /**
-     * @return TradeItemProcessingList Object
-     */
-    public static function make(array $data = []): TradeItemProcessingList
-    {
-        return new self($data);
-    }
-
     public function __construct(array $data = [])
     {
         parent::__construct($data); // Doen we EERST.

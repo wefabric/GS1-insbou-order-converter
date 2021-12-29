@@ -9,13 +9,6 @@ use Wefabric\GS1InsbouOrderConverter\Validatable;
  */
 class Invoicee extends BaseParty implements Validatable
 {
-    /**
-     * @return Invoicee Object
-     */
-    public static function make($data = []): Invoicee
-    {
-        return new self($data);
-    }
 
     public function __construct(array $data = [])
     {

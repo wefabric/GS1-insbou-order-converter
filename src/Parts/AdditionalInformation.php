@@ -12,14 +12,6 @@ class AdditionalInformation extends DataTransferObject implements Validatable
 
     public FreeTextList $FreeText;
 
-    /**
-     * @return AdditionalInformation Object
-     */
-    public static function make($data = []): AdditionalInformation
-    {
-        return new self($data);
-    }
-
     public function __construct(array $data = [])
     {
         if(isset($data['FreeText']) && is_array($data['FreeText'])){

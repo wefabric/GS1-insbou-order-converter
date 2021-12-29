@@ -9,14 +9,6 @@ class DeliveryParty extends BaseAddressParty implements Validatable
     public ?string $LocationDescription;
     public ?ContactInformationList $ContactInformation;
 
-    /**
-     * @return DeliveryParty Object
-     */
-    public static function make($data = []): DeliveryParty
-    {
-        return new self($data);
-    }
-
     public function __construct(array $data = [])
     {
         if(isset($data['ContactInformation']) && is_array($data['ContactInformation'])){

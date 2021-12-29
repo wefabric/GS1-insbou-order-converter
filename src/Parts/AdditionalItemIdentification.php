@@ -16,14 +16,6 @@ class AdditionalItemIdentification extends DataTransferObject implements Validat
     public ?string $SerialNumber;
     public ?PhysicalDimensions $PhysicalDimensions;
 
-    /**
-     * @return AdditionalItemIdentification Object
-     */
-    public static function make($data = []): AdditionalItemIdentification
-    {
-        return new self($data);
-    }
-
     public function __construct(array $data = [])
     {
         if(isset($data['PhysicalDimensions']) && is_array($data['PhysicalDimensions'])){

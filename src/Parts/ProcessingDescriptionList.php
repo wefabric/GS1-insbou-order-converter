@@ -15,14 +15,6 @@ class ProcessingDescriptionList extends BaseTextList
         return 35;
     }
 
-    /**
-     * @return ProcessingDescriptionList Object
-     */
-    public static function make(array $data = []): ProcessingDescriptionList
-    {
-        return new self($data);
-    }
-
     public function __construct(array $data = [])
     {
         parent::__construct($data); // Doen we EERST.

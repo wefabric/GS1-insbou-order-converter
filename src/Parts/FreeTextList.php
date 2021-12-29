@@ -15,14 +15,6 @@ class FreeTextList extends BaseTextList
         return 10;
     }
 
-    /**
-     * @return FreeTextList Object
-     */
-    public static function make(array $data = []): FreeTextList
-    {
-        return new self($data);
-    }
-
     public function __construct(array $data = [])
     {
         parent::__construct($data); // Doen we EERST.

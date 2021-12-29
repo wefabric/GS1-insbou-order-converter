@@ -14,14 +14,6 @@ class TransportInstructionList extends BaseList
         return 5;
     }
 
-    /**
-     * @return TransportInstructionList Object
-     */
-    public static function make(array $data = []): TransportInstructionList
-    {
-        return new self($data);
-    }
-
     public function __construct(array $data = [])
     {
         parent::__construct($data); // Doen we EERST.

@@ -15,14 +15,6 @@ class PhysicalDimensions extends DataTransferObject implements Validatable
     public ?float $Height;
     public ?string $MeasurementUnitCode;
 
-    /**
-     * @return PhysicalDimensions Object
-     */
-    public static function make($data = []): PhysicalDimensions
-    {
-        return new self($data);
-    }
-
     const validMeasurementUnitCodes = ['CMT', 'MMT', 'MTR'];
 
     /**

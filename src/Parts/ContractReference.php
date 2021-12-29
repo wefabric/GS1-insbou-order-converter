@@ -14,14 +14,6 @@ class ContractReference extends DataTransferObject implements Validatable
     public ?string $ContractDate;
 
     /**
-     * @return ContractReference Object
-     */
-    public static function make($data = []): ContractReference
-    {
-        return new self($data);
-    }
-
-    /**
      * @return string Human-readable errormessage(s) indicating the location of the invalid properties.
      */
     public function getErrorMessages() : string

@@ -15,14 +15,6 @@ class OrderLineList extends BaseList
         return 200000;
     }
 
-    /**
-     * @return OrderLineList Object
-     */
-    public static function make(array $data = []): OrderLineList
-    {
-        return new self($data);
-    }
-
     public function __construct(array $data = [])
     {
         parent::__construct($data); // Doen we EERST.

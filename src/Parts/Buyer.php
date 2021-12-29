@@ -8,14 +8,6 @@ class Buyer extends BaseAddressParty implements Validatable
 {
     public ?ContactInformationList $ContactInformation;
 
-    /**
-     * @return Buyer Object
-     */
-    public static function make($data = []): Buyer
-    {
-        return new self($data);
-    }
-
     public function __construct(array $data = [])
     {
         if(isset($data['ContactInformation']) && is_array($data['ContactInformation'])){
