@@ -25,6 +25,7 @@ use Wefabric\GS1InsbouOrderConverter\Parts\OrderLineList;
 
 class Order extends DataTransferObject implements Validatable
 {
+    //use IsValid; //Is the only class that DOESN'T use IsValid because it has a different implementation.
 
     public string $OrderType;
     public string $OrderNumber;

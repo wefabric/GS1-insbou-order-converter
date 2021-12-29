@@ -3,13 +3,18 @@
 namespace Wefabric\GS1InsbouOrderConverter\Parts;
 
 use Spatie\DataTransferObject\DataTransferObject;
+use Wefabric\GS1InsbouOrderConverter\IsValid;
 use Wefabric\GS1InsbouOrderConverter\Validatable;
 
 class PriceBase extends DataTransferObject implements Validatable
 {
+    use IsValid;
+
     public int $NumberOfUnitsInPriceBasis;
     public string $MeasureUnitPriceBasis;
     public ?string $PriceBaseDescription;
+
+    const validMeasureUnitPriceBasisCodes = ['CMT', 'DAY', 'GRM', 'HUR', 'KGM', 'LTR', 'MIN', 'MLT', 'MMT', 'MTK', 'MTQ', 'MTR', 'PCE', 'TNE'];
 
     /**
      * @return PriceBase Object
@@ -17,22 +22,6 @@ class PriceBase extends DataTransferObject implements Validatable
     public static function make($data = []): PriceBase
     {
         return new self($data);
-    }
-
-    public function __construct(array $data = [])
-    {
-        parent::__construct($data);
-    }
-
-    const validMeasureUnitPriceBasisCodes = ['CMT', 'DAY', 'GRM', 'HUR', 'KGM', 'LTR', 'MIN', 'MLT', 'MMT', 'MTK', 'MTQ', 'MTR', 'PCE', 'TNE'];
-
-    /**
-     * @return bool indicating whether the object is Valid (true) or invalid (false) based on the information inside the object.
-     * Calls getErrorMessages() and checks if the response is empty or not.
-     */
-    public function isValid() : bool
-    {
-        return !(bool) self::getErrorMessages();
     }
 
     /**

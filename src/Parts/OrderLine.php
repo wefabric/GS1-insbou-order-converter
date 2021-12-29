@@ -3,10 +3,13 @@
 namespace Wefabric\GS1InsbouOrderConverter\Parts;
 
 use Spatie\DataTransferObject\DataTransferObject;
+use Wefabric\GS1InsbouOrderConverter\IsValid;
 use Wefabric\GS1InsbouOrderConverter\Validatable;
 
 class OrderLine extends DataTransferObject implements Validatable
 {
+    use IsValid;
+
     public int $LineNumber;
     public int $OrderedQuantity;
     public ?string $OrderedQuantityMeasureUnitCode;
@@ -61,15 +64,6 @@ class OrderLine extends DataTransferObject implements Validatable
     }
 
     const validOrderedQuantityMeasureUnitCodes = ['CMT', 'DAY' ,'GRM', 'HUR', 'KGM', 'LTR', 'MIN', 'MLT', 'MMT', 'MTK', 'MTQ', 'MTR', 'PCE', 'TNE'];
-
-    /**
-     * @return bool indicating whether the object is Valid (true) or invalid (false) based on the information inside the object.
-     * Calls getErrorMessages() and checks if the response is empty or not.
-     */
-    public function isValid() : bool
-    {
-        return !(bool) self::getErrorMessages();
-    }
 
     /**
      * @return string Human-readable errormessage(s) indicating the location of the invalid properties.

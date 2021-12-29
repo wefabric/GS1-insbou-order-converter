@@ -3,12 +3,17 @@
 namespace Wefabric\GS1InsbouOrderConverter\Parts;
 
 use Spatie\DataTransferObject\DataTransferObject;
+use Wefabric\GS1InsbouOrderConverter\IsValid;
 use Wefabric\GS1InsbouOrderConverter\Validatable;
 
 class TransportInstruction extends DataTransferObject implements Validatable
 {
+    use IsValid;
+
     public ?string $TransportInstructionTypeCode;
     public ?string $DeliveryNoteText;
+
+    const validTransportInstructionTypeCodes = ['CRN', 'G05', 'G07', 'G10', 'G12', 'G15', 'G20', 'G25', 'G30', 'G40', 'IEU', 'IRM', 'MCH', 'MVA', 'PAF', 'PBE', 'PDV', 'PIN', 'PLA', 'PLL', 'PLR', 'PLV', 'POH', 'POT', 'VDA', 'VEA', 'VKO', 'VKR', 'VLA', 'VLK'];
 
     /**
      * @return TransportInstruction Object
@@ -16,22 +21,6 @@ class TransportInstruction extends DataTransferObject implements Validatable
     public static function make($data = []): TransportInstruction
     {
         return new self($data);
-    }
-
-    public function __construct(array $data = [])
-    {
-        parent::__construct($data);
-    }
-
-    const validTransportInstructionTypeCodes = ['CRN', 'G05', 'G07', 'G10', 'G12', 'G15', 'G20', 'G25', 'G30', 'G40', 'IEU', 'IRM', 'MCH', 'MVA', 'PAF', 'PBE', 'PDV', 'PIN', 'PLA', 'PLL', 'PLR', 'PLV', 'POH', 'POT', 'VDA', 'VEA', 'VKO', 'VKR', 'VLA', 'VLK'];
-
-    /**
-     * @return bool indicating whether the object is Valid (true) or invalid (false) based on the information inside the object.
-     * Calls getErrorMessages() and checks if the response is empty or not.
-     */
-    public function isValid() : bool
-    {
-        return !(bool) self::getErrorMessages();
     }
 
     /**

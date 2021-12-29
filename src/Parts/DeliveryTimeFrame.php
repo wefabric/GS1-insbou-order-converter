@@ -4,10 +4,13 @@ namespace Wefabric\GS1InsbouOrderConverter\Parts;
 
 use DateTime;
 use Spatie\DataTransferObject\DataTransferObject;
+use Wefabric\GS1InsbouOrderConverter\IsValid;
 use Wefabric\GS1InsbouOrderConverter\Validatable;
 
 class DeliveryTimeFrame extends DataTransferObject implements Validatable
 {
+    use IsValid;
+
     public string $DeliveryDateEarliest;
     public string $DeliveryTimeEarliest;
     public string $DeliveryDateLatest;
@@ -36,15 +39,6 @@ class DeliveryTimeFrame extends DataTransferObject implements Validatable
         } //If there's a time inside the DeliveryDateLatest, use that to set the OrderTime and strip it from the OrderDate.
 
         parent::__construct($data);
-    }
-
-    /**
-     * @return bool indicating whether the object is Valid (true) or invalid (false) based on the information inside the object.
-     * Calls getErrorMessages() and checks if the response is empty or not.
-     */
-    public function isValid() : bool
-    {
-        return !(bool) self::getErrorMessages();
     }
 
     /**

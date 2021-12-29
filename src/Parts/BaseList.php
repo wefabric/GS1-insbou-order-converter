@@ -5,10 +5,13 @@ namespace Wefabric\GS1InsbouOrderConverter\Parts;
 use Iterator;
 use Spatie\DataTransferObject\DataTransferObject;
 use Wefabric\GS1InsbouOrderConverter\GetSimpleChildClassName;
+use Wefabric\GS1InsbouOrderConverter\IsValid;
 use Wefabric\GS1InsbouOrderConverter\Validatable;
 
 abstract class BaseList extends DataTransferObject implements Iterator, Validatable
 {
+    use IsValid;
+
     /* @var Validatable[] $values */
     protected array $values;
     protected int $index;
@@ -101,15 +104,6 @@ abstract class BaseList extends DataTransferObject implements Iterator, Validata
     public function add(mixed $object)
     {
         $this->values[count($this->values)] = $object;
-    }
-
-    /**
-     * @return bool indicating whether the object is Valid (true) or invalid (false) based on the information inside the object.
-     * Calls getErrorMessages() and checks if the response is empty or not.
-     */
-    public function isValid() : bool
-    {
-        return !(bool) self::getErrorMessages();
     }
 
     /**

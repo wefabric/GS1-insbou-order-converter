@@ -16,9 +16,4 @@ class OrderReference extends DataTransferObject
         return new self($data);
     }
 
-    public function __construct(array $data = [])
-    {
-        parent::__construct($data);
-    }
-
 }

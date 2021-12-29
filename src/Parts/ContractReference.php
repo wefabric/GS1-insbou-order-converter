@@ -3,10 +3,13 @@
 namespace Wefabric\GS1InsbouOrderConverter\Parts;
 
 use Spatie\DataTransferObject\DataTransferObject;
+use Wefabric\GS1InsbouOrderConverter\IsValid;
 use Wefabric\GS1InsbouOrderConverter\Validatable;
 
 class ContractReference extends DataTransferObject implements Validatable
 {
+    use IsValid;
+
     public string $ContractNumber;
     public ?string $ContractDate;
 
@@ -16,20 +19,6 @@ class ContractReference extends DataTransferObject implements Validatable
     public static function make($data = []): ContractReference
     {
         return new self($data);
-    }
-
-    public function __construct(array $data = [])
-    {
-        parent::__construct($data);
-    }
-
-    /**
-     * @return bool indicating whether the object is Valid (true) or invalid (false) based on the information inside the object.
-     * Calls getErrorMessages() and checks if the response is empty or not.
-     */
-    public function isValid() : bool
-    {
-        return !(bool) self::getErrorMessages();
     }
 
     /**

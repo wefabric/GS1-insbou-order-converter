@@ -4,10 +4,13 @@ namespace Wefabric\GS1InsbouOrderConverter\Parts;
 
 use DateTime;
 use Spatie\DataTransferObject\DataTransferObject;
+use Wefabric\GS1InsbouOrderConverter\IsValid;
 use Wefabric\GS1InsbouOrderConverter\Validatable;
 
 class DeliveryDateTimeInformation extends DataTransferObject implements Validatable
 {
+    use IsValid;
+
     public ?string $RequiredDeliveryDate;
     public ?string $RequiredDeliveryTime;
     public ?DeliveryTimeFrame $DeliveryTimeFrame;
@@ -33,15 +36,6 @@ class DeliveryDateTimeInformation extends DataTransferObject implements Validata
         }
 
         parent::__construct($data);
-    }
-
-    /**
-     * @return bool indicating whether the object is Valid (true) or invalid (false) based on the information inside the object.
-     * Calls getErrorMessages() and checks if the response is empty or not.
-     */
-    public function isValid() : bool
-    {
-        return !(bool) self::getErrorMessages();
     }
 
     /**
