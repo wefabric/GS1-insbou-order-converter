@@ -2,7 +2,9 @@
 
 namespace Wefabric\GS1InsbouOrderConverter\Parts;
 
-class OrderLineReference
+use Spatie\DataTransferObject\DataTransferObject;
+
+class OrderLineReference extends DataTransferObject
 {
     public string $OrderLineIdentification;
 

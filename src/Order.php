@@ -10,9 +10,9 @@ use Wefabric\GS1InsbouOrderConverter\Parts\AdditionalInformation;
 use Wefabric\GS1InsbouOrderConverter\Parts\ContractReference;
 use Wefabric\GS1InsbouOrderConverter\Parts\CustomerOrderReference;
 use Wefabric\GS1InsbouOrderConverter\Parts\DeliveryConditions;
+use Wefabric\GS1InsbouOrderConverter\Parts\DeliveryDateTimeInformationRequest;
 use Wefabric\GS1InsbouOrderConverter\Parts\ProjectReference;
 use Wefabric\GS1InsbouOrderConverter\Parts\TransportInstructionList;
-use Wefabric\GS1InsbouOrderConverter\Parts\DeliveryDateTimeInformation;
 use Wefabric\GS1InsbouOrderConverter\Parts\Buyer;
 use Wefabric\GS1InsbouOrderConverter\Parts\Supplier;
 use Wefabric\GS1InsbouOrderConverter\Parts\DeliveryParty;
@@ -41,7 +41,7 @@ class Order extends DataTransferObject implements Validatable
     public ?DeliveryConditions $DeliveryConditions;
     public ?TransportInstructionList $TransportInstruction;
     public ?AdditionalInformation $AdditionalInformation;
-    public ?DeliveryDateTimeInformation $DeliveryDateTimeInformation;
+    public ?DeliveryDateTimeInformationRequest $DeliveryDateTimeInformation;
     public Buyer $Buyer;
     public Supplier $Supplier;
     public ?DeliveryParty $DeliveryParty;
@@ -102,7 +102,7 @@ class Order extends DataTransferObject implements Validatable
         }
 
         if(isset($data['DeliveryDateTimeInformation']) && is_array($data['DeliveryDateTimeInformation'])){
-            $data['DeliveryDateTimeInformation'] = new DeliveryDateTimeInformation($data['DeliveryDateTimeInformation']);
+            $data['DeliveryDateTimeInformation'] = new DeliveryDateTimeInformationRequest($data['DeliveryDateTimeInformation']);
         }
 
         if(isset($data['Buyer']) && is_array($data['Buyer'])){

@@ -18,7 +18,7 @@ class OrderLine extends DataTransferObject implements Validatable
     public ?TradeItemProcessingList $TradeItemProcessing;
     public ?TransportInstructionList $TransportInstruction;
     public ?AdditionalInformation $AdditionalInformation;
-    public ?DeliveryDateTimeInformation $DeliveryDateTimeInformation;
+    public ?DeliveryDateTimeInformationRequest $DeliveryDateTimeInformation;
     public ?DifferentPriceAgreement $DifferentPriceAgreement;
     public ?ContractReference $ContractReference;
 
@@ -41,7 +41,7 @@ class OrderLine extends DataTransferObject implements Validatable
         }
 
         if(isset($data['DeliveryDateTimeInformation']) && is_array($data['DeliveryDateTimeInformation'])){
-            $data['DeliveryDateTimeInformation'] = new DeliveryDateTimeInformation($data['DeliveryDateTimeInformation']);
+            $data['DeliveryDateTimeInformation'] = new DeliveryDateTimeInformationRequest($data['DeliveryDateTimeInformation']);
         }
 
         if(isset($data['DifferentPriceAgreement']) && is_array($data['DifferentPriceAgreement'])){

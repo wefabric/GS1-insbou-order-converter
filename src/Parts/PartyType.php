@@ -12,4 +12,6 @@ abstract class PartyType
     const PurchasingOrganisation = 6;
     const ShipFrom = 7;
     const UltimateConsignee = 8;
+    const ResponseSupplier = 9;
+
 }
