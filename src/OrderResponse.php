@@ -2,6 +2,7 @@
 
 namespace Wefabric\GS1InsbouOrderConverter;
 
+use SimpleXMLElement;
 use Spatie\DataTransferObject\DataTransferObject;
 
 use Wefabric\GS1InsbouOrderConverter\Parts\AdditionalInformation;
@@ -44,6 +45,16 @@ class OrderResponse extends DataTransferObject
      */
     public static function make(array $data = []): OrderResponse
     {
+        return new self($data);
+    }
+
+    /**
+     * @param SimpleXMLElement $xml
+     * @return OrderResponse Object
+     */
+    public static function makeFromXML(SimpleXMLElement $xml): OrderResponse
+    {
+        $data = XMLtoArray::XMLtoArray($xml);
         return new self($data);
     }
 

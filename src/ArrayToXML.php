@@ -7,7 +7,9 @@ use SimpleXMLElement;
 class ArrayToXML
 {
     /**
-     * Recursive function to add all members of an array to the given XMl element.
+     * Recursive function to add all members of an array to the given XML element.
+     * The opposite of @see XMLtoArray.
+     * @param SimpleXMLElement $object the root-tag of the object. Must be supplied.
      */
     static function arrayToXML(SimpleXMLElement $object, array $data)
     {

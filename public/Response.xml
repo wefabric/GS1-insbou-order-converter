@@ -1,0 +1,49 @@
+<OrderResponse xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Orderbevestiging_insbou003.xsd">
+    <OrderResponseNumber>1035706087</OrderResponseNumber>
+    <OrderResponseDate>2021-12-21</OrderResponseDate>
+    <OrderResponseTime>15:12:36</OrderResponseTime>
+    <StatusCode>29</StatusCode>
+    <TotalAmount>78.5</TotalAmount>
+    <BuyersOrderNumber>ELB-100197043</BuyersOrderNumber>
+    <DeliveryDateTimeInformation>
+        <ScheduledDeliveryDate>2021-12-22</ScheduledDeliveryDate>
+    </DeliveryDateTimeInformation>
+    <Buyer>
+        <GLN>1234567890121</GLN>
+        <Name>Samselaan T.V.</Name>
+    </Buyer>
+    <Supplier>
+        <GLN>1234567890122</GLN>
+        <Name>Koekebakker B.V.</Name>
+    </Supplier>
+    <DeliveryParty>
+        <Name>Pietje Puk</Name>
+        <StreetAndNumber>Petteflet 123</StreetAndNumber>
+        <City>Sneek</City>
+        <PostalCode>8603 CE</PostalCode>
+        <Country>NL</Country>
+    </DeliveryParty>
+    <OrderResponseLine>
+        <LineNumber>1</LineNumber>
+        <StatusCode>5</StatusCode>
+        <PlannedDeliveryQuantity>50</PlannedDeliveryQuantity>
+        <QuantityMeasureUnitCode>PCE</QuantityMeasureUnitCode>
+        <NetLineAmount>78.5</NetLineAmount>
+        <TradeItemIdentification>
+            <GTIN>04011377309456</GTIN>
+            <SuppliersTradeItemIdentification>2301056</SuppliersTradeItemIdentification>
+            <AdditionalItemIdentification>
+                <TradeItemDescription>JUNG AS500 AFDEKRAAM WT 9016 AS</TradeItemDescription>
+            </AdditionalItemIdentification>
+        </TradeItemIdentification>
+        <OrderLineIdentification>1</OrderLineIdentification>
+        <PriceInformation>
+            <GrossPrice>2.9</GrossPrice>
+            <NetPrice>1.57</NetPrice>
+            <PriceBase>
+                <NumberOfUnitsInPriceBasis>1.00</NumberOfUnitsInPriceBasis>
+                <MeasureUnitPriceBasis>PCE</MeasureUnitPriceBasis>
+            </PriceBase>
+        </PriceInformation>
+    </OrderResponseLine>
+</OrderResponse>

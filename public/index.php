@@ -1,6 +1,8 @@
 <?php
 
 use Wefabric\GS1InsbouOrderConverter\Order;
+use Wefabric\GS1InsbouOrderConverter\OrderResponse;
+use Wefabric\GS1InsbouOrderConverter\XMLtoArray;
 
 require __DIR__.'/../vendor/autoload.php';
 
@@ -55,3 +57,10 @@ if(! $GS1order2->isValid(true) ){
 } else {
     dump($GS1order2->toXML()->asXML()); //as string
 }
+
+//Reading in a typical response.
+echo '<h2>Response</h2>';
+$xml = simplexml_load_file('./Response.xml');
+dump($xml);
+$GS1response = OrderResponse::makeFromXMl($xml);
+dump($GS1response->toArray(true));
