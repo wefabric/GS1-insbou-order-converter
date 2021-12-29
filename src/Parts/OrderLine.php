@@ -24,6 +24,18 @@ class OrderLine extends DataTransferObject implements Validatable
 
     public function __construct(array $data = [])
     {
+        if (isset($data['LineNumber']) && ! is_int($data['LineNumber'])) {
+            $data['LineNumber'] = (int) $data['LineNumber'];
+        }
+
+        if (isset($data['OrderedQuantity']) && ! is_int($data['OrderedQuantity'])) {
+            $data['OrderedQuantity'] = (int) $data['OrderedQuantity'];
+        }
+
+        if (isset($data['LineIdentification']) && ! is_int($data['LineIdentification'])) {
+            $data['LineIdentification'] = (int) $data['LineIdentification'];
+        }
+
         if(isset($data['TradeItemIdentification']) && is_array($data['TradeItemIdentification'])){
             $data['TradeItemIdentification'] = new TradeItemIdentification($data['TradeItemIdentification']);
         }

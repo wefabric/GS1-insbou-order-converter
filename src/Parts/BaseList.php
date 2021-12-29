@@ -24,7 +24,7 @@ abstract class BaseList extends DataTransferObject implements Iterator, Validata
         $this->values = [];
         $this->index = 0;
 
-        parent::__construct($data);
+        parent::__construct([]); //doesn't need or use $data. Simply instantiate with an empty array.
     }
 
     /**

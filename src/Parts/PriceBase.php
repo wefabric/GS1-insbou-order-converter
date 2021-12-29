@@ -16,6 +16,16 @@ class PriceBase extends DataTransferObject implements Validatable
 
     const validMeasureUnitPriceBasisCodes = ['CMT', 'DAY', 'GRM', 'HUR', 'KGM', 'LTR', 'MIN', 'MLT', 'MMT', 'MTK', 'MTQ', 'MTR', 'PCE', 'TNE'];
 
+
+    public function __construct(array $data = [])
+    {
+        if (isset($data['NumberOfUnitsInPriceBasis']) && ! is_int($data['NumberOfUnitsInPriceBasis'])) {
+            $data['NumberOfUnitsInPriceBasis'] = (int) $data['NumberOfUnitsInPriceBasis'];
+        }
+
+        parent::__construct($data);
+    }
+
     /**
      * @return string Human-readable errormessage(s) indicating the location of the invalid properties.
      */

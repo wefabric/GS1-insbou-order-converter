@@ -16,6 +16,10 @@ class TradeItemProcessing extends DataTransferObject implements Validatable
 
     public function __construct(array $data = [])
     {
+        if (isset($data['ProcessingSequence']) && ! is_int($data['ProcessingSequence'])) {
+            $data['ProcessingSequence'] = (int) $data['ProcessingSequence'];
+        }
+
         if(isset($data['ProcessingDescription']) && is_array($data['ProcessingDescription'])){
             $data['ProcessingDescription'] = new ProcessingDescriptionList($data['ProcessingDescription']);
         }

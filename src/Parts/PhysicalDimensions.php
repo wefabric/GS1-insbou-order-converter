@@ -17,6 +17,23 @@ class PhysicalDimensions extends DataTransferObject implements Validatable
 
     const validMeasurementUnitCodes = ['CMT', 'MMT', 'MTR'];
 
+    public function __construct(array $data = [])
+    {
+        if (isset($data['Width']) && ! is_double($data['Width'])) {
+            $data['Width'] = (double) $data['Width'];
+        }
+
+        if (isset($data['Length']) && ! is_double($data['Length'])) {
+            $data['Length'] = (double) $data['Length'];
+        }
+
+        if (isset($data['Height']) && ! is_double($data['Height'])) {
+            $data['Height'] = (double) $data['Height'];
+        }
+
+        parent::__construct($data);
+    }
+
     /**
      * @return string Human-readable errormessage(s) indicating the location of the invalid properties.
      */

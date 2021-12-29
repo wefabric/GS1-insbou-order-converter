@@ -105,7 +105,7 @@ return [
                         ]
                     ]
                 ],
-                'TransportInstriction' => [
+                'TransportInstruction' => [
                     [
                         'TransportInstructionTypeCode' => 'PBE',
                         'DeliveryNoteText' => 'Protect the package well.'
