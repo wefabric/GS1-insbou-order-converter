@@ -2,9 +2,7 @@
 
 namespace Wefabric\GS1InsbouOrderConverter\Parts;
 
-use Spatie\DataTransferObject\DataTransferObject;
-
-class LineCharge extends DataTransferObject
+class LineCharge extends BaseItem
 {
     public string $ChargeTypeCode;
     public float $ChargeAmount;

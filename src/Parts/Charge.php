@@ -2,9 +2,7 @@
 
 namespace Wefabric\GS1InsbouOrderConverter\Parts;
 
-use Spatie\DataTransferObject\DataTransferObject;
-
-class Charge extends DataTransferObject
+class Charge extends BaseItem
 {
     public string $ChargeTypeCode;
     public float $ChargeAmount;

@@ -3,6 +3,7 @@
 namespace Wefabric\GS1InsbouOrderConverter\Parts;
 
 use Iterator;
+use RuntimeException;
 use Spatie\DataTransferObject\DataTransferObject;
 use Wefabric\GS1InsbouOrderConverter\GetSimpleChildClassName;
 use Wefabric\GS1InsbouOrderConverter\IsValid;
@@ -12,7 +13,7 @@ abstract class BaseList extends DataTransferObject implements Iterator, Validata
 {
     use IsValid;
 
-    /* @var Validatable[] $values */
+    /* @var BaseItem[] $values */
     protected array $values;
     protected int $index;
 
@@ -103,8 +104,10 @@ abstract class BaseList extends DataTransferObject implements Iterator, Validata
     {
         $return = [];
 
-        /* @var DataTransferObject $value */
         foreach($this->values as $value){
+            if(!$value instanceof BaseItem) {
+                throw new RuntimeException('Type of object is '. gettype($value) . ', BaseItem expected!');
+            }
             $return[] = $value->toArray(); //adds this element to END of $return.
         }
 
@@ -113,10 +116,10 @@ abstract class BaseList extends DataTransferObject implements Iterator, Validata
 
     /**
      * Method to add an object to the end of the array.
-     * @param mixed $object
+     * @param BaseItem $object
      * @return void
      */
-    public function add(mixed $object)
+    public function add(BaseItem $object)
     {
         $this->values[count($this->values)] = $object;
     }
@@ -135,8 +138,11 @@ abstract class BaseList extends DataTransferObject implements Iterator, Validata
             $errorMessage .= $className .' has an invalid amount of values (' . count($this->values) .'): must be between ' . $this->minAmount() .' and ' . $this->maxAmount() . '.' .'\n';
         }
 
-        /* @var Validatable $value */
         foreach($this->values as $value){
+            if(!$value instanceof BaseItem) {
+                throw new RuntimeException('Type of object '. $this->index .' is '. gettype($value) . ', BaseItem expected!');
+            }
+
             $innerErrorMessage .= $value->getErrorMessages();
             if(! empty($innerErrorMessage)){
                 $errorMessage .= $className . '[' . $this->index . '] is invalid.' . '\n' . $innerErrorMessage . '\n';

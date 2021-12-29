@@ -2,9 +2,7 @@
 
 namespace Wefabric\GS1InsbouOrderConverter\Parts;
 
-use Spatie\DataTransferObject\DataTransferObject;
-
-class Allowance extends DataTransferObject
+class Allowance extends BaseItem
 {
     public string $AllowanceTypeCode;
     public float $AllowanceAmount;

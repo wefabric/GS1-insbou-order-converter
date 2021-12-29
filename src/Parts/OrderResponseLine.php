@@ -2,9 +2,7 @@
 
 namespace Wefabric\GS1InsbouOrderConverter\Parts;
 
-use Spatie\DataTransferObject\DataTransferObject;
-
-class OrderResponseLine extends DataTransferObject
+class OrderResponseLine extends BaseItem
 {
     public int $LineNumber;
     public string $StatusCode;

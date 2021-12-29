@@ -2,14 +2,8 @@
 
 namespace Wefabric\GS1InsbouOrderConverter\Parts;
 
-use Spatie\DataTransferObject\DataTransferObject;
-use Wefabric\GS1InsbouOrderConverter\IsValid;
-use Wefabric\GS1InsbouOrderConverter\Validatable;
-
-class TransportInstruction extends DataTransferObject implements Validatable
+class TransportInstruction extends BaseItem
 {
-    use IsValid;
-
     public ?string $TransportInstructionTypeCode;
     public ?string $DeliveryNoteText;
 

@@ -2,14 +2,8 @@
 
 namespace Wefabric\GS1InsbouOrderConverter\Parts;
 
-use Spatie\DataTransferObject\DataTransferObject;
-use Wefabric\GS1InsbouOrderConverter\IsValid;
-use Wefabric\GS1InsbouOrderConverter\Validatable;
-
-class OrderLine extends DataTransferObject implements Validatable
+class OrderLine extends BaseItem
 {
-    use IsValid;
-
     public int $LineNumber;
     public int $OrderedQuantity;
     public ?string $OrderedQuantityMeasureUnitCode;

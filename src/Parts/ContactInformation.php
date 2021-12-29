@@ -2,14 +2,8 @@
 
 namespace Wefabric\GS1InsbouOrderConverter\Parts;
 
-use Spatie\DataTransferObject\DataTransferObject;
-use Wefabric\GS1InsbouOrderConverter\IsValid;
-use Wefabric\GS1InsbouOrderConverter\Validatable;
-
-class ContactInformation extends DataTransferObject implements Validatable
+class ContactInformation extends BaseItem
 {
-    use IsValid;
-
     public ?string $ContactPersonName;
     public ?string $PhoneNumber;
     public ?string $EmailAddress;

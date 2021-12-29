@@ -2,20 +2,18 @@
 
 namespace Wefabric\GS1InsbouOrderConverter\Parts;
 
-use Spatie\DataTransferObject\DataTransferObject;
-
-class PartialDelivery extends DataTransferObject
+class PartialDelivery extends BaseItem
 {
     public float $PlannedPartialDeliveryQuantity;
     public ?string $MeasurementUnitCode;
-    public ?DeliveryDateTimeInformation $DeliveryDateTimeInformation;
+    public ?DeliveryDateTimeInformationResponse $DeliveryDateTimeInformation;
 
     const validMeasurementUnitCodes = OrderLine::validOrderedQuantityMeasureUnitCodes;
 
     public function __construct(array $data = [])
     {
         if(isset($data['DeliveryDateTimeInformation']) && is_array($data['DeliveryDateTimeInformation'])){
-            $data['DeliveryDateTimeInformation'] = new DeliveryDateTimeInformation($data['DeliveryDateTimeInformation']);
+            $data['DeliveryDateTimeInformation'] = new DeliveryDateTimeInformationResponse($data['DeliveryDateTimeInformation']);
         }
 
         parent::__construct($data);

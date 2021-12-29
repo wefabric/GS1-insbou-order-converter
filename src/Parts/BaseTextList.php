@@ -2,6 +2,8 @@
 
 namespace Wefabric\GS1InsbouOrderConverter\Parts;
 
+use RuntimeException;
+
 abstract class BaseTextList extends BaseList
 {
 
@@ -12,9 +14,10 @@ abstract class BaseTextList extends BaseList
     public function toArray(): array
     {
         $return = [];
-
-        /* @var BaseText $value */
         foreach($this->values as $value){
+            if(! $value instanceof BaseText) {
+                throw new RuntimeException('Type of object is '. gettype($value) . ', BaseText expected!');
+            }
             $return[] = $value->value; //adds this element to END of $return.
         }
 

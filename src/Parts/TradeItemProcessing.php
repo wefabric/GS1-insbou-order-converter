@@ -2,14 +2,8 @@
 
 namespace Wefabric\GS1InsbouOrderConverter\Parts;
 
-use Spatie\DataTransferObject\DataTransferObject;
-use Wefabric\GS1InsbouOrderConverter\IsValid;
-use Wefabric\GS1InsbouOrderConverter\Validatable;
-
-class TradeItemProcessing extends DataTransferObject implements Validatable
+class TradeItemProcessing extends BaseItem
 {
-    use IsValid;
-
     public ?string $ProcessingGTIN;
     public ?int $ProcessingSequence;
     public ?ProcessingDescriptionList $ProcessingDescription;
@@ -51,6 +45,5 @@ class TradeItemProcessing extends DataTransferObject implements Validatable
 
         return $errorMessage;
     }
-
 
 }
