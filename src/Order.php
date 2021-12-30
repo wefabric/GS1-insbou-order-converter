@@ -139,7 +139,9 @@ class Order extends DataTransferObject implements Validatable
 
         if(isset($data['OrderLine']) && is_array($data['OrderLine'])){
             $data['OrderLine'] = new OrderLineList($data['OrderLine']);
-        }
+        } else {
+            $data['OrderLine'] = new OrderLineList();
+        } //instantiate an empty list, in case the OrderLines are supplied later.
 
         parent::__construct($data);
     }
