@@ -115,6 +115,14 @@ abstract class BaseList extends DataTransferObject implements Iterator, Validata
     }
 
     /**
+     * @return int Size of the collection.
+     */
+    public function count(): int
+    {
+        return count($this->values);
+    }
+
+    /**
      * Method to add an object to the end of the array.
      * @param BaseItem $object
      * @return void
