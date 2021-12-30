@@ -37,7 +37,7 @@ abstract class BaseList extends DataTransferObject implements Iterator, Validata
      */
     protected static function CheckAndCorrectArrayDepth(array $data): array
     {
-        if(! is_array($data[array_key_first($data)])) {
+        if(count($data) > 0 && ! is_array($data[array_key_first($data)])) {
             $data = [$data];
         }
         return $data;
