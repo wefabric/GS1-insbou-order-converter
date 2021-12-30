@@ -19,4 +19,23 @@ class PartialDelivery extends BaseItem
         parent::__construct($data);
     }
 
+    public function getErrorMessages(): string
+    {
+        $errorMessage = '';
+        $innerErrorMessage = '';
+
+        if(empty($this->DeliveryTimeLatest) || ! strtotime($this->DeliveryTimeLatest)) {
+            $errorMessage .= 'DeliveryTimeLatest (' . $this->DeliveryTimeLatest .') is invalid.' . '\n';
+        }
+
+        if(! empty($this->ContractReference)) {
+            $innerErrorMessage = $this->ContractReference->getErrorMessages();
+            if(! empty($innerErrorMessage)) {
+                $errorMessage .= 'ContractReference is invalid.' . '\n' . $innerErrorMessage . '\n';
+            }
+        }
+
+        return $errorMessage;
+    }
+
 }

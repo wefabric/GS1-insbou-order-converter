@@ -19,4 +19,9 @@ class Charge extends BaseItem
         parent::__construct($data);
     }
 
+    public function getErrorMessages(): string
+    {
+        // TODO: Implement getErrorMessages() method.
+    }
+
 }
