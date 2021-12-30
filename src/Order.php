@@ -343,10 +343,11 @@ class Order extends DataTransferObject implements Validatable
                 unset($array['DeliveryParty']['ContactInformation']);
             } // Rename DeliveryParty->ContactInformation to ContactInformation
 
-            foreach($array['OrderLine'] as $orderLine )  {
+            foreach($array['OrderLine'] as $i => $orderLine)  {
                 if(isset($orderLine['LineIdentification'])) {
                     $orderLine['LineIdentitfication'] = $orderLine['LineIdentification'];
                     unset($orderLine['LineIdentification']);
+                    $array['OrderLine'][$i] = $orderLine; //and store the edited object back in the array.
                 } // Rename Orderline->LineIdentification to LineIdentitfication
             }
 

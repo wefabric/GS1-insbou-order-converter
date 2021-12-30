@@ -44,7 +44,8 @@ dump($GS1order->toArray(true));
 if(! $GS1order->isValid(true) ){
     dump($GS1order->getErrorMessages());
 } else {
-    dump($GS1order->toXML()->asXML()); //as string
+//    dump($GS1order->toXML(true)->asXML()); //as string
+    dump(XMLtoArray::XMLtoArray($GS1order->toXML(true))); //as array
 }
 
 //Minimalist data-structure. This is everything you must supply.
