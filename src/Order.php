@@ -345,11 +345,16 @@ class Order extends DataTransferObject implements Validatable
 
             foreach($array['OrderLine'] as $i => $orderLine)  {
                 if(isset($orderLine['LineIdentification'])) {
-                    $orderLine['LineIdentitfication'] = $orderLine['LineIdentification'];
-                    unset($orderLine['LineIdentification']);
-                    $array['OrderLine'][$i] = $orderLine; //and store the edited object back in the array.
-                } // Rename Orderline->LineIdentification to LineIdentitfication
-            }
+                    $newOrderLine = [];
+                    foreach($orderLine as $key => $value){
+                        if($key === 'LineIdentification') {
+                            $key = 'LineIdentitfication';
+                        }
+                        $newOrderLine[$key] = $value;
+                    }
+                    $array['OrderLine'][$i] = $newOrderLine;
+                }
+            } // Rename Orderline->LineIdentification to LineIdentitfication
 
         } else {
 
