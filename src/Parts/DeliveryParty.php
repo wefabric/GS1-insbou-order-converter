@@ -13,8 +13,8 @@ class DeliveryParty extends BaseAddressParty implements Validatable
     {
         if(isset($data['ContactInformation']) && is_array($data['ContactInformation'])){
             $data['ContactInformation'] = new ContactInformationList($data['ContactInformation']);
-//        } elseif(! isset($data['ContactInformation']) && isset($data['Contactgegevens']) && is_array($data['Contactgegevens'])){
-//            $data['ContactInformation'] = new ContactInformationList($data['Contactgegevens']);
+        } elseif(! isset($data['ContactInformation']) && isset($data['Contactgegevens']) && is_array($data['Contactgegevens'])){
+            $data['ContactInformation'] = new ContactInformationList($data['Contactgegevens']);
         }
 
         parent::__construct($data);
