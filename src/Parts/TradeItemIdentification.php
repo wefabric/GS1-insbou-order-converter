@@ -42,7 +42,7 @@ class TradeItemIdentification extends DataTransferObject implements Validatable
         if(! empty($this->AdditionalItemIdentification)) {
             $innerErrorMessage = $this->AdditionalItemIdentification->getErrorMessages();
             if(! empty($innerErrorMessage)) {
-                $errorMessage .= 'AdditionalItemIdentification is invalid.' . '\n' . $innerErrorMessage & '\n';
+                $errorMessage .= 'AdditionalItemIdentification is invalid.' . '\n' . $innerErrorMessage . '\n';
                 $innerErrorMessage = '';
             }
         }

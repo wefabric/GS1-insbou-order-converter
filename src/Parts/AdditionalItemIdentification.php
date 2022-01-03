@@ -52,7 +52,7 @@ class AdditionalItemIdentification extends DataTransferObject implements Validat
         if(! empty($this->PhysicalDimensions)) {
             $innerErrorMessage = $this->PhysicalDimensions->getErrorMessages();
             if (!empty($innerErrorMessage)) {
-                $errorMessage .= 'PhysicalDimensions is invalid.' . '\n' . $innerErrorMessage & '\n';
+                $errorMessage .= 'PhysicalDimensions is invalid.' . '\n' . $innerErrorMessage . '\n';
             }
         }
 

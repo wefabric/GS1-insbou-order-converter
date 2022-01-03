@@ -32,7 +32,7 @@ abstract class DeliveryDateTimeInformation extends DataTransferObject implements
         if(! empty($this->DeliveryTimeFrame)) {
             $innerErrorMessage = $this->DeliveryTimeFrame->getErrorMessages();
             if(! empty(($innerErrorMessage)))  {
-                $errorMessage .= 'DeliveryTimeFrame is invalid.' . '\n' . $innerErrorMessage & '\n';
+                $errorMessage .= 'DeliveryTimeFrame is invalid.' . '\n' . $innerErrorMessage . '\n';
             }
         }
 

@@ -48,7 +48,7 @@ class DifferentPriceAgreement extends DataTransferObject implements Validatable
         if(! empty($this->PriceBase)) {
             $innerErrorMessage = $this->PriceBase->getErrorMessages();
             if(! empty($innerErrorMessage)) {
-                $errorMessage .= 'PriceBase is invalid.' . '\n' . $innerErrorMessage & '\n';
+                $errorMessage .= 'PriceBase is invalid.' . '\n' . $innerErrorMessage . '\n';
             }
         }
 
