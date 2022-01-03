@@ -5,10 +5,10 @@ namespace Wefabric\GS1InsbouOrderConverter\Parts;
 class PartialDelivery extends BaseItem
 {
     public float $PlannedPartialDeliveryQuantity;
-    public ?string $MeasurementUnitCode;
+    public ?string $QuantityMeasureUnitCode;
     public ?DeliveryDateTimeInformationResponse $DeliveryDateTimeInformation;
 
-    const validMeasurementUnitCodes = OrderLine::validOrderedQuantityMeasureUnitCodes;
+    const validQuantityMeasureUnitCodes = OrderLine::validOrderedQuantityMeasureUnitCodes;
 
     public function __construct(array $data = [])
     {
