@@ -23,6 +23,10 @@ class PriceBase extends DataTransferObject implements Validatable
             $data['NumberOfUnitsInPriceBasis'] = (int) $data['NumberOfUnitsInPriceBasis'];
         }
 
+        if(! isset($data['MeasureUnitPriceBasis'])) {
+            $data['MeasureUnitPriceBasis'] = 'PCE';
+        } // Is sometimes not sent in the Response.
+
         parent::__construct($data);
     }
 
