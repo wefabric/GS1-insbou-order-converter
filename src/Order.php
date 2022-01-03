@@ -320,4 +320,13 @@ class Order extends DataTransferObject implements Validatable
         return $errorMessage;
     }
 
+    /**
+     * @return SimpleXMLElement
+     */
+    public function toXML(): SimpleXMLElement
+    {
+        $xmltest = new SimpleXMLElement('<Order xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Order_insbou003.xsd" />');
+        ArrayToXML::arrayToXML($xmltest, $this->toArray(true));
+        return $xmltest;
+    }
 }
