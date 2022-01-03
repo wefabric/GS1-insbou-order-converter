@@ -13,16 +13,16 @@ class PriceInformation extends DataTransferObject
 
     public function __construct(array $data = [])
     {
-        if (isset($data['GrossPrice']) && ! is_double($data['GrossPrice'])) {
-            $data['GrossPrice'] = (double) $data['GrossPrice'];
+        if (isset($data['GrossPrice']) && ! is_float($data['GrossPrice'])) {
+            $data['GrossPrice'] = (float) $data['GrossPrice'];
         }
 
-        if (isset($data['NetPrice']) && ! is_double($data['NetPrice'])) {
-            $data['NetPrice'] = (double) $data['NetPrice'];
+        if (isset($data['NetPrice']) && ! is_float($data['NetPrice'])) {
+            $data['NetPrice'] = (float) $data['NetPrice'];
         }
 
-        if (isset($data['GrossPriceProcessingCharge']) && ! is_double($data['GrossPriceProcessingCharge'])) {
-            $data['GrossPriceProcessingCharge'] = (double) $data['GrossPriceProcessingCharge'];
+        if (isset($data['GrossPriceProcessingCharge']) && ! is_float($data['GrossPriceProcessingCharge'])) {
+            $data['GrossPriceProcessingCharge'] = (float) $data['GrossPriceProcessingCharge'];
         }
 
         if(isset($data['PriceBase']) && is_array($data['PriceBase'])){

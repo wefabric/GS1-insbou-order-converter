@@ -12,6 +12,10 @@ class Allowance extends BaseItem
 
     public function __construct(array $data = [])
     {
+        if (isset($data['AllowanceAmount']) && ! is_float($data['AllowanceAmount'])) {
+            $data['AllowanceAmount'] = (float) $data['AllowanceAmount'];
+        }
+
         if(isset($data['VATInformation']) && is_array($data['VATInformation'])){
             $data['VATInformation'] = new VATInformation($data['VATInformation']);
         }

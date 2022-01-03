@@ -11,4 +11,12 @@ class VATInformation extends DataTransferObject
 
     const validVATRateCodes = ['E', 'S'];
 
+    public function __construct(array $data = [])
+    {
+        if (isset($data['VATPercentage']) && ! is_float($data['VATPercentage'])) {
+            $data['VATPercentage'] = (float) $data['VATPercentage'];
+        }
+
+        parent::__construct($data);
+    }
 }

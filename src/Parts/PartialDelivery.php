@@ -12,6 +12,10 @@ class PartialDelivery extends BaseItem
 
     public function __construct(array $data = [])
     {
+        if (isset($data['PlannedPartialDeliveryQuantity']) && ! is_float($data['PlannedPartialDeliveryQuantity'])) {
+            $data['PlannedPartialDeliveryQuantity'] = (float) $data['PlannedPartialDeliveryQuantity'];
+        }
+
         if(isset($data['DeliveryDateTimeInformation']) && is_array($data['DeliveryDateTimeInformation'])){
             $data['DeliveryDateTimeInformation'] = new DeliveryDateTimeInformationResponse($data['DeliveryDateTimeInformation']);
         }

@@ -60,8 +60,8 @@ class OrderResponse extends DataTransferObject
 
     public function __construct(array $data = [])
     {
-        if (isset($data['TotalAmount']) && ! is_double($data['TotalAmount'])) {
-            $data['TotalAmount'] = (double) $data['TotalAmount'];
+        if (isset($data['TotalAmount']) && ! is_float($data['TotalAmount'])) {
+            $data['TotalAmount'] = (float) $data['TotalAmount'];
         }
 
         if(isset($data['OrderReference']) && is_array($data['OrderReference'])){

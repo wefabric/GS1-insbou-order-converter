@@ -12,6 +12,10 @@ class LineCharge extends BaseItem
 
     public function __construct(array $data = [])
     {
+        if (isset($data['ChargeAmount']) && ! is_float($data['ChargeAmount'])) {
+            $data['ChargeAmount'] = (float) $data['ChargeAmount'];
+        }
+
         if(isset($data['VATInformation']) && is_array($data['VATInformation'])){
             $data['VATInformation'] = new VATInformation($data['VATInformation']);
         }

@@ -16,8 +16,8 @@ class DifferentPriceAgreement extends DataTransferObject implements Validatable
 
     public function __construct(array $data = [])
     {
-        if (isset($data['DifferentPrice']) && ! is_double($data['DifferentPrice'])) {
-            $data['DifferentPrice'] = (double) $data['DifferentPrice'];
+        if (isset($data['DifferentPrice']) && ! is_float($data['DifferentPrice'])) {
+            $data['DifferentPrice'] = (float) $data['DifferentPrice'];
         }
 
         if(isset($data['PriceBase']) && is_array($data['PriceBase'])){

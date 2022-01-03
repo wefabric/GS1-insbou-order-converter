@@ -19,16 +19,16 @@ class PhysicalDimensions extends DataTransferObject implements Validatable
 
     public function __construct(array $data = [])
     {
-        if (isset($data['Width']) && ! is_double($data['Width'])) {
-            $data['Width'] = (double) $data['Width'];
+        if (isset($data['Width']) && ! is_float($data['Width'])) {
+            $data['Width'] = (float) $data['Width'];
         }
 
-        if (isset($data['Length']) && ! is_double($data['Length'])) {
-            $data['Length'] = (double) $data['Length'];
+        if (isset($data['Length']) && ! is_float($data['Length'])) {
+            $data['Length'] = (float) $data['Length'];
         }
 
-        if (isset($data['Height']) && ! is_double($data['Height'])) {
-            $data['Height'] = (double) $data['Height'];
+        if (isset($data['Height']) && ! is_float($data['Height'])) {
+            $data['Height'] = (float) $data['Height'];
         }
 
         parent::__construct($data);

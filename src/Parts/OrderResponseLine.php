@@ -28,16 +28,16 @@ class OrderResponseLine extends BaseItem
             $data['LineNumber'] = (int) $data['LineNumber'];
         }
 
-        if (isset($data['PlannedDeliveryQuantity']) && ! is_double($data['PlannedDeliveryQuantity'])) {
-            $data['PlannedDeliveryQuantity'] = (double) $data['PlannedDeliveryQuantity'];
+        if (isset($data['PlannedDeliveryQuantity']) && ! is_float($data['PlannedDeliveryQuantity'])) {
+            $data['PlannedDeliveryQuantity'] = (float) $data['PlannedDeliveryQuantity'];
         }
 
-        if (isset($data['DifferenceWithOrderedQuantity']) && ! is_double($data['DifferenceWithOrderedQuantity'])) {
-            $data['DifferenceWithOrderedQuantity'] = (double) $data['DifferenceWithOrderedQuantity'];
+        if (isset($data['DifferenceWithOrderedQuantity']) && ! is_float($data['DifferenceWithOrderedQuantity'])) {
+            $data['DifferenceWithOrderedQuantity'] = (float) $data['DifferenceWithOrderedQuantity'];
         }
 
-        if (isset($data['NetLineAmount']) && ! is_double($data['NetLineAmount'])) {
-            $data['NetLineAmount'] = (double) $data['NetLineAmount'];
+        if (isset($data['NetLineAmount']) && ! is_float($data['NetLineAmount'])) {
+            $data['NetLineAmount'] = (float) $data['NetLineAmount'];
         }
 
         if(isset($data['AdditionalInformation']) && is_array($data['AdditionalInformation'])){
