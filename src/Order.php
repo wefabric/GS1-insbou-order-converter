@@ -150,13 +150,13 @@ class Order extends DataTransferObject implements Validatable
      * @return bool indicating whether the object is Valid (true) or invalid (false) based on the information inside the object.
      * Calls getErrorMessages() and checks if the response is empty or not.
      */
-    public function isValid(bool $validateWithDeviations = false) : bool
+    public function isValid(bool $ignoreDeliveryPartyGLNmissing = false) : bool
     {
         $msg = self::getErrorMessages();
 
         if(empty($msg)) {
             return true; //No matter the deviations, an empty errormessage is always valid.
-        } else if($validateWithDeviations) {
+        } else if($ignoreDeliveryPartyGLNmissing) {
             return ($msg === 'DeliveryParty is invalid.' . '\n' . 'GLN is empty.' . '\n' . '\n');
         } // DeliveryParty -> GLN will throw a specific message if empty. If not empty, will get stripped out anyway.
 
@@ -318,54 +318,6 @@ class Order extends DataTransferObject implements Validatable
         }
 
         return $errorMessage;
-    }
-
-    /**
-     * @return SimpleXMLElement formatted as minified String.
-     */
-    public function toXML(bool $formatWithDeviations = false): SimpleXMLElement
-    {
-        $xmltest = new SimpleXMLElement('<Order xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Order_insbou003.xsd" />');
-        $array = $this->toArray(true);
-
-        if($formatWithDeviations) {
-
-            if(isset($array['DeliveryParty']['GLN'])) {
-                unset($array['DeliveryParty']['GLN']);
-            } // Remove GLN from DeliveryParty
-
-            if(isset($array['DeliveryParty']['LocationDescription'])) {
-                unset($array['DeliveryParty']['LocationDescription']);
-            } // Remove LocationDescription from DeliveryParty
-
-            if(isset($array['DeliveryParty']['ContactInformation'])) {
-                $array['DeliveryParty']['Contactgegevens'] = $array['DeliveryParty']['ContactInformation'];
-                unset($array['DeliveryParty']['ContactInformation']);
-            } // Rename DeliveryParty->ContactInformation to ContactInformation
-
-            foreach($array['OrderLine'] as $i => $orderLine)  {
-                if(isset($orderLine['LineIdentification'])) {
-                    $newOrderLine = [];
-                    foreach($orderLine as $key => $value){
-                        if($key === 'LineIdentification') {
-                            $key = 'LineIdentitfication';
-                        }
-                        $newOrderLine[$key] = $value;
-                    }
-                    $array['OrderLine'][$i] = $newOrderLine;
-                }
-            } // Rename Orderline->LineIdentification to LineIdentitfication
-
-        } else {
-
-            if(isset($array['DeliveryParty']['ContactInformation']['EmailAddress'])) {
-                unset($array['DeliveryParty']['ContactInformation']['EmailAddress']);
-            } // Remove DeliveryParty->ContactInformation->Emailaddress
-
-        }
-
-        ArrayToXML::arrayToXML($xmltest, $array);
-        return $xmltest;
     }
 
 }
