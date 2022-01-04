@@ -13,9 +13,10 @@ class GetSimpleChildClassName
      */
     static function from(mixed $object): string
     {
-        if(! gettype($object) == 'string') {
+        if(gettype($object) == 'string') {
             return $object;
         }
         return substr($className = get_class($object), strrpos($className, '\\') + 1);
     }
+
 }
