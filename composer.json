@@ -27,6 +27,23 @@
     "require": {
         "spatie/data-transfer-object": "^2.8",
         "ext-dom": "*",
-        "ext-simplexml": "*"
-    }
+        "ext-simplexml": "*",
+        "wefabric/strip-empty-elements-from-array": "*",
+        "wefabric/simplexml-to-array": "*",
+        "wefabric/array-to-simplexml": "*"
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/wefabric/strip-empty-elements-from-array"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/wefabric/simplexml-to-array"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/wefabric/array-to-simplexml"
+        }
+    ]
 }

@@ -4,6 +4,7 @@ namespace Wefabric\GS1InsbouOrderConverter;
 
 use SimpleXMLElement;
 use Spatie\DataTransferObject\DataTransferObject;
+use Wefabric\SimplexmlToArray\SimplexmlToArray;
 
 use Wefabric\GS1InsbouOrderConverter\Parts\AdditionalInformation;
 use Wefabric\GS1InsbouOrderConverter\Parts\AllowanceList;
@@ -54,7 +55,7 @@ class OrderResponse extends DataTransferObject
      */
     public static function makeFromXML(SimpleXMLElement $xml): OrderResponse
     {
-        $data = XMLtoArray::XMLtoArray($xml);
+        $data = SimplexmlToArray::convert($xml);
         return new self($data);
     }
 

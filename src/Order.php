@@ -5,6 +5,7 @@ namespace Wefabric\GS1InsbouOrderConverter;
 use DateTime;
 use SimpleXMLElement;
 use Spatie\DataTransferObject\DataTransferObject;
+use Wefabric\ArrayToSimplexml\ArrayToSimplexml;
 
 use Wefabric\GS1InsbouOrderConverter\Parts\AdditionalInformation;
 use Wefabric\GS1InsbouOrderConverter\Parts\ContractReference;
@@ -326,7 +327,7 @@ class Order extends DataTransferObject implements Validatable
     public function toXML(): SimpleXMLElement
     {
         $xmltest = new SimpleXMLElement('<Order xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Order_insbou003.xsd" />');
-        ArrayToXML::arrayToXML($xmltest, $this->toArray(true));
+        ArrayToSimpleXML::convert($xmltest, $this->toArray(true), stripNumericKeys: true);
         return $xmltest;
     }
 }

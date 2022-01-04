@@ -2,6 +2,8 @@
 
 namespace Wefabric\GS1InsbouOrderConverter;
 
+use Wefabric\StripEmptyElementsFromArray\StripEmptyElementsFromArray;
+
 trait ToArray_StripEmptyElements
 {
 
@@ -9,7 +11,7 @@ trait ToArray_StripEmptyElements
     {
         $data = parent::toArray();
         if($stripEmptyElements) {
-            $data = ArrayStripEmptyElements::ArrayStripEmptyElements($data);
+            $data = StripEmptyElementsFromArray::from($data);
         }
         return $data;
     }

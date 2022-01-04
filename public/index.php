@@ -1,9 +1,9 @@
 <?php
 
+use Wefabric\SimplexmlToArray\SimplexmlToArray;
+
 use Wefabric\GS1InsbouOrderConverter\Order;
 use Wefabric\GS1InsbouOrderConverter\OrderResponse;
-use Wefabric\GS1InsbouOrderConverter\XMLtoArray;
-use Wefabric\GS1InsbouOrderConverter\ArrayToXML;
 
 require __DIR__.'/../vendor/autoload.php';
 
@@ -46,7 +46,8 @@ if(! $GS1order->isValid(true) ){
     dump($GS1order->getErrorMessages());
 } else {
     dump($GS1order->toXML()->asXML()); //as string
-    dump(XMLtoArray::XMLtoArray($GS1order->toXML())); //as array
+    dump($GS1order->toXML()); //as xml
+//    dump(SimplexmlToArray::convert($GS1order->toXML())); //as array
 }
 
 //Minimalist data-structure. This is everything you must supply.
@@ -58,7 +59,8 @@ if(! $GS1order2->isValid(true) ){
     dump($GS1order2->getErrorMessages());
 } else {
     dump($GS1order2->toXML()->asXML()); //as string
-    dump(XMLtoArray::XMLtoArray($GS1order2->toXML())); //as array
+    dump($GS1order2->toXML()); //as xml
+//    dump(SimplexmlToArray::convert($GS1order2->toXML())); //as array
 }
 
 //Reading in a typical response.
