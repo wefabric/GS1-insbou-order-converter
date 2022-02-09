@@ -22,6 +22,23 @@ class DeliveryParty extends BaseAddressParty implements Validatable
         $this->PartyType = PartyType::DeliveryParty;
     }
 
+    public function toArray(): array
+    {
+        $data = parent::toArray();
+        //the above function puts the variables from THIS class in the array before the variables from the PARENT class. But we need them the other way around.
+
+        //place this object at the END of the array. Really hacky.
+        $contactInfo = $data['ContactInformation'];
+        unset($data['ContactInformation']);
+        $data['ContactInformation'] = $contactInfo;
+
+        $locationDesc = $data['LocationDescription'];
+        unset($data['LocationDescription']);
+        $data['LocationDescription'] = $locationDesc;
+
+        return $data;
+    }
+
     /**
      * @return string Human-readable errormessage(s) indicating the location of the invalid properties.
      */
