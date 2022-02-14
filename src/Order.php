@@ -327,7 +327,7 @@ class Order extends DataTransferObject implements Validatable
     public function toXML(): SimpleXMLElement
     {
         $xmltest = new SimpleXMLElement('<Order xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Order_insbou003.xsd" />');
-        ArrayToSimpleXML::convert($xmltest, $this->toArray(true), stripNumericKeys: true);
+        ArrayToSimpleXML::convert($xmltest, $this->toArray(true, true), stripNumericKeys: true);
         return $xmltest;
     }
 }
