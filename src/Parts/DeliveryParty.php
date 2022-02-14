@@ -27,14 +27,14 @@ class DeliveryParty extends BaseAddressParty implements Validatable
         $data = parent::toArray();
         //the above function puts the variables from THIS class in the array before the variables from the PARENT class. But we need them the other way around.
 
+        $locationDesc = $data['LocationDescription'];
+        unset($data['LocationDescription']);
+        $data['LocationDescription'] = $locationDesc;
+
         //place this object at the END of the array. Really hacky.
         $contactInfo = $data['ContactInformation'];
         unset($data['ContactInformation']);
         $data['ContactInformation'] = $contactInfo;
-
-        $locationDesc = $data['LocationDescription'];
-        unset($data['LocationDescription']);
-        $data['LocationDescription'] = $locationDesc;
 
         return $data;
     }
