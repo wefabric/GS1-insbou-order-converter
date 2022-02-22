@@ -42,6 +42,10 @@ $GS1order = Order::make(require('CompleteDataset.php'));
 echo '<h2>Complete Dataset</h2>';
 dump($GS1order->toArray(true));
 
+echo '<h3>Now with cut off Strings</h3>';
+$GS1order->cutOffStrings();
+dump($GS1order->toArray(true));
+
 if(! $GS1order->isValid(true) ){
     dump($GS1order->getErrorMessages());
 } else {

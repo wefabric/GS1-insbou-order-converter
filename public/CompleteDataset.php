@@ -60,7 +60,7 @@ return [
                 'LocationDescription' => 'Can\'t miss it.',
                 'ContactInformation' => [
                     [
-                        'ContactPersonName' => 'Pietje Puk',
+                        'ContactPersonName' => 'Pietje Puk with a really long surname.',
                         'PhoneNumber' => '0600000000',
                         //'EmailAddress' => 'notallowed@structure.com'
                     ]
@@ -112,9 +112,7 @@ return [
                     ]
                 ],
                 'AdditionalInformation' => [
-                    'FreeText' => [
-                        'Contains special cookies. Do not eat.'
-                    ]
+                    'FreeText' => 'Contains special cookies. Do not eat. This is a really long text containing more than 70 characters. In total it contains 182 characters that will be split into at least three lines.'
                 ],
                 'DeliveryDateTimeInformation' => [// Same thing as the entire order, but now specifically for one orderline.
                     'RequiredDeliveryDate' => '2012-03-03 06:00:00',
