@@ -14,8 +14,14 @@ class AdditionalInformation extends DataTransferObject implements Validatable
 
     public function __construct(array $data = [])
     {
-        if(isset($data['FreeText']) && is_array($data['FreeText'])){
-            $data['FreeText'] = new FreeTextList($data['FreeText']);
+        if(isset($data['FreeText'])) {
+            if(is_string($data['FreeText'])) {
+                $data['FreeText'] = str_split($data['FreeText'], 70);
+            } //if length > 10*70, cuttOffStrings from BaseTextList will remove extra items.
+
+            if(is_array($data['FreeText'])){
+                $data['FreeText'] = new FreeTextList($data['FreeText']);
+            }
         }
 
         parent::__construct($data);
