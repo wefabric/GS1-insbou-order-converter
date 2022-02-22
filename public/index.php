@@ -59,6 +59,10 @@ echo '<h2>Minimal Dataset</h2>';
 $GS1order2 = Order::make(require('MinimalDataset.php'));
 dump($GS1order2->toArray(true));
 
+echo '<h3>Now with cut off Strings</h3>';
+$GS1order2->cutOffStrings();
+dump($GS1order2->toArray(true));
+
 if(! $GS1order2->isValid(true) ){
     dump($GS1order2->getErrorMessages());
 } else {

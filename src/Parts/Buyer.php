@@ -40,7 +40,9 @@ class Buyer extends BaseAddressParty implements Validatable
 
     public function cutOffStrings()
     {
-        $this->ContactInformation->cutOffStrings();
+        if(! empty($this->ContactInformation)) {
+            $this->ContactInformation->cutOffStrings();
+        }
 
         parent::cutOffStrings();
     }

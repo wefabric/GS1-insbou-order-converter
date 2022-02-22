@@ -149,21 +149,50 @@ class Order extends DataTransferObject implements Validatable
 
     public function cutOffStrings()
     {
-        $this->CustomerOrderReference->cutOffStrings();
-        $this->ContractReference->cutOffStrings();
-        $this->ProjectReference->cutOffStrings();
-        $this->DeliveryConditions->cutOffStrings();
-        $this->TransportInstruction->cutOffStrings();
-        $this->AdditionalInformation->cutOffStrings();
-        $this->DeliveryDateTimeInformation->cutOffStrings();
+        if(! empty($this->CustomerOrderReference)) {
+            $this->CustomerOrderReference->cutOffStrings();
+        }
+        if(! empty($this->ContractReference)) {
+            $this->ContractReference->cutOffStrings();
+        }
+        if(! empty($this->ProjectReference)) {
+            $this->ProjectReference->cutOffStrings();
+        }
+        if(! empty($this->DeliveryConditions)) {
+            $this->DeliveryConditions->cutOffStrings();
+        }
+        if(! empty($this->TransportInstruction)) {
+            $this->TransportInstruction->cutOffStrings();
+        }
+        if(! empty($this->AdditionalInformation)) {
+            $this->AdditionalInformation->cutOffStrings();
+        }
+        if(! empty($this->DeliveryDateTimeInformation)) {
+            $this->DeliveryDateTimeInformation->cutOffStrings();
+        }
+
         $this->Buyer->cutOffStrings();
         $this->Supplier->cutOffStrings();
-        $this->DeliveryParty->cutOffStrings();
-        $this->Invoicee->cutOffStrings();
-        $this->UltimateConsignee->cutOffStrings();
-        $this->ShipFrom->cutOffStrings();
-        $this->PurchasingOrganisation->cutOffStrings();
-        $this->Carrier->cutOffStrings();
+
+        if(! empty($this->DeliveryParty)) {
+            $this->DeliveryParty->cutOffStrings();
+        }
+        if(! empty($this->Invoicee)) {
+            $this->Invoicee->cutOffStrings();
+        }
+        if(! empty($this->UltimateConsignee)) {
+            $this->UltimateConsignee->cutOffStrings();
+        }
+        if(! empty($this->ShipFrom)) {
+            $this->ShipFrom->cutOffStrings();
+        }
+        if(! empty($this->PurchasingOrganisation)) {
+            $this->PurchasingOrganisation->cutOffStrings();
+        }
+        if(! empty($this->Carrier)) {
+            $this->Carrier->cutOffStrings();
+        }
+
         $this->OrderLine->cutOffStrings();
     }
 

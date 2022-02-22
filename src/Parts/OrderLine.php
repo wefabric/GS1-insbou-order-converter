@@ -146,11 +146,23 @@ class OrderLine extends BaseItem
         //Cannot logically cut off OrderedQuantityMeasureUnitCode
 
         $this->TradeItemIdentification->cutOffStrings();
-        $this->TradeItemProcessing->cutOffStrings();
-        $this->TransportInstruction->cutOffStrings();
-        $this->AdditionalInformation->cutOffStrings();
-        $this->DeliveryDateTimeInformation->cutOffStrings();
-        $this->DifferentPriceAgreement->cutOffStrings();
-        $this->ContractReference->cutOffStrings();
+        if(! empty($this->TradeItemProcessing)) {
+            $this->TradeItemProcessing->cutOffStrings();
+        }
+        if(! empty($this->TransportInstruction)) {
+            $this->TransportInstruction->cutOffStrings();
+        }
+        if(! empty($this->AdditionalInformation)) {
+            $this->AdditionalInformation->cutOffStrings();
+        }
+        if(! empty($this->DeliveryDateTimeInformation)) {
+            $this->DeliveryDateTimeInformation->cutOffStrings();
+        }
+        if(! empty($this->DifferentPriceAgreement)) {
+            $this->DifferentPriceAgreement->cutOffStrings();
+        }
+        if(! empty($this->ContractReference)) {
+            $this->ContractReference->cutOffStrings();
+        }
     }
 }
