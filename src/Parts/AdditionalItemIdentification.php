@@ -74,6 +74,8 @@ class AdditionalItemIdentification extends DataTransferObject implements Validat
             $this->SerialNumber = substr($this->SerialNumber , 0, 35);
         }
 
-        $this->PhysicalDimensions->cutOffStrings();
+        if(! empty($this->PhysicalDimensions)) {
+            $this->PhysicalDimensions->cutOffStrings();
+        }
     }
 }
