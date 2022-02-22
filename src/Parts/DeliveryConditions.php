@@ -27,4 +27,9 @@ class DeliveryConditions extends DataTransferObject implements Validatable
 
         return $errorMessage;
     }
+
+    public function cutOffStrings()
+    {
+    }
+
 }

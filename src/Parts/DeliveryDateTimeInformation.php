@@ -39,4 +39,9 @@ abstract class DeliveryDateTimeInformation extends DataTransferObject implements
         return $errorMessage;
     }
 
+    public function cutOffStrings()
+    {
+        $this->DeliveryTimeFrame->cutOffStrings();
+    }
+
 }

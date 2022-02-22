@@ -47,4 +47,19 @@ abstract class BaseAddressParty extends BaseParty
         return $errorMessage;
     }
 
+    public function cutOffStrings()
+    {
+        if(strlen($this->Name) > 50) {
+            $this->Name = substr($this->Name,0,50);
+        }
+
+        if(strlen($this->Name2) > 50) {
+            $this->Name2 = substr($this->Name2,0,50);
+        }
+
+        //cannot logically cut off StreetAndNumber, City, PostalCode, CountryCode.
+
+        parent::cutOffStrings();
+    }
+
 }

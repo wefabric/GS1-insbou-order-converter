@@ -40,4 +40,8 @@ class AdditionalInformation extends DataTransferObject implements Validatable
         return $errorMessage;
     }
 
+    public function cutOffStrings()
+    {
+        $this->FreeText->cutOffStrings();
+    }
 }

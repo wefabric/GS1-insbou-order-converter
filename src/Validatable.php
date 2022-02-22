@@ -16,4 +16,12 @@ interface Validatable
      */
     public function getErrorMessages() : string;
 
+    /**
+     * Automatically cuts off the strings in the object to the specified max length.
+     * Attempts to fix small errors for the validation.
+     * Will not cut off enums or anything that cannot be logically cut off.
+     * @return void
+     */
+    public function cutOffStrings();
+
 }

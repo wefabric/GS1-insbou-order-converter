@@ -33,4 +33,9 @@ abstract class BaseParty extends DataTransferObject implements Validatable
         return $errorMessage;
     }
 
+    public function cutOffStrings()
+    {
+        //cannot logically cut off GLN.
+    }
+
 }

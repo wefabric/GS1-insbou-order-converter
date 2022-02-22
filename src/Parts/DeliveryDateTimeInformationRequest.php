@@ -40,4 +40,9 @@ class DeliveryDateTimeInformationRequest extends DeliveryDateTimeInformation
         return $errorMessage;
     }
 
+    public function cutOffStrings()
+    {
+        parent::cutOffStrings();
+    }
+
 }

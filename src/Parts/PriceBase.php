@@ -52,4 +52,10 @@ class PriceBase extends DataTransferObject implements Validatable
         return $errorMessage;
     }
 
+    public function cutOffStrings()
+    {
+        if(strlen($this->PriceBaseDescription) > 70) {
+            $this->PriceBaseDescription = substr($this->PriceBaseDescription, 0, 70);
+        }
+    }
 }

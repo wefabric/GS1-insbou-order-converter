@@ -160,4 +160,11 @@ abstract class BaseList extends DataTransferObject implements Iterator, Validata
         return $errorMessage;
     }
 
+    public function cutOffStrings()
+    {
+        foreach($this->values as $item) {
+            $item->cutOffStrings();
+        }
+    }
+
 }

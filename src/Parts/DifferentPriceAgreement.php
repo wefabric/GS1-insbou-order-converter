@@ -55,4 +55,9 @@ class DifferentPriceAgreement extends DataTransferObject implements Validatable
         return $errorMessage;
     }
 
+    public function cutOffStrings()
+    {
+        $this->PriceBase->cutOffStrings();
+    }
+
 }

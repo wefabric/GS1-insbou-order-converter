@@ -38,4 +38,11 @@ class Buyer extends BaseAddressParty implements Validatable
         return $errorMessage;
     }
 
+    public function cutOffStrings()
+    {
+        $this->ContactInformation->cutOffStrings();
+
+        parent::cutOffStrings();
+    }
+
 }

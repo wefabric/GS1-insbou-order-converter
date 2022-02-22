@@ -26,4 +26,9 @@ class CustomerOrderReference extends DataTransferObject implements Validatable
         return $errorMessage;
     }
 
+    public function cutOffStrings()
+    {
+        //EndCustomerOrderNumber cannot be logically cut off at 3 characters.
+    }
+
 }

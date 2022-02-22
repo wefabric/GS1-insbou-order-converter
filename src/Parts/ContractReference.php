@@ -31,4 +31,9 @@ class ContractReference extends DataTransferObject implements Validatable
         return $errorMessage;
     }
 
+    public function cutOffStrings()
+    {
+        //ContractNumber cannot be logically cut off at 17 characters.
+    }
+
 }

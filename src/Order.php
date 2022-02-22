@@ -147,6 +147,26 @@ class Order extends DataTransferObject implements Validatable
         parent::__construct($data);
     }
 
+    public function cutOffStrings()
+    {
+        $this->CustomerOrderReference->cutOffStrings();
+        $this->ContractReference->cutOffStrings();
+        $this->ProjectReference->cutOffStrings();
+        $this->DeliveryConditions->cutOffStrings();
+        $this->TransportInstruction->cutOffStrings();
+        $this->AdditionalInformation->cutOffStrings();
+        $this->DeliveryDateTimeInformation->cutOffStrings();
+        $this->Buyer->cutOffStrings();
+        $this->Supplier->cutOffStrings();
+        $this->DeliveryParty->cutOffStrings();
+        $this->Invoicee->cutOffStrings();
+        $this->UltimateConsignee->cutOffStrings();
+        $this->ShipFrom->cutOffStrings();
+        $this->PurchasingOrganisation->cutOffStrings();
+        $this->Carrier->cutOffStrings();
+        $this->OrderLine->cutOffStrings();
+    }
+
     /**
      * @return bool indicating whether the object is Valid (true) or invalid (false) based on the information inside the object.
      * Calls getErrorMessages() and checks if the response is empty or not.

@@ -31,4 +31,12 @@ abstract class BaseText extends BaseItem
 
         return $errorMessage;
     }
+
+    public function cutOffStrings()
+    {
+        if(strlen($this->value) > 70) {
+            $this->value = substr($this->value, 0, 70);
+        }
+    }
+
 }

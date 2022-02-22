@@ -28,4 +28,8 @@ class LineCharge extends BaseItem
         // TODO: Implement getErrorMessages() method.
     }
 
+    public function cutOffStrings()
+    {
+        // TODO: Implement cutOffStrings() method.
+    }
 }

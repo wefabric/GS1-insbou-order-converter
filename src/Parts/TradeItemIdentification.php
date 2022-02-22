@@ -50,5 +50,13 @@ class TradeItemIdentification extends DataTransferObject implements Validatable
         return $errorMessage;
     }
 
+    public function cutOffStrings()
+    {
+        //Cannot logically cut off GTIN, SuppliersTradeItemID
+
+        if(! empty($this->AdditionalItemIdentification)) {
+            $this->AdditionalItemIdentification->cutOffStrings();
+        }
+    }
 
 }

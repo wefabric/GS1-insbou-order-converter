@@ -27,4 +27,11 @@ class TransportInstruction extends BaseItem
         return $errorMessage;
     }
 
+    public function cutOffStrings()
+    {
+        if (strlen($this->DeliveryNoteText) > 70) {
+            $this->DeliveryNoteText = substr($this->DeliveryNoteText, 0,70);
+        }
+    }
+
 }

@@ -30,4 +30,13 @@ class ContactInformation extends BaseItem
         return $errorMessage;
     }
 
+    public function cutOffStrings()
+    {
+        if(strlen($this->ContactPersonName) > 35) {
+            $this->ContactPersonName = substr($this->ContactPersonName, 0, 35);
+        }
+
+        //Cannot logically cut off PhoneNumber, Emailaddress.
+    }
+
 }

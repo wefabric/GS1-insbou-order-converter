@@ -46,4 +46,11 @@ class TradeItemProcessing extends BaseItem
         return $errorMessage;
     }
 
+    public function cutOffStrings()
+    {
+        //Cannot logically cut off GTIN
+
+        $this->ProcessingDescription->cutOffStrings();
+    }
+
 }

@@ -59,4 +59,21 @@ class AdditionalItemIdentification extends DataTransferObject implements Validat
         return $errorMessage;
     }
 
+    public function cutOffStrings()
+    {
+        if(strlen($this->TradeItemDescription) > 70) {
+            $this->TradeItemDescription = substr($this->TradeItemDescription, 0, 70);
+        }
+        if(strlen($this->Colour) > 35) {
+            $this->Colour = substr($this->Colour, 0, 35);
+        }
+        if(strlen($this->Size) > 35) {
+            $this->Size = substr($this->Size, 0, 35);
+        }
+        if(strlen($this->SerialNumber) > 35) {
+            $this->SerialNumber = substr($this->SerialNumber , 0, 35);
+        }
+
+        $this->PhysicalDimensions->cutOffStrings();
+    }
 }

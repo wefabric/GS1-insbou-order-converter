@@ -59,5 +59,9 @@ class DeliveryTimeFrame extends DataTransferObject implements Validatable
         return $errorMessage;
     }
 
+    public function cutOffStrings()
+    {
+        //We cannot cut off date-strings.
+    }
 
 }

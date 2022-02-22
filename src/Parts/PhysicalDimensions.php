@@ -60,4 +60,20 @@ class PhysicalDimensions extends DataTransferObject implements Validatable
         return $errorMessage;
     }
 
+    public function cutOffStrings()
+    {
+        if(strlen(number_format($this->Width, 3) > 18)) {
+            $this->Width = (float) substr(number_format($this->Width,3), 0, 18);
+        }
+
+        if(strlen(number_format($this->Length, 3) > 18)) {
+            $this->Length = (float) substr(number_format($this->Length,3), 0, 18);
+
+        }
+        if(strlen(number_format($this->Height, 3) > 18)) {
+            $this->Height = (float) substr(number_format($this->Height,3), 0, 18);
+
+        }
+    }
+
 }

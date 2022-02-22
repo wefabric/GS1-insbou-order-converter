@@ -24,5 +24,13 @@ abstract class BaseTextList extends BaseList
         return $return;
     }
 
+    public function cutOffStrings()
+    {
+        if(count($this->values) > $this->maxAmount()) {
+            array_splice($this->values, 0, $this->maxAmount());
+        }
+
+        parent::cutOffStrings();
+    }
 
 }

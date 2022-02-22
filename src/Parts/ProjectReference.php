@@ -26,4 +26,9 @@ class ProjectReference extends DataTransferObject implements Validatable
         return $errorMessage;
     }
 
+    public function cutOffStrings()
+    {
+        //ProjectNumber cannot be logically cut off at 17 characters.
+    }
+
 }

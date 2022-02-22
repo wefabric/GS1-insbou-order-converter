@@ -69,4 +69,15 @@ class DeliveryParty extends BaseAddressParty implements Validatable
         return $errorMessage;
     }
 
+    public function cutOffStrings()
+    {
+        if(strlen($this->LocationDescription) > 70) {
+            $this->LocationDescription = substr($this->LocationDescription,0,70);
+        }
+
+        $this->ContactInformation->cutOffStrings();
+
+        parent::cutOffStrings();
+    }
+
 }

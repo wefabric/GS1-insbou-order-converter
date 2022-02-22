@@ -141,4 +141,16 @@ class OrderLine extends BaseItem
         return $errorMessage;
     }
 
+    public function cutOffStrings()
+    {
+        //Cannot logically cut off OrderedQuantityMeasureUnitCode
+
+        $this->TradeItemIdentification->cutOffStrings();
+        $this->TradeItemProcessing->cutOffStrings();
+        $this->TransportInstruction->cutOffStrings();
+        $this->AdditionalInformation->cutOffStrings();
+        $this->DeliveryDateTimeInformation->cutOffStrings();
+        $this->DifferentPriceAgreement->cutOffStrings();
+        $this->ContractReference->cutOffStrings();
+    }
 }
