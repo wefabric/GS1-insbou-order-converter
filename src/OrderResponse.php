@@ -118,6 +118,8 @@ class OrderResponse extends DataTransferObject
 
         if(isset($data['OrderResponseLine']) && is_array($data['OrderResponseLine'])){
             $data['OrderResponseLine'] = new OrderResponseLineList($data['OrderResponseLine']);
+        } else {
+            $data['OrderResponseLine'] = new OrderResponseLineList();
         }
 
         parent::__construct($data);
