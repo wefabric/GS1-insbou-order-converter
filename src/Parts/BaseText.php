@@ -39,4 +39,9 @@ abstract class BaseText extends BaseItem
         }
     }
 
+    public function __toString(): string
+    {
+        return $this->value;
+    }
+
 }

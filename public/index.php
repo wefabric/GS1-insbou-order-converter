@@ -77,3 +77,5 @@ $xml = simplexml_load_file('./Response.xml');
 dump($xml);
 $GS1response = OrderResponse::makeFromXMl($xml);
 dump($GS1response->toArray(true));
+
+dump($GS1response->FreeText->asString(';'));

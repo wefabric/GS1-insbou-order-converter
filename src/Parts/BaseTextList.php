@@ -33,4 +33,11 @@ abstract class BaseTextList extends BaseList
         parent::cutOffStrings();
     }
 
+    /**
+     * @return string All of the text-items pasted after eachother, with optional separator.
+     */
+    public function asString(string $separator = ''): string
+    {
+        return implode($separator, $this->values);
+    }
 }
