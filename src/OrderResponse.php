@@ -4,6 +4,7 @@ namespace Wefabric\GS1InsbouOrderConverter;
 
 use SimpleXMLElement;
 use Spatie\DataTransferObject\DataTransferObject;
+use Wefabric\GS1InsbouOrderConverter\Parts\FreeTextList;
 use Wefabric\SimplexmlToArray\SimplexmlToArray;
 
 use Wefabric\GS1InsbouOrderConverter\Parts\AdditionalInformation;
@@ -40,6 +41,7 @@ class OrderResponse extends DataTransferObject
     public ?ChargeList $Charge;
     public ?AllowanceList $Allowance;
     public OrderResponseLineList $OrderResponseLine;
+    public ?FreeTextList $FreeText;
 
     /**
      * @return OrderResponse Object
@@ -121,6 +123,16 @@ class OrderResponse extends DataTransferObject
         } else {
             $data['OrderResponseLine'] = new OrderResponseLineList();
         }
+
+        if(isset($data['FreeText'])) {
+            if(is_string($data['FreeText'])) {
+                $data['FreeText'] = str_split($data['FreeText'], 70);
+            } //if length > 10*70, cuttOffStrings from BaseTextList will remove extra items.
+
+            if(is_array($data['FreeText'])){
+                $data['FreeText'] = new FreeTextList($data['FreeText']);
+            }
+        } //Copy from AdditionalInformation > construct. Not sure if this should be placed here, as it's not part of the specification.
 
         parent::__construct($data);
     }
