@@ -41,7 +41,6 @@ class OrderResponse extends DataTransferObject
     public ?ChargeList $Charge;
     public ?AllowanceList $Allowance;
     public OrderResponseLineList $OrderResponseLine;
-    public ?FreeTextList $FreeText;
 
     /**
      * @return OrderResponse Object
@@ -84,7 +83,10 @@ class OrderResponse extends DataTransferObject
 
         if(isset($data['AdditionalInformation']) && is_array($data['AdditionalInformation'])){
             $data['AdditionalInformation'] = new AdditionalInformation($data['AdditionalInformation']);
-        }
+        } elseif(isset($data['FreeText'])) {
+            $data['AdditionalInformation'] = new AdditionalInformation(['FreeText' => $data['FreeText']]);
+            unset($data['FreeText']);
+        } //Sometimes FreeText is sent outside AdditionalInformation.
 
         if(isset($data['DeliveryDateTimeInformation']) && is_array($data['DeliveryDateTimeInformation'])){
             $data['DeliveryDateTimeInformation'] = new DeliveryDateTimeInformationResponse($data['DeliveryDateTimeInformation']);
@@ -123,16 +125,6 @@ class OrderResponse extends DataTransferObject
         } else {
             $data['OrderResponseLine'] = new OrderResponseLineList();
         }
-
-        if(isset($data['FreeText'])) {
-            if(is_string($data['FreeText'])) {
-                $data['FreeText'] = str_split($data['FreeText'], 70);
-            } //if length > 10*70, cuttOffStrings from BaseTextList will remove extra items.
-
-            if(is_array($data['FreeText'])){
-                $data['FreeText'] = new FreeTextList($data['FreeText']);
-            }
-        } //Copy from AdditionalInformation > construct. Not sure if this should be placed here, as it's not part of the specification.
 
         parent::__construct($data);
     }

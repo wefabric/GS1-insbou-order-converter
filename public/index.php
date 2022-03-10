@@ -78,4 +78,4 @@ dump($xml);
 $GS1response = OrderResponse::makeFromXMl($xml);
 dump($GS1response->toArray(true));
 
-dump($GS1response->FreeText->asString(';'));
+//dump($GS1response->AdditionalInformation->FreeText->asString(';'));
