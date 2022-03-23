@@ -46,10 +46,14 @@ class OrderResponseLine extends BaseItem
 
         if(isset($data['LineCharge']) && is_array($data['LineCharge'])){
             $data['LineCharge'] = new LineChargeList($data['LineCharge']);
+        } else {
+            $data['LineCharge'] = new LineChargeList();
         }
 
         if(isset($data['LineAllowance']) && is_array($data['LineAllowance'])){
             $data['LineAllowance'] = new LineAllowanceList($data['LineAllowance']);
+        } else {
+            $data['LineAllowance'] = new LineAllowanceList();
         }
 
         if(isset($data['TradeItemIdentification']) && is_array($data['TradeItemIdentification'])){
@@ -73,6 +77,8 @@ class OrderResponseLine extends BaseItem
 
         if(isset($data['PartialDelivery']) && is_array($data['PartialDelivery'])){
             $data['PartialDelivery'] = new PartialDeliveryList($data['PartialDelivery']);
+        } else {
+            $data['PartialDelivery'] = new PartialDeliveryList();
         }
 
         parent::__construct($data);
