@@ -42,7 +42,10 @@ class OrderResponseLine extends BaseItem
 
         if(isset($data['AdditionalInformation']) && is_array($data['AdditionalInformation'])){
             $data['AdditionalInformation'] = new AdditionalInformation($data['AdditionalInformation']);
-        }
+        } else if(!isset($data['AdditionalInformation']) && isset($data['FreeText'])) {
+            $data['AdditionalInformation'] = new AdditionalInformation( ['FreeText' => $data['FreeText']] );
+            unset($data['FreeText']);
+        } //sometimes FreeText is sent outside AdditionalInformation.
 
         if(isset($data['LineCharge']) && is_array($data['LineCharge'])){
             $data['LineCharge'] = new LineChargeList($data['LineCharge']);
