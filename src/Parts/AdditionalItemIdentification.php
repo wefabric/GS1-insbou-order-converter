@@ -22,6 +22,10 @@ class AdditionalItemIdentification extends DataTransferObject implements Validat
             $data['PhysicalDimensions'] = new PhysicalDimensions($data['PhysicalDimensions']);
         }
 
+        if(isset($data['TradeItemDescription'])) {
+            $data['TradeItemDescription'] = preg_replace('/\p{No}/','', utf8_decode($data['TradeItemDescription']));
+        } //convert from UTF8 and then strip out any superscript numbers.
+
         parent::__construct($data);
     }
 
