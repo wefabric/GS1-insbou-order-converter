@@ -24,7 +24,8 @@ class AdditionalItemIdentification extends DataTransferObject implements Validat
 
         if(isset($data['TradeItemDescription'])) {
             $data['TradeItemDescription'] = preg_replace('/\p{No}/','', utf8_decode($data['TradeItemDescription']));
-        } //convert from UTF8 and then strip out any superscript numbers.
+            $data['TradeItemDescription'] = preg_replace('/[[:^ascii:]]/', '', $data['TradeItemDescription']);
+        } //convert from UTF8 and then strip out any superscript numbers. Then strips out any non-ascii characters (e.g. with symbols) as a last-ditch effort.
 
         parent::__construct($data);
     }
