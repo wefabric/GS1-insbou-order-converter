@@ -2,6 +2,7 @@
 
 namespace Wefabric\GS1InsbouOrderConverter\Parts;
 
+use Couchbase\InvalidRangeException;
 use Iterator;
 use RuntimeException;
 use Spatie\DataTransferObject\DataTransferObject;
@@ -85,9 +86,15 @@ abstract class BaseList extends DataTransferObject implements Iterator, Validata
      * @return bool The return value will be casted to boolean and then evaluated.
      * Returns true on success or false on failure.
      */
-    public function valid(): bool
+    public function valid(int $key = null): bool
     {
-        return (0 <= $this->index && $this->index < count($this->values));
+        if(!isset($key)) {
+            $key = $this->index;
+        }
+        if(! (0 <= $key && $key < count($this->values))) {
+            throw new \InvalidArgumentException('Index '. $key .' invalid, must be between 0-'. ($this->count()-1) .'!');
+        }
+        return true;
     } //Zero-based index
 
     /**
@@ -130,6 +137,34 @@ abstract class BaseList extends DataTransferObject implements Iterator, Validata
     public function add(BaseItem $object)
     {
         $this->values[count($this->values)] = $object;
+    }
+
+    /**
+     * @param int $index Zero-based.
+     * @return BaseItem|null
+     */
+    public function get(int $index): BaseItem|null
+    {
+        if($this->valid($index)) {
+            return $this->values[$index];
+        }
+        return null;
+    }
+
+    /**
+     * @return BaseItem|null
+     */
+    public function first(): BaseItem|null
+    {
+        return $this->get(0);
+    }
+
+    /**
+     * @return BaseItem|null
+     */
+    public function last(): BaseItem|null
+    {
+        return $this->get($this->count() - 1);
     }
 
     /**
