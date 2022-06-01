@@ -156,7 +156,10 @@ abstract class BaseList extends DataTransferObject implements Iterator, Validata
      */
     public function first(): BaseItem|null
     {
-        return $this->get(0);
+        if($this->count() > 0) {
+            return $this->get(0);
+        }
+        return null;
     }
 
     /**
@@ -164,7 +167,10 @@ abstract class BaseList extends DataTransferObject implements Iterator, Validata
      */
     public function last(): BaseItem|null
     {
-        return $this->get($this->count() - 1);
+        if($this->count() > 0) {
+            return $this->get($this->count() - 1);
+        }
+        return null;
     }
 
     /**
