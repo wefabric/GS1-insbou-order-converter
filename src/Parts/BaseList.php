@@ -91,11 +91,8 @@ abstract class BaseList extends DataTransferObject implements Iterator, Validata
         if(!isset($key)) {
             $key = $this->index;
         }
-        if(! (0 <= $key && $key < count($this->values))) {
-            throw new \InvalidArgumentException('Index '. $key .' invalid, must be between 0-'. ($this->count()-1) .'!');
-        }
-        return true;
-    } //Zero-based index
+        return (0 <= $key && $key < count($this->values)); //Zero-based index
+    }
 
     /**
      * Rewind the Iterator to the first element
@@ -145,10 +142,10 @@ abstract class BaseList extends DataTransferObject implements Iterator, Validata
      */
     public function get(int $index): BaseItem|null
     {
-        if($this->valid($index)) {
-            return $this->values[$index];
+        if(! $this->valid($index)) {
+            throw new \InvalidArgumentException('Index '. $index .' is invalid, must be between 0-'. ($this->count()-1) .'!');
         }
-        return null;
+        return $this->values[$index];
     }
 
     /**
