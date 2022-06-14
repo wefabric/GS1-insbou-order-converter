@@ -6,6 +6,7 @@ use Spatie\DataTransferObject\DataTransferObject;
 
 class PriceInformation extends DataTransferObject
 {
+    public ?float $Price;
     public ?float $GrossPrice; //NL: Bruto
     public ?float $NetPrice; //NL: Netto
     public ?float $GrossPriceProcessingCharge;
@@ -13,6 +14,10 @@ class PriceInformation extends DataTransferObject
 
     public function __construct(array $data = [])
     {
+        if (isset($data['Price']) && ! is_float($data['Price'])) {
+            $data['Price'] = (float) $data['Price'];
+        }
+
         if (isset($data['GrossPrice']) && ! is_float($data['GrossPrice'])) {
             $data['GrossPrice'] = (float) $data['GrossPrice'];
         }

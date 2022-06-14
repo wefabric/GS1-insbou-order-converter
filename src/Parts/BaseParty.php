@@ -12,6 +12,8 @@ abstract class BaseParty extends DataTransferObject implements Validatable
 
     protected int $PartyType;
     public ?string $GLN;
+    public ?string $VATRegistrationNumber;
+    public ?string $ChamberOfCommerceNumber;
 
     /**
      * @return string Human-readable errormessage(s) indicating the location of the invalid properties.

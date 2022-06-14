@@ -10,7 +10,7 @@ class PriceBase extends DataTransferObject implements Validatable
 {
     use IsValid;
 
-    public int $NumberOfUnitsInPriceBasis;
+    public float $NumberOfUnitsInPriceBasis;
     public string $MeasureUnitPriceBasis;
     public ?string $PriceBaseDescription;
 
@@ -19,8 +19,8 @@ class PriceBase extends DataTransferObject implements Validatable
 
     public function __construct(array $data = [])
     {
-        if (isset($data['NumberOfUnitsInPriceBasis']) && ! is_int($data['NumberOfUnitsInPriceBasis'])) {
-            $data['NumberOfUnitsInPriceBasis'] = (int) $data['NumberOfUnitsInPriceBasis'];
+        if (isset($data['NumberOfUnitsInPriceBasis']) && ! is_float($data['NumberOfUnitsInPriceBasis'])) {
+            $data['NumberOfUnitsInPriceBasis'] = (float) $data['NumberOfUnitsInPriceBasis'];
         }
 
         if(! isset($data['MeasureUnitPriceBasis'])) {
