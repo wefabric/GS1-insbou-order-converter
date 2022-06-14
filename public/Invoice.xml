@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Invoice xsi:noNamespaceSchemaLocation="Factuur_insbou003.xsd"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<InvoiceType>380</InvoiceType>
+	<InvoiceNumber>12345678</InvoiceNumber>
+	<InvoiceDate>2022-06-01</InvoiceDate>
+	<DeliveryDate>2022-06-01</DeliveryDate>
+	<Currency>EUR</Currency>
+	<BuyersOrderNumber>123456</BuyersOrderNumber>
+	<DespatchAdviceNumber>12345/7890</DespatchAdviceNumber>
+	<Buyer>
+		<GLN>1234567890123</GLN>
+		<VATRegistrationNumber>NL12345678B01</VATRegistrationNumber>
+	</Buyer>
+	<Supplier>
+		<GLN>1234567899121</GLN>
+		<VATRegistrationNumber>NL12345670B01</VATRegistrationNumber>
+	</Supplier>
+	<Invoicee>
+		<GLN>1234567890123</GLN>
+		<Name>Alfana</Name>
+		<StreetAndNumber>Beatrixstraat 15</StreetAndNumber>
+		<City>Buitenpost</City>
+		<Country>NL</Country>
+	</Invoicee>
+	<Invoicer>
+		<GLN>1234567890121</GLN>
+		<Name>Hans Worst</Name>
+		<StreetAndNumber>Winkelstraat 1</StreetAndNumber>
+		<City>Leeuwarden</City>
+		<Country>NL</Country>
+	</Invoicer>
+	<DeliveryParty>
+		<Name>Pietje Puk</Name>
+		<StreetAndNumber>Petteflet 123</StreetAndNumber>
+		<City>Sneek</City>
+	</DeliveryParty>
+	<InvoiceLine>
+		<LineNumber>10</LineNumber>
+		<DeliveredQuantity>3.000</DeliveredQuantity>
+		<DeliveredQuantityMeasureUnitCode>PCE</DeliveredQuantityMeasureUnitCode>
+		<NumberOfInvoicingUnits>3.000</NumberOfInvoicingUnits>
+		<NetLineAmount>5.55</NetLineAmount>
+		<TradeItemIdentification>
+			<SuppliersTradeItemIdentification>2700175908</SuppliersTradeItemIdentification>
+			<AdditionalItemIdentification>
+				<TradeItemDescription>92.944.0053.1 WIE VEERKLEMCONN.4P MALE ZWRT</TradeItemDescription>
+			</AdditionalItemIdentification>
+		</TradeItemIdentification>
+		<PriceInformation>
+			<Price>1.85</Price>
+			<PriceBase>
+				<NumberOfUnitsInPriceBasis>1.000</NumberOfUnitsInPriceBasis>
+				<MeasureUnitPriceBasis>PCE</MeasureUnitPriceBasis>
+			</PriceBase>
+		</PriceInformation>
+		<VATInformation>
+			<VATRate>S</VATRate>
+			<VATPercentage>21.00</VATPercentage>
+		</VATInformation>
+		<OrderLineIdentification>1</OrderLineIdentification>
+		<DespatchAdviceLineIdentification></DespatchAdviceLineIdentification>
+	</InvoiceLine>
+	<InvoiceTotals>
+		<TotalInvoiceAmount>6.72</TotalInvoiceAmount>
+		<TotalNetLineAmount>5.55</TotalNetLineAmount>
+		<TotalAmountSubjectToPaymentDiscount>5.55</TotalAmountSubjectToPaymentDiscount>
+		<TotalAmountInvoiceChargeAllowance>0</TotalAmountInvoiceChargeAllowance>
+		<TotalVATAmount>1.17</TotalVATAmount>
+	</InvoiceTotals>
+	<VATSubTotal>
+		<VATAmount>1.17</VATAmount>
+		<VATInformation>
+			<VATRate>S</VATRate>
+			<VATpercentage>21.00</VATpercentage>
+			<VATBaseAmount>5.55</VATBaseAmount>
+		</VATInformation>
+	</VATSubTotal>
+</Invoice>

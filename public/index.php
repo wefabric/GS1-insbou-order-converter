@@ -4,6 +4,7 @@ use Wefabric\SimplexmlToArray\SimplexmlToArray;
 
 use Wefabric\GS1InsbouOrderConverter\Order;
 use Wefabric\GS1InsbouOrderConverter\OrderResponse;
+use Wefabric\GS1InsbouOrderConverter\Invoice;
 
 require __DIR__.'/../vendor/autoload.php';
 
@@ -30,6 +31,7 @@ function getPartyArray(string $num, string $char): array
 $showOrder = false;
 $showMinimalOrder = false;
 $showResponse = false;
+$showInvoices = true;
 
 /**
  * Quick function to create standard GLN (or GTIN), with a supplyable ending digit (or two for GTIN).
@@ -89,4 +91,25 @@ if ($showResponse ?? false) {
     //dump($GS1response->AdditionalInformation->FreeText->asString(';'));
 }
 
+if($showInvoices ?? false) {
+    $path = getcwd() .'/';
+    $files = array_diff(scandir($path), ['.', '..']); //exclude '.' and '..' from the array.
 
+    $files = ['Invoice.xml']; //override.
+    foreach($files as $i => $invoice) {
+        //Reading in an invoice.
+        $xml = simplexml_load_file($path . $invoice);
+
+        try {
+            $invoice = Invoice::makeFromXMl($xml);
+
+            echo '<h2>Invoice</h2>';
+            dump($xml);
+            dump($invoice->toArray(true));
+        } catch (Error $e) {
+            echo '<h2>Invoice '. $i .'</h2> '. '<p>File: '. $invoice .'</p>';
+            dump($xml);
+            echo ($e) and die();
+        }
+    }
+}
