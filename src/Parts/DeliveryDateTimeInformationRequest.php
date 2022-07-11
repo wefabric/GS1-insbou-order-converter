@@ -2,6 +2,7 @@
 
 namespace Wefabric\GS1InsbouOrderConverter\Parts;
 
+use Carbon\Carbon;
 use DateTime;
 
 class DeliveryDateTimeInformationRequest extends DeliveryDateTimeInformation
@@ -11,7 +12,7 @@ class DeliveryDateTimeInformationRequest extends DeliveryDateTimeInformation
 
     public function __construct(array $data = [])
     {
-        if(isset($data['RequiredDeliveryDate']) && gettype($data['RequiredDeliveryDate']) === 'string' && strtotime($data['RequiredDeliveryDate'])) {
+        if(isset($data['RequiredDeliveryDate']) && ($data['RequiredDeliveryDate'] instanceof Carbon || (gettype($data['RequiredDeliveryDate']) === 'string' && strtotime($data['RequiredDeliveryDate'])))) {
             $dateTime = new DateTime($data['RequiredDeliveryDate']);
             $this->RequiredDeliveryTime = $dateTime->format('H:i:s');
             $data['RequiredDeliveryDate'] = $dateTime->format('Y-m-d');

@@ -41,7 +41,9 @@ abstract class DeliveryDateTimeInformation extends DataTransferObject implements
 
     public function cutOffStrings()
     {
-        $this->DeliveryTimeFrame->cutOffStrings();
+        if(! empty($this->DeliveryTimeFrame))  {
+            $this->DeliveryTimeFrame->cutOffStrings();
+        }
     }
 
 }

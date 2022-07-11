@@ -30,7 +30,8 @@
         "ext-simplexml": "*",
         "wefabric/strip-empty-elements-from-array": "*",
         "wefabric/simplexml-to-array": "*",
-        "wefabric/array-to-simplexml": "*"
+        "wefabric/array-to-simplexml": "*",
+        "nesbot/carbon": "*"
     },
     "repositories": [
         {

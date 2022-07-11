@@ -2,6 +2,7 @@
 
 namespace Wefabric\GS1InsbouOrderConverter\Parts;
 
+use Carbon\Carbon;
 use DateTime;
 use Spatie\DataTransferObject\DataTransferObject;
 use Wefabric\GS1InsbouOrderConverter\IsValid;
@@ -18,13 +19,13 @@ class DeliveryTimeFrame extends DataTransferObject implements Validatable
 
     public function __construct(array $data = [])
     {
-        if(isset($data['DeliveryDateEarliest']) && gettype($data['DeliveryDateEarliest']) === 'string' && strtotime($data['DeliveryDateEarliest'])) {
+        if(isset($data['DeliveryDateEarliest']) && ($data['DeliveryDateEarliest'] instanceof Carbon || (gettype($data['DeliveryDateEarliest']) === 'string' && strtotime($data['DeliveryDateEarliest'])))) {
             $dateTime = new DateTime($data['DeliveryDateEarliest']);
             $this->DeliveryTimeEarliest = $dateTime->format('H:i:s');
             $data['DeliveryDateEarliest'] = $dateTime->format('Y-m-d');
         } //If there's a time inside the DeliveryDateEarliest, use that to set the OrderTime and strip it from the OrderDate.
 
-        if(isset($data['DeliveryDateLatest']) && gettype($data['DeliveryDateLatest']) === 'string' && strtotime($data['DeliveryDateLatest'])) {
+        if(isset($data['DeliveryDateLatest']) && ($data['DeliveryDateLatest'] instanceof Carbon || (gettype($data['DeliveryDateLatest']) === 'string' && strtotime($data['DeliveryDateLatest'])))) {
             $dateTime = new DateTime($data['DeliveryDateLatest']);
             $this->DeliveryTimeLatest = $dateTime->format('H:i:s');
             $data['DeliveryDateLatest'] = $dateTime->format('Y-m-d');
