@@ -31,7 +31,7 @@ class Invoice extends DataTransferObject
     public Supplier $Supplier;
     public Invoicee $Invoicee;
     public Invoicer $Invoicer;
-    public DeliveryParty $DeliveryParty;
+    public ?DeliveryParty $DeliveryParty;
     public ?PaymentDiscount $PaymentDiscount;
     public InvoiceLineList $InvoiceLine;
     public InvoiceTotals $InvoiceTotals;
