@@ -15,7 +15,19 @@ abstract class BaseParty extends DataTransferObject implements Validatable
     public ?string $VATRegistrationNumber;
     public ?string $ChamberOfCommerceNumber;
 
-    /**
+	public function __construct(array $data = [])
+	{
+		//sometimes suppliers send [] as values which cannot be parsed to correct values. Therefore unset those.
+		foreach($data as $key => $value) {
+			if(is_array($value) && empty($value)) {
+				unset($data[$key]);
+			}
+		}
+		
+		parent::__construct($data);
+	}
+	
+	/**
      * @return string Human-readable errormessage(s) indicating the location of the invalid properties.
      */
     public function getErrorMessages() : string
