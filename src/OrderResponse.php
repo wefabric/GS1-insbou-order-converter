@@ -24,7 +24,7 @@ class OrderResponse extends DataTransferObject
 {
     use ToArray_StripEmptyElements;
 
-    public string $OrderResponseNumber;
+    public ?string $OrderResponseNumber;
     public string $OrderResponseDate;
     public ?string $OrderResponseTime;
     public string $StatusCode;
