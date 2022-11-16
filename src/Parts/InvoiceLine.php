@@ -12,7 +12,7 @@ class InvoiceLine extends BaseItem
     public float $NetLineAmount;
     public TradeItemIdentification $TradeItemIdentification;
     public PriceInformation $PriceInformation;
-    public ?Allowance $Allowance;
+    public ?AllowanceList $Allowance;
     public ?Charge $Charge;
     public VATInformation $VATInformation;
     public ?string $OrderLineIdentification;
@@ -45,7 +45,7 @@ class InvoiceLine extends BaseItem
         }
 
         if(isset($data['Allowance']) && is_array($data['Allowance'])){
-            $data['Allowance'] = new Allowance($data['Allowance']);
+            $data['Allowance'] = new AllowanceList($data['Allowance']);
         }
 
         if(isset($data['VATInformation']) && is_array($data['VATInformation'])){
