@@ -33,14 +33,23 @@ abstract class BaseList extends DataTransferObject implements Iterator, Validata
      * Checks if the supplied array is a nested array, or a single-level array. If the latter, returns it as nested array.
      * This is due to the SimpleXML parser parsing objects that occur once as an element, and those that appear twice or more, as an array of elements.
      * And we can't specify to parse certain elements as elements and others as arrays.
+     * Also removes 'empty' elements to make sure those don't get counted as 'arrays' that in turn prevent adding another array-layer.
      * @param array $data
      * @return array
      */
     protected static function CheckAndCorrectArrayDepth(array $data): array
     {
-        if(count($data) > 0 && ! is_array($data[array_key_first($data)])) {
-            $data = [$data];
-        }
+        if(count($data) > 0) {
+			foreach($data as $key => $value) {
+				if(is_array($value) && empty($value)) {
+					unset($data[$key]);
+				}
+			}
+			
+			if(! is_array($data[array_key_first($data)])) {
+	            $data = [$data];
+	        }
+		}
         return $data;
     }
 
