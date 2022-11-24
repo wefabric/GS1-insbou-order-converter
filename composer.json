@@ -22,7 +22,7 @@
     ],
     "minimum-stability": "dev",
     "require-dev": {
-        "symfony/var-dumper": "6.1.x-dev"
+        "symfony/var-dumper": "6.*"
     },
     "require": {
         "spatie/data-transfer-object": "^2.8",
