@@ -75,7 +75,9 @@ class DeliveryParty extends BaseAddressParty implements Validatable
             $this->LocationDescription = substr($this->LocationDescription,0,70);
         }
 
-        $this->ContactInformation->cutOffStrings();
+		if(isset($this->ContactInformation)) {
+			$this->ContactInformation->cutOffStrings();
+		}
 
         parent::cutOffStrings();
     }
