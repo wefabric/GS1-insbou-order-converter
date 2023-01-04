@@ -10,7 +10,7 @@ class PriceBase extends DataTransferObject implements Validatable
 {
     use IsValid;
 
-    public float $NumberOfUnitsInPriceBasis;
+    public ?float $NumberOfUnitsInPriceBasis;
     public string $MeasureUnitPriceBasis;
     public ?string $PriceBaseDescription;
 
