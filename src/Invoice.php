@@ -12,6 +12,7 @@ use Wefabric\GS1InsbouOrderConverter\Parts\Invoicer;
 use Wefabric\GS1InsbouOrderConverter\Parts\InvoiceTotals;
 use Wefabric\GS1InsbouOrderConverter\Parts\PaymentDiscount;
 use Wefabric\GS1InsbouOrderConverter\Parts\Supplier;
+use Wefabric\GS1InsbouOrderConverter\Parts\UltimateConsignee;
 use Wefabric\GS1InsbouOrderConverter\Parts\VATSubTotal;
 use Wefabric\SimplexmlToArray\SimplexmlToArray;
 
@@ -25,12 +26,14 @@ class Invoice extends DataTransferObject
     public string $DeliveryDate;
     public string $Currency;
     public string $BuyersOrderNumber;
+    public ?string $OrderResponseNumber;
     public ?string $DespatchAdviceNumber;
     public ?string $InvoiceNumberToBeCorrected;
     public Buyer $Buyer;
     public Supplier $Supplier;
     public Invoicee $Invoicee;
     public Invoicer $Invoicer;
+    public ?UltimateConsignee $UltimateConsignee;
     public ?DeliveryParty $DeliveryParty;
     public ?PaymentDiscount $PaymentDiscount;
     public InvoiceLineList $InvoiceLine;
@@ -64,8 +67,12 @@ class Invoice extends DataTransferObject
         if(isset($data['Invoicer']) && is_array($data['Invoicer'])){
             $data['Invoicer'] = new Invoicer($data['Invoicer']);
         }
-
-        if(isset($data['DeliveryParty']) && is_array($data['DeliveryParty'])){
+	
+	    if(isset($data['UltimateConsignee']) && is_array($data['UltimateConsignee'])){
+		    $data['UltimateConsignee'] = new UltimateConsignee($data['UltimateConsignee']);
+	    }
+	
+	    if(isset($data['DeliveryParty']) && is_array($data['DeliveryParty'])){
             $data['DeliveryParty'] = new DeliveryParty($data['DeliveryParty']);
         }
 
