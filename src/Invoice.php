@@ -13,7 +13,7 @@ use Wefabric\GS1InsbouOrderConverter\Parts\InvoiceTotals;
 use Wefabric\GS1InsbouOrderConverter\Parts\PaymentDiscount;
 use Wefabric\GS1InsbouOrderConverter\Parts\Supplier;
 use Wefabric\GS1InsbouOrderConverter\Parts\UltimateConsignee;
-use Wefabric\GS1InsbouOrderConverter\Parts\VATSubTotal;
+use Wefabric\GS1InsbouOrderConverter\Parts\VATSubTotalList;
 use Wefabric\SimplexmlToArray\SimplexmlToArray;
 
 class Invoice extends DataTransferObject
@@ -38,7 +38,7 @@ class Invoice extends DataTransferObject
     public ?PaymentDiscount $PaymentDiscount;
     public InvoiceLineList $InvoiceLine;
     public InvoiceTotals $InvoiceTotals;
-    public VATSubTotal $VATSubTotal;
+    public VATSubTotalList $VATSubTotal;
 
     /**
      * @param SimpleXMLElement $xml
@@ -91,7 +91,7 @@ class Invoice extends DataTransferObject
         }
 
         if(isset($data['VATSubTotal']) && is_array($data['VATSubTotal'])){
-            $data['VATSubTotal'] = new VATSubTotal($data['VATSubTotal']);
+            $data['VATSubTotal'] = new VATSubTotalList($data['VATSubTotal']);
         }
 
         parent::__construct($data);
