@@ -4,7 +4,7 @@ namespace Wefabric\GS1InsbouOrderConverter\Parts;
 
 class OrderResponseLine extends BaseItem
 {
-    public int $LineNumber;
+    public ?int $LineNumber;
     public string $StatusCode;
     public ?float $PlannedDeliveryQuantity;
     public ?float $DifferenceWithOrderedQuantity;
@@ -14,7 +14,7 @@ class OrderResponseLine extends BaseItem
     public ?LineChargeList $LineCharge;
     public ?LineAllowanceList $LineAllowance;
     public ?TradeItemIdentification $TradeItemIdentification;
-    public OrderLineReference $OrderLineReference;
+    public ?OrderLineReference $OrderLineReference;
     public ?DifferentPriceAgreement $DifferentPriceAgreement;
     public ?PriceInformation $PriceInformation;
     public ?PartialDeliveryList $PartialDelivery;
