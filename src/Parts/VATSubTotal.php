@@ -6,8 +6,8 @@ use Spatie\DataTransferObject\DataTransferObject;
 
 class VATSubTotal extends DataTransferObject
 {
-    public float $VATAmount;
-    public VATInformation $VATInformation;
+    public ?float $VATAmount;
+    public ?VATInformation $VATInformation;
 
     public function __construct(array $data = [])
     {
