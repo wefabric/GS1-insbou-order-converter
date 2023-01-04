@@ -9,9 +9,9 @@ class InvoiceTotals extends DataTransferObject
 
     public float $TotalInvoiceAmount;
     public float $TotalNetLineAmount;
-    public float $TotalAmountSubjectToPaymentDiscount;
+    public ?float $TotalAmountSubjectToPaymentDiscount;
     public float $TotalAmountInvoiceChargeAllowance;
-    public float $TotalVATAmount;
+    public ?float $TotalVATAmount;
 
     public function __construct(array $data = [])
     {
