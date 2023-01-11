@@ -96,9 +96,9 @@ if($showInvoices ?? false) {
     $files = array_diff(scandir($path), ['.', '..']); //exclude '.' and '..' from the array.
 
     $files = ['Invoice.xml']; //override.
-    foreach($files as $i => $invoice) {
+    foreach($files as $i => $file) {
         //Reading in an invoice.
-        $xml = simplexml_load_file($path . $invoice);
+        $xml = simplexml_load_file($path . $file);
 
         try {
             $invoice = Invoice::makeFromXMl($xml);
@@ -107,7 +107,7 @@ if($showInvoices ?? false) {
             dump($xml);
             dump($invoice->toArray(true));
         } catch (Error $e) {
-            echo '<h2>Invoice '. $i .'</h2> '. '<p>File: '. $invoice .'</p>';
+            echo '<h2>Invoice '. $i .'</h2> '. '<p>File: '. $file .'</p>';
             dump($xml);
             echo ($e) and die();
         }

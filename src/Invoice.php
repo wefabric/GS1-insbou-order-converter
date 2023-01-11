@@ -5,12 +5,14 @@ namespace Wefabric\GS1InsbouOrderConverter;
 use SimpleXMLElement;
 use Spatie\DataTransferObject\DataTransferObject;
 use Wefabric\GS1InsbouOrderConverter\Parts\Buyer;
+use Wefabric\GS1InsbouOrderConverter\Parts\CustomerOrderReference;
 use Wefabric\GS1InsbouOrderConverter\Parts\DeliveryParty;
 use Wefabric\GS1InsbouOrderConverter\Parts\Invoicee;
 use Wefabric\GS1InsbouOrderConverter\Parts\InvoiceLineList;
 use Wefabric\GS1InsbouOrderConverter\Parts\Invoicer;
 use Wefabric\GS1InsbouOrderConverter\Parts\InvoiceTotals;
 use Wefabric\GS1InsbouOrderConverter\Parts\PaymentDiscount;
+use Wefabric\GS1InsbouOrderConverter\Parts\ShipFrom;
 use Wefabric\GS1InsbouOrderConverter\Parts\Supplier;
 use Wefabric\GS1InsbouOrderConverter\Parts\UltimateConsignee;
 use Wefabric\GS1InsbouOrderConverter\Parts\VATSubTotalList;
@@ -29,10 +31,13 @@ class Invoice extends DataTransferObject
     public ?string $OrderResponseNumber;
     public ?string $DespatchAdviceNumber;
     public ?string $InvoiceNumberToBeCorrected;
+	public ?string $PaymentMethodCode;
+	public ?CustomerOrderReference $CustomerOrderReference;
     public Buyer $Buyer;
     public Supplier $Supplier;
     public Invoicee $Invoicee;
     public Invoicer $Invoicer;
+	public ?ShipFrom $ShipFrom;
     public ?UltimateConsignee $UltimateConsignee;
     public ?DeliveryParty $DeliveryParty;
     public ?PaymentDiscount $PaymentDiscount;
@@ -52,7 +57,15 @@ class Invoice extends DataTransferObject
 
     public function __construct(array $data = [])
     {
-        if(isset($data['Buyer']) && is_array($data['Buyer'])){
+	
+	    if(isset($data['CustomerOrderReference']) && is_array($data['CustomerOrderReference'])){
+		    $data['CustomerOrderReference'] = new CustomerOrderReference($data['CustomerOrderReference']);
+	    } else if (! isset($data['CustomerOrderReference']) && isset($data['EndCustomerOrderNumber'])) {
+		    $data['CustomerOrderReference'] = new CustomerOrderReference(['EndCustomerOrderNumber' => $data['EndCustomerOrderNumber']]);
+		    unset($data['EndCustomerOrderNumber']);
+	    } //sometimes $EndCustomerOrderNumber is sent outside CustomerOrderReference.
+	
+	    if(isset($data['Buyer']) && is_array($data['Buyer'])){
             $data['Buyer'] = new Buyer($data['Buyer']);
         }
 
@@ -67,7 +80,11 @@ class Invoice extends DataTransferObject
         if(isset($data['Invoicer']) && is_array($data['Invoicer'])){
             $data['Invoicer'] = new Invoicer($data['Invoicer']);
         }
-	
+	    
+		if(isset($data['ShipFrom']) && is_array($data['ShipFrom'])){
+		    $data['ShipFrom'] = new ShipFrom($data['ShipFrom']);
+	    }
+		
 	    if(isset($data['UltimateConsignee']) && is_array($data['UltimateConsignee'])){
 		    $data['UltimateConsignee'] = new UltimateConsignee($data['UltimateConsignee']);
 	    }

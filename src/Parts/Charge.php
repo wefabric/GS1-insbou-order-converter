@@ -6,6 +6,7 @@ class Charge extends BaseItem
 {
     public string $ChargeTypeCode;
     public float $ChargeAmount;
+	public ?string $ChargeDescription;
     public VATInformation $VATInformation;
 
     const validChargeTypeCodes = ['AAT', 'ADR', 'ADZ', 'AEM', 'AEO', 'FC', 'MAC'];

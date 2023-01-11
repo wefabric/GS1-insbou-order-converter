@@ -76,9 +76,10 @@ class Order extends DataTransferObject implements Validatable
 
         if(isset($data['CustomerOrderReference']) && is_array($data['CustomerOrderReference'])){
             $data['CustomerOrderReference'] = new CustomerOrderReference($data['CustomerOrderReference']);
-        } else if (! isset($data['CustomerOrderReference']) && isset($data['$EndCustomerOrderNumber'])) {
-            $data['CustomerOrderReference'] = new CustomerOrderReference(['$EndCustomerOrderNumber' => $data['$EndCustomerOrderNumber']]);
-        } //sometimes $EndCustomerOrderNumber is sent outside CustomerOrderReference.
+        } else if (! isset($data['CustomerOrderReference']) && isset($data['EndCustomerOrderNumber'])) {
+            $data['CustomerOrderReference'] = new CustomerOrderReference(['EndCustomerOrderNumber' => $data['EndCustomerOrderNumber']]);
+	        unset($data['EndCustomerOrderNumber']);
+		} //sometimes $EndCustomerOrderNumber is sent outside CustomerOrderReference.
 
         if(isset($data['ContractReference']) && is_array($data['ContractReference'])){
             $data['ContractReference'] = new ContractReference($data['ContractReference']);
