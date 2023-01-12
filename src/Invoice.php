@@ -28,7 +28,7 @@ class Invoice extends DataTransferObject
     public string $InvoiceDate;
     public ?string $DeliveryDate;
     public string $Currency;
-    public string $BuyersOrderNumber;
+    public ?string $BuyersOrderNumber;
     public ?string $OrderResponseNumber;
     public ?string $DespatchAdviceNumber;
     public ?string $InvoiceNumberToBeCorrected;
