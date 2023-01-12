@@ -25,7 +25,7 @@ class Invoice extends DataTransferObject
     public string $InvoiceType;
     public string $InvoiceNumber;
     public string $InvoiceDate;
-    public string $DeliveryDate;
+    public ?string $DeliveryDate;
     public string $Currency;
     public string $BuyersOrderNumber;
     public ?string $OrderResponseNumber;
@@ -36,7 +36,7 @@ class Invoice extends DataTransferObject
     public Buyer $Buyer;
     public Supplier $Supplier;
     public Invoicee $Invoicee;
-    public Invoicer $Invoicer;
+    public ?Invoicer $Invoicer;
 	public ?ShipFrom $ShipFrom;
     public ?UltimateConsignee $UltimateConsignee;
     public ?DeliveryParty $DeliveryParty;
