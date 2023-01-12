@@ -4,6 +4,7 @@ namespace Wefabric\GS1InsbouOrderConverter;
 
 use SimpleXMLElement;
 use Spatie\DataTransferObject\DataTransferObject;
+use Wefabric\GS1InsbouOrderConverter\Parts\Attachment;
 use Wefabric\GS1InsbouOrderConverter\Parts\Buyer;
 use Wefabric\GS1InsbouOrderConverter\Parts\CustomerOrderReference;
 use Wefabric\GS1InsbouOrderConverter\Parts\DeliveryParty;
@@ -33,6 +34,7 @@ class Invoice extends DataTransferObject
     public ?string $InvoiceNumberToBeCorrected;
 	public ?string $PaymentMethodCode;
 	public ?CustomerOrderReference $CustomerOrderReference;
+	public ?Attachment $Attachment;
     public Buyer $Buyer;
     public Supplier $Supplier;
     public Invoicee $Invoicee;
@@ -65,6 +67,10 @@ class Invoice extends DataTransferObject
 		    unset($data['EndCustomerOrderNumber']);
 	    } //sometimes $EndCustomerOrderNumber is sent outside CustomerOrderReference.
 	
+	    if(isset($data['Attachment']) && is_array($data['Attachment'])){
+		    $data['Attachment'] = new Attachment($data['Attachment']);
+	    }
+	    
 	    if(isset($data['Buyer']) && is_array($data['Buyer'])){
             $data['Buyer'] = new Buyer($data['Buyer']);
         }
