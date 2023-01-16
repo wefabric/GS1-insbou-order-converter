@@ -6,7 +6,7 @@ class Allowance extends BaseItem
 {
     public string $AllowanceTypeCode;
     public float $AllowanceAmount;
-	public float $AllowancePercentage;
+	public ?float $AllowancePercentage;
     public ?VATInformation $VATInformation;
 
     const validAllowanceTypeCodes = ['ADO', 'ADR'];
