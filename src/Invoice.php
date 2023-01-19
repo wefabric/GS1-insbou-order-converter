@@ -117,6 +117,10 @@ class Invoice extends DataTransferObject
             $data['VATSubTotal'] = new VATSubTotalList($data['VATSubTotal']);
         }
 
+		if(isset($data['comment'])) {
+			unset($data['comment']);
+		} // Remove any XML comments as they carry no technical meaning.
+		
         parent::__construct($data);
     }
 
