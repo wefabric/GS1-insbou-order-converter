@@ -26,3 +26,4 @@ Homestead.json
 .DS_Store
 .idea
 composer.lock
+public/*.pdf
