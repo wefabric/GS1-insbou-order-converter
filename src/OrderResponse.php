@@ -4,7 +4,6 @@ namespace Wefabric\GS1InsbouOrderConverter;
 
 use SimpleXMLElement;
 use Spatie\DataTransferObject\DataTransferObject;
-use Wefabric\GS1InsbouOrderConverter\Parts\FreeTextList;
 use Wefabric\SimplexmlToArray\SimplexmlToArray;
 
 use Wefabric\GS1InsbouOrderConverter\Parts\AdditionalInformation;

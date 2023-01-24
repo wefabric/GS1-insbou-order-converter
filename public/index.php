@@ -1,7 +1,5 @@
 <?php
 
-use Wefabric\SimplexmlToArray\SimplexmlToArray;
-
 use Wefabric\GS1InsbouOrderConverter\Order;
 use Wefabric\GS1InsbouOrderConverter\OrderResponse;
 use Wefabric\GS1InsbouOrderConverter\Invoice;
@@ -28,11 +26,6 @@ function getPartyArray(string $num, string $char): array
     ];
 }
 
-$showOrder = false;
-$showMinimalOrder = false;
-$showResponse = false;
-$showInvoices = true;
-
 /**
  * Quick function to create standard GLN (or GTIN), with a supplyable ending digit (or two for GTIN).
  * @param string $num
@@ -43,7 +36,15 @@ function GLN(string $num): string
     return '123456789012' . $num;
 }
 
-if($showOrder ?? false) {
+
+$params = [];
+parse_str(parse_url($_SERVER['REQUEST_URI'])['query'], $params);
+
+if(! array_key_exists('show', $params)) {
+	dd('Geen geldige parameter \'?show=\' gevonden. Verwacht: ORDERS,ORDRSP,INVOIC,DESADV. ');
+}
+
+if($params['show'] == 'ORDERS') {
     //Complete array-structure. This is everything that fits. This does NOT necessarily represent a contextually valid XML!
     $GS1order = Order::make(require('CompleteDataset.php'));
     echo '<h2>Complete Dataset</h2>';
@@ -81,7 +82,7 @@ if($showMinimalOrder ?? false) {
     }
 }
 
-if ($showResponse ?? false) {
+if($params['show'] == 'ORDRSP') {
     //Reading in a typical response.
     echo '<h2>Response</h2>';
     $xml = simplexml_load_file('./Response.xml');
@@ -91,7 +92,7 @@ if ($showResponse ?? false) {
     //dump($GS1response->AdditionalInformation->FreeText->asString(';'));
 }
 
-if($showInvoices ?? false) {
+if($params['show'] == 'INVOIC') {
     $path = getcwd() .'/';
     $files = array_diff(scandir($path), ['.', '..']); //exclude '.' and '..' from the array.
 
