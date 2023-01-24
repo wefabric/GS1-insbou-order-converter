@@ -21,6 +21,11 @@ class DeliveryDateTimeInformationRequest extends DeliveryDateTimeInformation
         parent::__construct($data);
     }
 
+	public function RequiredDeliveryDateTime(): DateTime
+	{
+		return new DateTime($this->RequiredDeliveryDate .' '. $this->RequiredDeliveryTime);
+	}
+	
     /**
      * @return string Human-readable errormessage(s) indicating the location of the invalid properties.
      */

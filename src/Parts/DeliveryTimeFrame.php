@@ -38,6 +38,16 @@ class DeliveryTimeFrame extends DataTransferObject implements Validatable
 
         parent::__construct($data);
     }
+	
+	public function EarliestDeliveryDateTime(): DateTime
+	{
+		return new DateTime($this->DeliveryDateEarliest .' '. $this->DeliveryTimeEarliest);
+	}
+	
+	public function LatestDeliveryDateTime(): DateTime
+	{
+		return new DateTime($this->DeliveryDateLatest .' '. $this->DeliveryTimeLatest);
+	}
 
     /**
      * @return string Human-readable errormessage(s) indicating the location of the invalid properties.

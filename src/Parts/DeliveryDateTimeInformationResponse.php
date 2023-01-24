@@ -20,6 +20,11 @@ class DeliveryDateTimeInformationResponse extends DeliveryDateTimeInformation
         parent::__construct($data);
     }
 
+	public function ScheduledDeliveryDateTime(): DateTime
+	{
+		return new DateTime($this->ScheduledDeliveryDate .' '. $this->ScheduledDeliveryTime);
+	}
+	
     /**
      * @return string Human-readable errormessage(s) indicating the location of the invalid properties.
      */
