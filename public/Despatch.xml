@@ -1,0 +1,64 @@
+<DespatchAdvice xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Verzendbericht_insbou003.xsd">
+    <MessageNumber>21664280</MessageNumber>
+    <MessageDate>2023-01-23</MessageDate>
+    <MessageStructure>EANNL1</MessageStructure>
+    <BuyersOrderNumber>239891 RN</BuyersOrderNumber>
+    <DeliveryDateTimeInformation>
+        <ScheduledDeliveryDate>2023-01-23</ScheduledDeliveryDate>
+        <ScheduledDeliveryTime>16:41:00</ScheduledDeliveryTime>
+        <DeliveryTimeFrame>
+            <DeliveryDateEarliest>2023-01-23</DeliveryDateEarliest>
+            <DeliveryTimeEarlies>18:18:00</DeliveryTimeEarlies>
+            <DeliveryDateLatest>2023-01-23</DeliveryDateLatest>
+            <DeliveryTimeLatest>16:41:00</DeliveryTimeLatest>
+        </DeliveryTimeFrame>
+    </DeliveryDateTimeInformation>
+    <Supplier>
+        <GLN>8713473000010</GLN>
+        <Name>Rexel Nederland B.V.</Name>
+        <StreetAndNumber>Bleiswijkseweg, 35</StreetAndNumber>
+        <City>Zoetermeer</City>
+        <PostalCode>2712PB</PostalCode>
+        <Country>NL</Country>
+    </Supplier>
+    <Buyer>
+        <GLN>8714231774051</GLN>
+        <Name>LODEMA ELECTROTECHN. BV. (ELB)</Name>
+        <StreetAndNumber>Uranusweg, 12</StreetAndNumber>
+        <City>LEEUWARDEN</City>
+        <PostalCode>8938 AJ</PostalCode>
+        <Country>NL</Country>
+    </Buyer>
+    <ShipFrom>
+        <GLN>8713473000034</GLN>
+        <Name>Distributiecentrum Bleiswijk</Name>
+        <StreetAndNumber>Brandpuntlaan Zuid, 3</StreetAndNumber>
+        <City>Bleiswijk</City>
+        <PostalCode>2665 NZ</PostalCode>
+        <Country>NL</Country>
+    </ShipFrom>
+    <UltimateConsignee>
+        <GLN></GLN>
+        <Name>Elektrobode</Name>
+        <StreetAndNumber>Beatrixstraat, 15</StreetAndNumber>
+        <City>Buitenpost</City>
+        <PostalCode>9285 TV</PostalCode>
+        <Country>NL</Country>
+    </UltimateConsignee>
+    <DespatchLine>
+        <DespatchLineNumber>10</DespatchLineNumber>
+        <ItemLevelDespatchAdvice>
+            <LineNumber>10</LineNumber>
+            <DeliveredQuantity>1</DeliveredQuantity>
+            <DeliveredQuantityMeasurementUnit>PCE</DeliveredQuantityMeasurementUnit>
+            <LineIdentification>10</LineIdentification>
+            <TradeItemIdentification>
+                <GTIN>4024337003349</GTIN>
+                <SuppliersTradeItemIdentification>2700144288</SuppliersTradeItemIdentification>
+                <AdditionalItemIdentification>
+                    <TradeItemDescription>BER EINDSCHAKELAAR</TradeItemDescription>
+                </AdditionalItemIdentification>
+            </TradeItemIdentification>
+        </ItemLevelDespatchAdvice>
+    </DespatchLine>
+</DespatchAdvice>

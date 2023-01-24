@@ -3,6 +3,7 @@
 use Wefabric\GS1InsbouOrderConverter\Order;
 use Wefabric\GS1InsbouOrderConverter\OrderResponse;
 use Wefabric\GS1InsbouOrderConverter\Invoice;
+use Wefabric\GS1InsbouOrderConverter\DespatchAdvice;
 
 require __DIR__.'/../vendor/autoload.php';
 
@@ -123,4 +124,12 @@ if($params['show'] == 'INVOIC') {
             echo ($e) and die();
         }
     }
+}
+
+if($params['show'] == 'DESADV') {
+	echo '<h2>Despatch Advice</h2>';
+	$xml = simplexml_load_file('./Despatch.xml');
+	dump($xml);
+	$GS1despatch = DespatchAdvice::makeFromXML($xml);
+	dump($GS1despatch->toArray());
 }

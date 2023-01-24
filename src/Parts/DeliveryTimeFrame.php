@@ -19,6 +19,11 @@ class DeliveryTimeFrame extends DataTransferObject implements Validatable
 
     public function __construct(array $data = [])
     {
+		if(!isset($data['DeliveryTimeEarliest']) && isset($data['DeliveryTimeEarlies'])) {
+			$data['DeliveryTimeEarliest'] = $data['DeliveryTimeEarlies'];
+			unset($data['DeliveryTimeEarlies']);
+		}
+		
         if(isset($data['DeliveryDateEarliest']) && ($data['DeliveryDateEarliest'] instanceof Carbon || (gettype($data['DeliveryDateEarliest']) === 'string' && strtotime($data['DeliveryDateEarliest'])))) {
             $dateTime = new DateTime($data['DeliveryDateEarliest']);
             $this->DeliveryTimeEarliest = $dateTime->format('H:i:s');
