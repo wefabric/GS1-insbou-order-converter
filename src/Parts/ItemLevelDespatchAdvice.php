@@ -27,6 +27,7 @@ class ItemLevelDespatchAdvice extends DataTransferObject
 		
 		if(!isset($data['DeliveredQuantityMeasurementUnit']) && isset($data['DeliveredNetQuantityMeasurementUnit'])) {
 			$data['DeliveredQuantityMeasurementUnit'] = $data['DeliveredNetQuantityMeasurementUnit'];
+			unset($data['DeliveredNetQuantityMeasurementUnit']);
 		} // Oosterberg sends DeliveryNet... instead of Delivery...
 		
 		if (isset($data['LineIdentification']) && ! is_int($data['LineIdentification'])) {
