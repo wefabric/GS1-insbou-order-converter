@@ -24,6 +24,8 @@ class Allowance extends BaseItem
 			    'VATPercentage' => $data['AllowancePercentage']
 		    ]);
 		    unset($data['AllowancePercentage']);
+        } else {
+	        $data['VATInformation'] = new VATInformation();
         }
 
         parent::__construct($data);

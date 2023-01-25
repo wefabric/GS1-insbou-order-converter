@@ -7,7 +7,7 @@ class Charge extends BaseItem
     public string $ChargeTypeCode;
     public float $ChargeAmount;
 	public ?string $ChargeDescription;
-    public ?VATInformation $VATInformation;
+    public VATInformation $VATInformation;
 
     const validChargeTypeCodes = ['AAT', 'ADR', 'ADZ', 'AEM', 'AEO', 'FC', 'MAC'];
 
@@ -19,6 +19,8 @@ class Charge extends BaseItem
 
         if(isset($data['VATInformation']) && is_array($data['VATInformation'])){
             $data['VATInformation'] = new VATInformation($data['VATInformation']);
+        } else {
+	        $data['VATInformation'] = new VATInformation();
         }
 
         parent::__construct($data);
