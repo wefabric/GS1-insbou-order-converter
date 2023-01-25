@@ -115,6 +115,8 @@ class Invoice extends DataTransferObject
 
         if(isset($data['VATSubTotal']) && is_array($data['VATSubTotal'])){
             $data['VATSubTotal'] = new VATSubTotalList($data['VATSubTotal']);
+        } else {
+	        $data['VATSubTotal'] = new VATSubTotalList();
         }
 
 		if(isset($data['comment'])) {
