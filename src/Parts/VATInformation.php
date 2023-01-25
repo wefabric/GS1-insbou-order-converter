@@ -6,7 +6,7 @@ use Spatie\DataTransferObject\DataTransferObject;
 
 class VATInformation extends DataTransferObject
 {
-    public string $VATRate;
+    public ?string $VATRate;
     public ?float $VATPercentage;
     public ?float $VATBaseAmount;
 
