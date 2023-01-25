@@ -50,6 +50,8 @@ class InvoiceLine extends BaseItem
 
         if(isset($data['VATInformation']) && is_array($data['VATInformation'])){
             $data['VATInformation'] = new VATInformation($data['VATInformation']);
+        } else {
+	        $data['VATInformation'] = new VATInformation();
         }
 
         if(isset($data['DespatchAdviceLineIdentification']) && is_array($data['DespatchAdviceLineIdentification'])){

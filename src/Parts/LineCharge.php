@@ -18,6 +18,8 @@ class LineCharge extends BaseItem
 
         if(isset($data['VATInformation']) && is_array($data['VATInformation'])){
             $data['VATInformation'] = new VATInformation($data['VATInformation']);
+        } else {
+	        $data['VATInformation'] = new VATInformation();
         }
 
         parent::__construct($data);
