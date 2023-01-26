@@ -6,6 +6,7 @@ class Allowance extends BaseItem
 {
     public string $AllowanceTypeCode;
     public float $AllowanceAmount;
+	public ?float $AllowancePercentage;
     public VATInformation $VATInformation;
 
     const validAllowanceTypeCodes = ['ADO', 'ADR'];
@@ -16,14 +17,12 @@ class Allowance extends BaseItem
             $data['AllowanceAmount'] = (float) $data['AllowanceAmount'];
         }
 
+	    if (isset($data['AllowancePercentage']) && ! is_float($data['AllowancePercentage'])) {
+		    $data['AllowancePercentage'] = (float) $data['AllowancePercentage'];
+	    }
+	    
 	    if(isset($data['VATInformation']) && is_array($data['VATInformation'])){
             $data['VATInformation'] = new VATInformation($data['VATInformation']);
-	    } elseif(!isset($data['VATInformation']) && isset($data['AllowancePercentage'])) {
-		    $data['VATInformation'] = new VATInformation([
-			    'VATRate' => 'S', //required, choose S (standard) as default
-			    'VATPercentage' => $data['AllowancePercentage']
-		    ]);
-		    unset($data['AllowancePercentage']);
         } else {
 	        $data['VATInformation'] = new VATInformation();
         }
