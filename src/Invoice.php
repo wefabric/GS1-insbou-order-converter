@@ -8,6 +8,7 @@ use Wefabric\GS1InsbouOrderConverter\Parts\Attachment;
 use Wefabric\GS1InsbouOrderConverter\Parts\Buyer;
 use Wefabric\GS1InsbouOrderConverter\Parts\CustomerOrderReference;
 use Wefabric\GS1InsbouOrderConverter\Parts\DeliveryParty;
+use Wefabric\GS1InsbouOrderConverter\Parts\InvoiceCharge;
 use Wefabric\GS1InsbouOrderConverter\Parts\Invoicee;
 use Wefabric\GS1InsbouOrderConverter\Parts\InvoiceLineList;
 use Wefabric\GS1InsbouOrderConverter\Parts\Invoicer;
@@ -43,6 +44,7 @@ class Invoice extends DataTransferObject
     public ?UltimateConsignee $UltimateConsignee;
     public ?DeliveryParty $DeliveryParty;
     public ?PaymentDiscount $PaymentDiscount;
+	public ?InvoiceCharge $InvoiceCharge;
     public InvoiceLineList $InvoiceLine;
     public InvoiceTotals $InvoiceTotals;
     public VATSubTotalList $VATSubTotal;
@@ -103,6 +105,10 @@ class Invoice extends DataTransferObject
             $data['PaymentDiscount'] = new PaymentDiscount($data['PaymentDiscount']);
         }
 
+	    if(isset($data['InvoiceCharge']) && is_array($data['InvoiceCharge'])){
+		    $data['InvoiceCharge'] = new InvoiceCharge($data['InvoiceCharge']);
+	    }
+		
         if(isset($data['InvoiceLine']) && is_array($data['InvoiceLine'])){
             $data['InvoiceLine'] = new InvoiceLineList($data['InvoiceLine']);
         } else {
