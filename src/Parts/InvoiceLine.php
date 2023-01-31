@@ -13,7 +13,7 @@ class InvoiceLine extends BaseItem
     public TradeItemIdentification $TradeItemIdentification;
     public PriceInformation $PriceInformation;
     public ?AllowanceList $Allowance;
-    public ?Charge $Charge;
+    public ?ChargeList $Charge;
     public VATInformation $VATInformation;
     public ?string $OrderLineIdentification;
     public ?string $DespatchAdviceLineIdentification;
@@ -48,6 +48,10 @@ class InvoiceLine extends BaseItem
             $data['Allowance'] = new AllowanceList($data['Allowance']);
         }
 
+	    if(isset($data['Charge']) && is_array($data['Charge'])){
+		    $data['Charge'] = new ChargeList($data['Charge']);
+	    }
+		
         if(isset($data['VATInformation']) && is_array($data['VATInformation'])){
             $data['VATInformation'] = new VATInformation($data['VATInformation']);
         } else {
