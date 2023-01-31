@@ -110,14 +110,16 @@ if($params['show'] == 'INVOIC') {
 			dump($invoice);
             dump($invoice->toArray(true));
 			
-			if(!empty($invoice->Attachment)) { //this overwrites any existing file and should only be used for simple testing.
+			if(!empty($invoice->Attachment) && $invoice->Attachment->IsValidAttachment()) { //this overwrites any existing file and should only be used for simple testing.
 				$myfile = fopen($invoice->Attachment->FileName, "w") or die("Unable to open file!");
 				fwrite($myfile, $invoice->Attachment->GetBinaryFile());
 				fclose($myfile);
 				echo 'Attachment written to: <a href="/'. $invoice->Attachment->FileName .'">'. $invoice->Attachment->FileName .'</a>';
+			} else {
+				echo 'No attachment written.';
 			}
 			
-        } catch (Error $e) {
+        } catch (Exception|Error $e) {
 			dump($e);
             echo '<h2>Invoice '. $i .'</h2> '. '<p>File: '. $file .'</p>';
             dump($xml);
