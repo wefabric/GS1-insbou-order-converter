@@ -2,7 +2,6 @@
 
 namespace Wefabric\GS1InsbouOrderConverter\Parts;
 
-use Couchbase\InvalidRangeException;
 use Iterator;
 use RuntimeException;
 use Spatie\DataTransferObject\DataTransferObject;
