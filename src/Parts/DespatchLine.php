@@ -6,7 +6,7 @@ class DespatchLine extends BaseItem
 {
 	
 	public int $DespatchLineNumber;
-	public ItemLevelDespatchAdvice $ItemLevelDespatchAdvice;
+	public ItemLevelDespatchAdviceList $ItemLevelDespatchAdvice;
 	
 	public function __construct(array $data = [])
 	{
@@ -15,7 +15,7 @@ class DespatchLine extends BaseItem
 		}
 		
 		if(isset($data['ItemLevelDespatchAdvice']) && is_array($data['ItemLevelDespatchAdvice'])) {
-			$data['ItemLevelDespatchAdvice'] = new ItemLevelDespatchAdvice($data['ItemLevelDespatchAdvice']);
+			$data['ItemLevelDespatchAdvice'] = new ItemLevelDespatchAdviceList($data['ItemLevelDespatchAdvice']);
 		}
 		
 		parent::__construct($data);

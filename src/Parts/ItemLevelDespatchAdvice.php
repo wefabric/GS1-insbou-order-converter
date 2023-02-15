@@ -4,7 +4,7 @@ namespace Wefabric\GS1InsbouOrderConverter\Parts;
 
 use Spatie\DataTransferObject\DataTransferObject;
 
-class ItemLevelDespatchAdvice extends DataTransferObject
+class ItemLevelDespatchAdvice extends BaseItem
 {
 	public int $LineNumber;
 	public float $DeliveredQuantity;
@@ -12,6 +12,7 @@ class ItemLevelDespatchAdvice extends DataTransferObject
 	public int $LineIdentification;
 	public TradeItemIdentification $TradeItemIdentification;
 	public ?string $OrderLineIdentification;
+	public ?string $BatchNumber;
 	
 	const validDeliveredNetQuantityMeasurementUnitCodes = OrderLine::validOrderedQuantityMeasureUnitCodes;
 	
@@ -41,4 +42,13 @@ class ItemLevelDespatchAdvice extends DataTransferObject
 		parent::__construct($data);
 	}
 	
+	public function getErrorMessages(): string
+	{
+		// TODO: Implement getErrorMessages() method.
+	}
+	
+	public function cutOffStrings()
+	{
+		// TODO: Implement cutOffStrings() method.
+	}
 }

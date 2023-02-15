@@ -8,6 +8,7 @@ use Wefabric\GS1InsbouOrderConverter\Parts\Buyer;
 use Wefabric\GS1InsbouOrderConverter\Parts\DeliveryDateTimeInformationResponse;
 use Wefabric\GS1InsbouOrderConverter\Parts\DeliveryParty;
 use Wefabric\GS1InsbouOrderConverter\Parts\DespatchLineList;
+use Wefabric\GS1InsbouOrderConverter\Parts\FreeTextList;
 use Wefabric\GS1InsbouOrderConverter\Parts\ShipFrom;
 use Wefabric\GS1InsbouOrderConverter\Parts\Supplier;
 use Wefabric\GS1InsbouOrderConverter\Parts\UltimateConsignee;
@@ -29,6 +30,7 @@ class DespatchAdvice extends DataTransferObject
 	public ?DeliveryParty $DeliveryParty;
 	public ?UltimateConsignee $UltimateConsignee;
 	public DespatchLineList $DespatchLine;
+	public FreeTextList $FreeText;
 	
 	/**
 	 * @param SimpleXMLElement $xml
@@ -71,6 +73,17 @@ class DespatchAdvice extends DataTransferObject
 			$data['DespatchLine'] = new DespatchLineList($data['DespatchLine']);
 		} else {
 			$data['DespatchLine'] = new DespatchLineList();
+		}
+		
+		if(isset($data['FreeText'])) {
+			if(is_string($data['FreeText'])) {
+				$data['FreeText'] = str_split($data['FreeText'], 70);
+			}
+			if(is_array($data['FreeText'])){
+				$data['FreeText'] = new FreeTextList($data['FreeText']);
+			}
+		} else {
+			$data['FreeText'] = new FreeTextList([]);
 		}
 		
 		parent::__construct($data);
