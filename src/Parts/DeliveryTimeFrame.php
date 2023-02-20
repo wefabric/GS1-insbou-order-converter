@@ -12,10 +12,10 @@ class DeliveryTimeFrame extends DataTransferObject implements Validatable
 {
     use IsValid;
 
-    public string $DeliveryDateEarliest;
-    public string $DeliveryTimeEarliest;
-    public string $DeliveryDateLatest;
-    public string $DeliveryTimeLatest;
+    public ?string $DeliveryDateEarliest;
+    public ?string $DeliveryTimeEarliest;
+    public ?string $DeliveryDateLatest;
+    public ?string $DeliveryTimeLatest;
 
     public function __construct(array $data = [])
     {
@@ -39,14 +39,20 @@ class DeliveryTimeFrame extends DataTransferObject implements Validatable
         parent::__construct($data);
     }
 	
-	public function EarliestDeliveryDateTime(): DateTime
+	public function EarliestDeliveryDateTime(): ?DateTime
 	{
-		return new DateTime($this->DeliveryDateEarliest .' '. $this->DeliveryTimeEarliest);
+		if(!empty($this->DeliveryDateEarliest)) {
+			return new DateTime($this->DeliveryDateEarliest .' '. $this->DeliveryTimeEarliest);
+		}
+		return null;
 	}
 	
-	public function LatestDeliveryDateTime(): DateTime
+	public function LatestDeliveryDateTime(): ?DateTime
 	{
-		return new DateTime($this->DeliveryDateLatest .' '. $this->DeliveryTimeLatest);
+		if(!empty($this->DeliveryDateLatest)) {
+			return new DateTime($this->DeliveryDateLatest .' '. $this->DeliveryTimeLatest);
+		}
+		return null;
 	}
 
     /**
