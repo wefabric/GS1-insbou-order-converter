@@ -9,7 +9,7 @@ class ItemLevelDespatchAdvice extends BaseItem
 	public int $LineNumber;
 	public float $DeliveredQuantity;
 	public string $DeliveredQuantityMeasurementUnit;
-	public int $LineIdentification;
+	public ?int $LineIdentification;
 	public TradeItemIdentification $TradeItemIdentification;
 	public ?string $OrderLineIdentification;
 	public ?string $BatchNumber;
