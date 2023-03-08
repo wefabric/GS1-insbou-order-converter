@@ -2,6 +2,7 @@
 
 namespace Wefabric\GS1InsbouOrderConverter\Parts;
 
+use Carbon\Carbon;
 use DateTime;
 
 class DeliveryDateTimeInformationResponse extends DeliveryDateTimeInformation
@@ -20,9 +21,9 @@ class DeliveryDateTimeInformationResponse extends DeliveryDateTimeInformation
         parent::__construct($data);
     }
 
-	public function ScheduledDeliveryDateTime(): DateTime
+	public function ScheduledDeliveryDateTime(): Carbon
 	{
-		return new DateTime($this->ScheduledDeliveryDate .' '. $this->ScheduledDeliveryTime);
+		return Carbon::createFromFormat('Y-m-d H:i:s',$this->ScheduledDeliveryDate .' '. $this->ScheduledDeliveryTime);
 	}
 	
     /**

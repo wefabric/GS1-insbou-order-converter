@@ -39,18 +39,18 @@ class DeliveryTimeFrame extends DataTransferObject implements Validatable
         parent::__construct($data);
     }
 	
-	public function EarliestDeliveryDateTime(): ?DateTime
+	public function EarliestDeliveryDateTime(): ?Carbon
 	{
 		if(!empty($this->DeliveryDateEarliest)) {
-			return new DateTime($this->DeliveryDateEarliest .' '. $this->DeliveryTimeEarliest);
+			return Carbon::createFromFormat('Y-m-d H:i:s',$this->DeliveryDateEarliest .' '. $this->DeliveryTimeEarliest);
 		}
 		return null;
 	}
 	
-	public function LatestDeliveryDateTime(): ?DateTime
+	public function LatestDeliveryDateTime(): ?Carbon
 	{
 		if(!empty($this->DeliveryDateLatest)) {
-			return new DateTime($this->DeliveryDateLatest .' '. $this->DeliveryTimeLatest);
+			return Carbon::createFromFormat('Y-m-d H:i:s',$this->DeliveryDateLatest .' '. $this->DeliveryTimeLatest);
 		}
 		return null;
 	}

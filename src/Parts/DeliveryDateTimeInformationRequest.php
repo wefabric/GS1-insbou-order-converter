@@ -21,9 +21,9 @@ class DeliveryDateTimeInformationRequest extends DeliveryDateTimeInformation
         parent::__construct($data);
     }
 
-	public function RequiredDeliveryDateTime(): DateTime
+	public function RequiredDeliveryDateTime(): Carbon
 	{
-		return new DateTime($this->RequiredDeliveryDate .' '. $this->RequiredDeliveryTime);
+		return Carbon::createFromFormat('Y-m-d H:i:s', $this->RequiredDeliveryDate .' '. $this->RequiredDeliveryTime);
 	}
 	
     /**
