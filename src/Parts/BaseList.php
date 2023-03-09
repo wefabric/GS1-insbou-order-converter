@@ -134,6 +134,14 @@ abstract class BaseList extends DataTransferObject implements Iterator, Validata
         return count($this->values);
     }
 
+	/**
+	 * @return bool True if the list contains no elements.
+	 */
+	public function isEmpty(): bool
+	{
+		return $this->count() == 0;
+	}
+	
     /**
      * Method to add an object to the end of the array.
      * @param BaseItem $object
