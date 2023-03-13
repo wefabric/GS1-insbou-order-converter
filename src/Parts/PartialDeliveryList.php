@@ -31,9 +31,13 @@ class PartialDeliveryList extends BaseList
 	public function getSortedByScheduledDeliveryDate(string $order = 'asc'): array
 	{
 		$sortedArray = []; /* @var PartialDelivery $partialDelivery */
-		foreach($this->toArray() as $partialDelivery) {
-			$date = $partialDelivery->DeliveryDateTimeInformation->ScheduledDeliveryDateTime();
-			$sortedArray[$date->format('Y-m-d H:i:s')] = $partialDelivery;
+		foreach($this->values as $partialDelivery) {
+			if(!empty($partialDelivery->DeliveryDateTimeInformation)) {
+				$date = $partialDelivery->DeliveryDateTimeInformation->ScheduledDeliveryDateTime();
+				$sortedArray[$date->format('Y-m-d H:i:s')] = $partialDelivery;
+			} else {
+				$sortedArray[] = $partialDelivery;
+			}
 		}
 		
 		switch ($order){ //sort by key
