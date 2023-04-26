@@ -24,7 +24,7 @@ class DespatchAdvice extends DataTransferObject
 	public string $BuyersOrderNumber;
 	public ?string $OrderResponseNumber;
 	public ?string $ProjectNumber;
-	public DeliveryDateTimeInformationResponse $DeliveryDateTimeInformation;
+	public ?DeliveryDateTimeInformationResponse $DeliveryDateTimeInformation;
 	public Buyer $Buyer;
 	public Supplier $Supplier;
 	public ?ShipFrom $ShipFrom;
