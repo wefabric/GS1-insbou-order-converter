@@ -28,7 +28,7 @@ class OrderResponse extends DataTransferObject
     public ?string $OrderResponseTime;
     public string $StatusCode;
     public ?float $TotalAmount;
-    public OrderReference $OrderReference;
+    public ?OrderReference $OrderReference;
     public ?ProjectReference $ProjectReference;
     public ?AdditionalInformation $AdditionalInformation;
     public ?DeliveryDateTimeInformationResponse $DeliveryDateTimeInformation;
