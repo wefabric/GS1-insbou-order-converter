@@ -46,6 +46,10 @@ class DespatchAdvice extends DataTransferObject
 	public function __construct(array $data = [])
 	{
 		
+		if(isset($data['BuyersOrderNumber']) && is_array($data['BuyersOrderNumber']) && empty($data['BuyersOrderNumber'])) {
+			$data['BuyersOrderNumber'] = ''; // change empty array into empty string.
+		}
+		
 		if(isset($data['DeliveryDateTimeInformation']) && is_array($data['DeliveryDateTimeInformation'])){
 			$data['DeliveryDateTimeInformation'] = new DeliveryDateTimeInformationResponse($data['DeliveryDateTimeInformation']);
 		}
