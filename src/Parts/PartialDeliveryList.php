@@ -28,21 +28,29 @@ class PartialDeliveryList extends BaseList
         }
     }
 	
+	/**
+	 * Returns the partial deliveries, sorted by their scheduled delivery date. Empty dates are sorted as last items.
+	 * @param string $order 'asc' ord 'desc'. If 'desc', array is reversed before returned.
+	 * @return array
+	 */
 	public function getSortedByScheduledDeliveryDate(string $order = 'asc'): array
 	{
-		$sortedArray = []; /* @var PartialDelivery $partialDelivery */
+		$sortedArray = [];
+		$emptyDateArray = [];
+		/* @var PartialDelivery $partialDelivery */
 		foreach($this->values as $partialDelivery) {
 			if(!empty($partialDelivery->DeliveryDateTimeInformation)) {
 				$date = $partialDelivery->DeliveryDateTimeInformation->ScheduledDeliveryDateTime();
 				$sortedArray[$date->format('Y-m-d H:i:s')] = $partialDelivery;
 			} else {
-				$sortedArray[] = $partialDelivery;
+				$emptyDateArray[] = $partialDelivery;
 			}
 		}
 		
-		switch ($order){ //sort by key
-			case 'asc': ksort($sortedArray); break;
-			case 'desc': krsort($sortedArray); break;
+		ksort($sortedArray);
+		$sortedArray = array_merge($sortedArray, $emptyDateArray);
+		if($order === 'desc') {
+			$sortedArray = array_reverse($sortedArray, true);
 		}
 		
 		return $sortedArray;
