@@ -28,6 +28,7 @@ class Invoice extends DataTransferObject
     public string $InvoiceNumber;
     public string $InvoiceDate;
     public ?string $DeliveryDate;
+    public ?string $ExpirationDate;
     public string $Currency;
     public ?string $BuyersOrderNumber;
     public ?string $OrderResponseNumber;
