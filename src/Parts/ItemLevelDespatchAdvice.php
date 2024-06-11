@@ -13,6 +13,7 @@ class ItemLevelDespatchAdvice extends BaseItem
 	public TradeItemIdentification $TradeItemIdentification;
 	public ?string $OrderLineIdentification;
 	public ?string $BatchNumber;
+	public ?string $FreeText;
 	
 	const validDeliveredNetQuantityMeasurementUnitCodes = OrderLine::validOrderedQuantityMeasureUnitCodes;
 	
@@ -37,6 +38,10 @@ class ItemLevelDespatchAdvice extends BaseItem
 		
 		if(isset($data['TradeItemIdentification']) && is_array($data['TradeItemIdentification'])){
 			$data['TradeItemIdentification'] = new TradeItemIdentification($data['TradeItemIdentification']);
+		}
+
+		if(isset($data['FreeText']) && !is_string($data['FreeText'])){
+			$data['FreeText'] = (string)$data['FreeText'];
 		}
 		
 		parent::__construct($data);
