@@ -7,6 +7,7 @@ class DespatchLine extends BaseItem
 	
 	public int $DespatchLineNumber;
 	public ItemLevelDespatchAdviceList $ItemLevelDespatchAdvice;
+	public ?array $DespatchUnitInformation = null;
 	
 	public function __construct(array $data = [])
 	{
