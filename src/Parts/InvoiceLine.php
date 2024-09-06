@@ -28,6 +28,10 @@ class InvoiceLine extends BaseItem
             $data['DeliveredQuantity'] = (float) $data['DeliveredQuantity'];
         }
 
+        if (isset($data['DeliveredQuantityMeasureUnitCode']) && ! is_string($data['DeliveredQuantityMeasureUnitCode'])) {
+            $data['DeliveredQuantityMeasureUnitCode'] = (string)$data['DeliveredQuantityMeasureUnitCode'];
+        }
+
         if (isset($data['NumberOfInvoicingUnits']) && ! is_float($data['NumberOfInvoicingUnits'])) {
             $data['NumberOfInvoicingUnits'] = (float) $data['NumberOfInvoicingUnits'];
         }
@@ -51,7 +55,7 @@ class InvoiceLine extends BaseItem
 	    if(isset($data['Charge']) && is_array($data['Charge'])){
 		    $data['Charge'] = new ChargeList($data['Charge']);
 	    }
-		
+
         if(isset($data['VATInformation']) && is_array($data['VATInformation'])){
             $data['VATInformation'] = new VATInformation($data['VATInformation']);
         } else {
