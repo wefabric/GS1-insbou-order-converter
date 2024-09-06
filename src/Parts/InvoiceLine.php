@@ -7,7 +7,7 @@ class InvoiceLine extends BaseItem
 
     public int $LineNumber;
     public float $DeliveredQuantity;
-    public string $DeliveredQuantityMeasureUnitCode;
+    public ?string $DeliveredQuantityMeasureUnitCode;
     public float $NumberOfInvoicingUnits;
     public float $NetLineAmount;
     public TradeItemIdentification $TradeItemIdentification;
@@ -26,10 +26,6 @@ class InvoiceLine extends BaseItem
 
         if (isset($data['DeliveredQuantity']) && ! is_float($data['DeliveredQuantity'])) {
             $data['DeliveredQuantity'] = (float) $data['DeliveredQuantity'];
-        }
-
-        if (isset($data['DeliveredQuantityMeasureUnitCode']) && ! is_string($data['DeliveredQuantityMeasureUnitCode'])) {
-            $data['DeliveredQuantityMeasureUnitCode'] = (string)$data['DeliveredQuantityMeasureUnitCode'];
         }
 
         if (isset($data['NumberOfInvoicingUnits']) && ! is_float($data['NumberOfInvoicingUnits'])) {
