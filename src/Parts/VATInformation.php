@@ -14,6 +14,13 @@ class VATInformation extends DataTransferObject
 
     public function __construct(array $data = [])
     {
+        if(isset($data['VATRate']) && is_array($data['VATRate'])) {
+            $data['VATRate'] =  implode(',', $data['VATRate']);
+            if(!$data['VATRate']) {
+                $data['VATRate'] = null;
+            }
+        }
+        
         if (isset($data['VATPercentage']) && ! is_float($data['VATPercentage'])) {
             $data['VATPercentage'] = (float) $data['VATPercentage'];
         } elseif (!isset($data['VATPercentage']) && isset($data['VATpercentage'])) {
