@@ -10,6 +10,7 @@ abstract class BaseAddressParty extends BaseParty
     public ?string $City;
     public ?string $PostalCode;
     public ?string $Country;
+    public ?string $GLN;
 
     /**
      * @return string Human-readable errormessage(s) indicating the location of the invalid properties.
@@ -42,6 +43,10 @@ abstract class BaseAddressParty extends BaseParty
 
         if(! empty($this->Country) && strlen($this->Country) <> 2) {
             $errorMessage .= 'Country (' . $this->Country .') is invalid.' . '\n';
+        }
+
+        if(! empty($this->GLN) && strlen($this->GLN) <> 13) {
+            $errorMessage .= 'GLN (' . $this->GLN .') is invalid.' . '\n';
         }
 
         return $errorMessage;
